@@ -24,3 +24,37 @@ class EmploymentContractDocumentResponseSchema(BaseModel):
     benefits_and_packages: str
     schedule: str
     response_deadline: str
+
+class ConfidentialityAgreementDocumentResponseSchema(BaseModel):
+    summary: str
+    confidential_info: str
+    timeframe: str
+    breach: str
+    obligations: str
+    steps_upon_violation: str
+
+class SalesContractDocumentResponseSchema(BaseModel):
+    summary: str
+    coverage: str
+    payment_plan: str
+    details_of_delivery: str
+
+class IndependentContractorAgreementDocumentResponseSchema(BaseModel):
+    summary: str
+    schedule: str
+    payment_terms: str
+    details_of_termination: str
+
+class LoanAgreementDocumentResponseSchema(BaseModel):
+    summary: str
+    loan_amount: str
+    interest_rate: str
+    timeframe: str
+    method_of_repayment: str
+    late_payment_info: str
+
+class PartnershipAgreementDocumentResponseSchema(BaseModel):
+    summary: str
+    responsibilities: str
+    restrictions: str
+    dispute_resolution: str
