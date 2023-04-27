@@ -2,7 +2,8 @@ import os
 from abc import abstractmethod
 from llama_index import GPTSimpleVectorIndex
 from hackproject.code.api.app.enums import Document
-from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponseSchema
+from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponseSchema, \
+    LandDocumentResponseSchema, ServiceContractDocumentResponseSchema, EmploymentContractDocumentResponseSchema
 from dotenv import dotenv_values
 
 class ModelService:
@@ -60,13 +61,34 @@ class ModelServiceImpl(ModelService):
                                                emergency_information=emergency_information.response)
 
     def __process_land_document(self):
-        pass
+        summary = self.__generate_summary()
+        description = self.process_prompt("Describe the property briefly")
+        terms_of_use = self.process_prompt("What are the terms of use?")
+        warranties_and_guarantees = self.process_prompt("What are the warranties and guarantees")
+        return LandDocumentResponseSchema(summary=summary.response, description=description.response,
+                                               terms_of_use=terms_of_use.response,
+                                               warranties_and_guarantees=warranties_and_guarantees.response)
 
     def __process_service_contract_document(self):
-        pass
+        summary = self.__generate_summary()
+        payment_and_services = self.process_prompt("How and what exactly is the vendor being paid for its services?")
+        obligations = self.process_prompt("What are my obligations?")
+        liability = self.process_prompt("How will be responsible for mistakes?")
+        return ServiceContractDocumentResponseSchema(summary=summary.response, payment_and_services=payment_and_services.response,
+                                          obligations=obligations.response,
+                                          liability=liability.response)
 
     def __process_employment_contract_document(self):
-        pass
+        summary = self.__generate_summary()
+        start_date = self.process_prompt("What is the start date?")
+        benefits_and_packages = self.process_prompt("What are the benefits and packages")
+        schedule = self.process_prompt("Is there a defined schedule?")
+        response_deadline = self.process_prompt("Am I expected to give my answer before a certain date?")
+        return EmploymentContractDocumentResponseSchema(summary=summary.response,
+                                                     start_date=start_date.response,
+                                                     benefits_and_packages=benefits_and_packages.response,
+                                                     schedule=schedule.response,
+                                                     response_deadline=response_deadline.response)
 
     def __process_confidentiality_agreement_document(self):
         pass
