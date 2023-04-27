@@ -1,5 +1,7 @@
 import os
 from abc import abstractmethod
+from typing import List
+
 from llama_index import GPTSimpleVectorIndex
 from hackproject.code.api.app.enums import Document
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponseSchema, \
@@ -15,7 +17,7 @@ class ModelService:
         pass
 
 class ModelServiceImpl(ModelService):
-    def __init__(self, document: str, type: Document, openai_api_key=None):
+    def __init__(self, document: List, type: Document, openai_api_key=None):
         if not openai_api_key:
             dir_path = os.path.dirname(os.path.realpath(__file__))
             env_path = os.path.join(dir_path, '..', '..', '.env')
