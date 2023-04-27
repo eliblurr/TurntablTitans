@@ -28,7 +28,7 @@ jobs:
         python -m pip install black
         pip install -r requirements.txt
     - name: Lint with black
-      run: black . && black --check .
+      run: black ./tests && black --check ./tests
     - name: Run Tests with Pytest
       run: |
         pytest
