@@ -22,8 +22,9 @@ class ModelServiceImpl(ModelService):
             dir_path = os.path.dirname(os.path.realpath(__file__))
             env_path = os.path.join(dir_path, '..', '..', '.env')
             config = dotenv_values(env_path)
-            openai_api_key = config['OPENAI_API_KEY']
-        os.environ['OPENAI_API_KEY'] = openai_api_key
+            openai_api_key = config.get('OPENAI_API_KEY')
+            if openai_api_key:
+                os.environ['OPENAI_API_KEY'] = openai_api_key
         self.__index = GPTSimpleVectorIndex.from_documents(document)
         self.__document = type
 
