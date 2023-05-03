@@ -1,31 +1,31 @@
 from pydantic import BaseModel
 
-class InsuranceDocumentResponseSchema(BaseModel):
+class InsuranceDocumentResponse(BaseModel):
     summary: str
     included_in_cover: str
     excluded_from_cover: str
     emergency_information: str
 
-class LandDocumentResponseSchema(BaseModel):
+class LandDocumentResponse(BaseModel):
     summary: str
     description: str
     terms_of_use: str
     warranties_and_guarantees: str
 
-class ServiceContractDocumentResponseSchema(BaseModel):
+class ServiceContractDocumentResponse(BaseModel):
     summary: str
     payment_and_services: str
     obligations: str
     liability: str
 
-class EmploymentContractDocumentResponseSchema(BaseModel):
+class EmploymentContractDocumentResponse(BaseModel):
     summary: str
     start_date: str
     benefits_and_packages: str
     schedule: str
     response_deadline: str
 
-class ConfidentialityAgreementDocumentResponseSchema(BaseModel):
+class ConfidentialityAgreementDocumentResponse(BaseModel):
     summary: str
     confidential_info: str
     timeframe: str
@@ -33,19 +33,19 @@ class ConfidentialityAgreementDocumentResponseSchema(BaseModel):
     obligations: str
     steps_upon_violation: str
 
-class SalesContractDocumentResponseSchema(BaseModel):
+class SalesContractDocumentResponse(BaseModel):
     summary: str
     coverage: str
     payment_plan: str
     details_of_delivery: str
 
-class IndependentContractorAgreementDocumentResponseSchema(BaseModel):
+class IndependentContractorAgreementDocumentResponse(BaseModel):
     summary: str
     schedule: str
     payment_terms: str
     details_of_termination: str
 
-class LoanAgreementDocumentResponseSchema(BaseModel):
+class LoanAgreementDocumentResponse(BaseModel):
     summary: str
     loan_amount: str
     interest_rate: str
@@ -53,8 +53,12 @@ class LoanAgreementDocumentResponseSchema(BaseModel):
     method_of_repayment: str
     late_payment_info: str
 
-class PartnershipAgreementDocumentResponseSchema(BaseModel):
+class PartnershipAgreementDocumentResponse(BaseModel):
     summary: str
     responsibilities: str
     restrictions: str
     dispute_resolution: str
+
+class PromptResponse(BaseModel):
+    prompt: str
+    response: str

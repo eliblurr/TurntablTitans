@@ -11,12 +11,17 @@ class TestModelService:
         test_document_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'test_document.pdf')
         self.__document = SimpleDirectoryReader(input_files=[test_document_path]).load_data()
 
+    def test_index_is_built(self):
+
     def test_model_is_queried_with_necessary_prompts_for_insurance_document(self, mocker):
         mock_index = Mock()
         mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
                                           return_value=mock_index)
         mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.INSURANCE)
+        mocker.patch('llama_index.GPTSimpleVectorIndex.from_documents')
+        model_service = ModelServiceImpl()
+        model_service.get_index(self.__document)
+        model_service.process_document()
         prompts: dict = Prompts.value_of(Document.INSURANCE.value).value
         calls = [call(v) for v in prompts.values()]
         calls.append(call(Prompts.SUMMARY.value))

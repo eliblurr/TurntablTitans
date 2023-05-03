@@ -12,26 +12,55 @@ class Document(Enum):
     LOAN_AGREEMENT = 'LOAN_AGREEMENT'
     PARTNERSHIP_AGREEMENT = 'PARTNERSHIP_AGREEMENT'
 
+    @classmethod
+    def value_of(cls, value):
+        for k, v in cls.__members__.items():
+            if k == value:
+                return v
+
 class Prompts(Enum):
+    GREETING = ['hi', 'hello', 'hey', 'howdy', 'yo',
+                'sup', 'hiya', 'heya',
+                'greetings', "what's up", 'good morning', 'good afternoon',
+                'good evening', 'howdy', 'salutations','pleased to meet you', 'how are you',
+                "what's new", "what's happening",
+                "how's it going", "how's life", 'how do you do',
+                'whats up', 'whats new', 'whats happening', 'hows it going', 'hows life'
+            ]
+    GREETING_RESPONSE = [
+                         "Hey, Great day! I am here to help you!",
+                         "Hello, it's my pleasure meeting you!",
+                         "Hi, Let's chat!",
+                         "Hi there! How can I assist you today?",
+                         "Hello! How can I help you?",
+                         "Good to see you! How can I be of service?",
+                         "Welcome! How can I help you today?",
+                         "Hey there! What can I help you with?",
+                         "Hi, how can I make your day better?",
+                         "Greetings! What brings you here today?",
+                         "Hello! What can I do for you?",
+                         "Salutations! What can I assist you with?",
+                         "Hey! How can I be of help today?"
+                     ]
     SUMMARY = "Can you give me a summary of the document using easy to understand words or non-legal terms"
     INSURANCE = {
-        "included_in_cover" : "What is included in the cover?",
-        "excluded_from_cover" : "What is excluded from the cover?",
+        "included_in_cover" : "Describe what is included in the cover",
+        "excluded_from_cover" : "Describe what is excluded from the cover",
         "emergency_information" :"Who should I contact in case of emergency?"
     }
     LAND = {
-        "description" : "Describe the property briefly?",
-        "terms_of_use" : "What are the terms of use?",
-        "warranties_and_guarantees" : "What are the warranties and guarantees?"
+        "description" : "Describe the property briefly",
+        "terms_of_use" : "Describe the terms of use",
+        "warranties_and_guarantees" : "Describe the warranties and guarantees"
     }
     SERVICE_CONTRACT = {
         "payment_and_services" : "How and what exactly is the vendor being paid for its services?",
         "obligations" : "What are my obligations?",
-        "liability" : "How will be responsible for mistakes?"
+        "liability" : "Who will be responsible for mistakes?"
     }
     EMPLOYMENT_CONTRACT = {
         "start_date" : "What is the start date?",
-        "benefits_and_packages" : "What are the benefits and packages?",
+        "benefits_and_packages" : "Describe the benefits and packages?",
         "schedule" : "Is there a defined schedule?",
         "response_deadline" :"Am I expected to give my answer before a certain date?"
     }
@@ -39,17 +68,17 @@ class Prompts(Enum):
         "confidential_info" : "What constitutes confidential information?",
         "timeframe" : "Within what timeframe does this agreement hold?",
         "breach" : "What constitutes a breach?",
-        "obligations" : "What are my obligations?",
+        "obligations" : "Describe my obligations?",
         "steps_upon_violation" : "What steps will be taken if I violate?"
     }
     SALES_CONTRACT = {
-        "coverage" : "What are the goods and services covered?",
+        "coverage" : "What goods and services are covered?",
         "payment_plan" : "Is there a payment plan in place?",
-        "details_of_delivery" : "What are the details of delivery?"
+        "details_of_delivery" : "Describe the details of delivery?"
     }
     INDEPENDENT_CONTRACTOR_AGREEMENT = {
         "schedule" : "Will I be required to work a set schedule?",
-        "payment_terms" : "What are the payment terms?",
+        "payment_terms" : "Describe the payment terms?",
         "details_of_termination" : "What is the minimum notice which will be provided in case of an,"
                                                      "early contract termination?"
     }
@@ -61,9 +90,9 @@ class Prompts(Enum):
         "late_payment_info" :"What happens in case there are late or missed payments?"
     }
     PARTNERSHIP_AGREEMENT = {
-        "responsibilities" : "What are the responsibilities of the partners?",
+        "responsibilities" : "Describe the responsibilities of the partners?",
         "restrictions" : "What are the restriction on partners",
-        "dispute_resolution" : "What will disputes be resolved"
+        "dispute_resolution" : "How will disputes be resolved?"
     }
 
     @classmethod
@@ -179,3 +208,36 @@ class Language(Enum):
     YIDDISH = 'yi'
     YORUBA = 'yo'
     ZULU = 'zu'
+
+    @classmethod
+    def value_of(cls, value):
+        for k, v in cls.__members__.items():
+            if k == value:
+                return v
+
+class Product(Enum):
+    WEB = 'WEB'
+    MESSAGING = "MESSAGING"
+
+l = ["Greetings",
+                "What's up",
+                "Good morning",
+                "Good afternoon",
+                "Good evening",
+                "Howdy",
+                "Salutations",
+                "Nice to meet you",
+                "Pleased to meet you",
+                "How are you",
+                "What's new",
+                "What's happening",
+                "How's it going",
+                "How's life",
+                "How do you do"]
+
+if __name__ == "__main__":
+    v = []
+    for s in l:
+        if "'" in s:
+            v.append(s.lower().replace("'", ""))
+    print(v)

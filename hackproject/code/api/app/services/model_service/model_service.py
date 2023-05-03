@@ -1,111 +1,130 @@
-import os
 from abc import abstractmethod
 from typing import List
 
 from llama_index import GPTSimpleVectorIndex
+from llama_index.indices.base import BaseGPTIndex
+
 from hackproject.code.api.app.enums import Document, Prompts
-from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponseSchema, \
-    LandDocumentResponseSchema, ServiceContractDocumentResponseSchema, EmploymentContractDocumentResponseSchema, \
-    ConfidentialityAgreementDocumentResponseSchema, SalesContractDocumentResponseSchema, \
-    IndependentContractorAgreementDocumentResponseSchema, LoanAgreementDocumentResponseSchema, \
-    PartnershipAgreementDocumentResponseSchema
-from dotenv import dotenv_values
+from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponse, \
+    LandDocumentResponse, ServiceContractDocumentResponse, EmploymentContractDocumentResponse, \
+    ConfidentialityAgreementDocumentResponse, SalesContractDocumentResponse, \
+    IndependentContractorAgreementDocumentResponse, LoanAgreementDocumentResponse, \
+    PartnershipAgreementDocumentResponse, PromptResponse
+
 
 class ModelService:
     @abstractmethod
-    def process_prompt(self, prompt: str):
+    def get_index(self, document: List):
+        pass
+
+    @abstractmethod
+    def add_document_to_index(self, index: BaseGPTIndex, document: List):
+        pass
+
+    @abstractmethod
+    def process_document(self, index: BaseGPTIndex, doc_type: Document):
+        pass
+
+    @abstractmethod
+    def process_prompt(self, prompt: str, index: BaseGPTIndex):
         pass
 
 class ModelServiceImpl(ModelService):
-    def __init__(self, document: List, type: Document, openai_api_key=None):
-        if not openai_api_key:
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            env_path = os.path.join(dir_path, '..', '..', '.env')
-            config = dotenv_values(env_path)
-            openai_api_key = config.get('OPENAI_API_KEY')
-            if openai_api_key:
-                os.environ['OPENAI_API_KEY'] = openai_api_key
-        self.__index = GPTSimpleVectorIndex.from_documents(document)
-        self.__document = type
+    _instance = None
 
-    def process_document(self):
-        match self.__document:
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def get_index(self, document: List):
+        from hackproject.code.api.app.main import service_context
+        index = GPTSimpleVectorIndex.from_documents(document, service_context=service_context)
+        return index
+
+    def add_document_to_index(self, index: BaseGPTIndex, document: List):
+        from hackproject.code.api.app.main import service_context
+        for doc in document:
+            index.insert(doc, service_context=service_context)
+
+
+    def process_document(self, index: BaseGPTIndex, doc_type: Document):
+        match doc_type:
             case Document.INSURANCE:
-                return self.__process_insurance_document()
+                return self.__process_insurance_document(index=index)
             case Document.LAND:
-                return self.__process_land_document()
+                return self.__process_land_document(index=index)
             case Document.SERVICE_CONTRACT:
-                return self.__process_service_contract_document()
+                return self.__process_service_contract_document(index=index)
             case Document.EMPLOYMENT_CONTRACT:
-                return self.__process_employment_contract_document()
+                return self.__process_employment_contract_document(index=index)
             case Document.CONFIDENTIALITY_AGREEMENT:
-                return self.__process_confidentiality_agreement_document()
+                return self.__process_confidentiality_agreement_document(index=index)
             case Document.SALES_CONTRACT:
-                return self.__process_sales_contract_document()
+                return self.__process_sales_contract_document(index=index)
             case Document.INDEPENDENT_CONTRACTOR_AGREEMENT:
-                return self.__process_independent_contractor_agreement_document()
+                return self.__process_independent_contractor_agreement_document(index=index)
             case Document.LOAN_AGREEMENT:
-                return self.__process_loan_agreement_document()
+                return self.__process_loan_agreement_document(index=index)
             case Document.PARTNERSHIP_AGREEMENT:
-                return self.__process_partnership_agreement_document()
+                return self.__process_partnership_agreement_document(index=index)
 
+    def process_prompt(self, prompt: str, index: BaseGPTIndex):
+        return PromptResponse(prompt=prompt, response=index.query(prompt).response)
 
-    def __generate_summary(self):
-        return self.process_prompt(Prompts.SUMMARY.value)
+    def __generate_summary(self, index: BaseGPTIndex):
+        return index.query(Prompts.SUMMARY.value).response
 
-    def process_prompt(self, prompt: str):
-        return self.__index.query(prompt).response
-
-    def __process_insurance_document(self):
-        summary = self.__generate_summary()
+    def __process_insurance_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.INSURANCE.value).value
-        answers = {k: self.process_prompt(v) for k,v in prompts.items()}
-        return InsuranceDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k,v in prompts.items()}
+        return InsuranceDocumentResponse(summary=summary, **answers)
 
-    def __process_land_document(self):
-        summary = self.__generate_summary()
+    def __process_land_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.LAND.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return LandDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return LandDocumentResponse(summary=summary, **answers)
 
-    def __process_service_contract_document(self):
-        summary = self.__generate_summary()
+    def __process_service_contract_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.SERVICE_CONTRACT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return ServiceContractDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return ServiceContractDocumentResponse(summary=summary, **answers)
 
-    def __process_employment_contract_document(self):
-        summary = self.__generate_summary()
+    def __process_employment_contract_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.EMPLOYMENT_CONTRACT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return EmploymentContractDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return EmploymentContractDocumentResponse(summary=summary, **answers)
 
-    def __process_confidentiality_agreement_document(self):
-        summary = self.__generate_summary()
+    def __process_confidentiality_agreement_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.CONFIDENTIALITY_AGREEMENT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return ConfidentialityAgreementDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return ConfidentialityAgreementDocumentResponse(summary=summary, **answers)
 
-    def __process_sales_contract_document(self):
-        summary = self.__generate_summary()
+    def __process_sales_contract_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.SALES_CONTRACT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return SalesContractDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return SalesContractDocumentResponse(summary=summary, **answers)
 
-    def __process_independent_contractor_agreement_document(self):
-        summary = self.__generate_summary()
+    def __process_independent_contractor_agreement_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.INDEPENDENT_CONTRACTOR_AGREEMENT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return IndependentContractorAgreementDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return IndependentContractorAgreementDocumentResponse(summary=summary, **answers)
 
-    def __process_loan_agreement_document(self):
-        summary = self.__generate_summary()
+    def __process_loan_agreement_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.LOAN_AGREEMENT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return LoanAgreementDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return LoanAgreementDocumentResponse(summary=summary, **answers)
 
-    def __process_partnership_agreement_document(self):
-        summary = self.__generate_summary()
+    def __process_partnership_agreement_document(self, index: BaseGPTIndex):
+        summary = self.__generate_summary(index=index)
         prompts: dict = Prompts.value_of(Document.PARTNERSHIP_AGREEMENT.value).value
-        answers = {k: self.process_prompt(v) for k, v in prompts.items()}
-        return PartnershipAgreementDocumentResponseSchema(summary=summary, **answers)
+        answers = {k: index.query(v).response for k, v in prompts.items()}
+        return PartnershipAgreementDocumentResponse(summary=summary, **answers)

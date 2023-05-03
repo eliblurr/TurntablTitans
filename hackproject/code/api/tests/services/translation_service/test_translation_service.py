@@ -1,13 +1,13 @@
 from unittest.mock import call, Mock
 
 from hackproject.code.api.app.enums import Language
-from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponseSchema
+from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponse
 from hackproject.code.api.app.services.translation_service.translation_service import TranslationServiceImpl
 
 
 class TestTranslationService:
     def setup_method(self):
-        self.__schema = InsuranceDocumentResponseSchema(
+        self.__schema = InsuranceDocumentResponse(
             summary="summary_value",
             included_in_cover = "included_in_cover_value",
             excluded_from_cover = "excluded_from_cover_value",
