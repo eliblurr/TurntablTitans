@@ -1,27 +1,14 @@
 from abc import abstractmethod
 
-from hackproject.code.api.app.enums import Language
 from googletrans import Translator
+from pydantic import BaseModel
 
-from hackproject.code.api.app.schemas.model_service.model_service_schemas import InsuranceDocumentResponse, \
-    LandDocumentResponse, ServiceContractDocumentResponse, EmploymentContractDocumentResponse, \
-    ConfidentialityAgreementDocumentResponse, SalesContractDocumentResponse, \
-    IndependentContractorAgreementDocumentResponse, LoanAgreementDocumentResponse, \
-    PartnershipAgreementDocumentResponse
+from hackproject.code.api.app.enums import Language
 
 
 class TranslationService:
     @abstractmethod
-    def translate(self, schema: InsuranceDocumentResponse |
-                                LandDocumentResponse |
-                                ServiceContractDocumentResponse |
-                                EmploymentContractDocumentResponse |
-                                ConfidentialityAgreementDocumentResponse |
-                                SalesContractDocumentResponse |
-                                IndependentContractorAgreementDocumentResponse |
-                                LoanAgreementDocumentResponse |
-                                PartnershipAgreementDocumentResponse,
-                  language: Language):
+    def translate(self, schema: BaseModel, language: Language):
         pass
 
 class TranslationServiceImpl(TranslationService):
@@ -32,17 +19,8 @@ class TranslationServiceImpl(TranslationService):
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def translate(self, schema: InsuranceDocumentResponse |
-                                LandDocumentResponse |
-                                ServiceContractDocumentResponse |
-                                EmploymentContractDocumentResponse |
-                                ConfidentialityAgreementDocumentResponse |
-                                SalesContractDocumentResponse |
-                                IndependentContractorAgreementDocumentResponse |
-                                LoanAgreementDocumentResponse |
-                                PartnershipAgreementDocumentResponse,
-                  language: Language):
-        translator = Translator()
+    def translate(self, schema: BaseModel, language: Language):
+        from hackproject.code.api.app.main import translator
         for field_name in schema.__fields__.keys():
             try:
                 translation = translator.translate(getattr(schema, field_name), dest=language.value)

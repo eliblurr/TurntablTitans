@@ -31,19 +31,15 @@ class ChatServiceImpl(ChatService):
         self.__chats = {}
 
     def initialize(self, initialization_details: ChatInitialization):
-        responses = ["Initializing..."]
         chat_id = initialization_details.chat_id
         self.__chats[chat_id] = None
         if initialization_details.product == Product.MESSAGING:
             bot = self.__get_bot()
-            bot.send_message(chat_id, responses[0])
-            # give time to read what has been printed
-            time.sleep(1)
-            # Greet and introduce
             greeting = random.choice(Prompts.GREETING_RESPONSE.value)
+            time.sleep(1)
             bot.send_message(chat_id, greeting)
         else:
-            return [responses[0], random.choice(Prompts.GREETING_RESPONSE.value)]
+            return random.choice(Prompts.GREETING_RESPONSE.value)
 
     def reply_prompt(self, processed_prompt: ProcessedPrompt):
         if processed_prompt.text:
@@ -65,10 +61,8 @@ class ChatServiceImpl(ChatService):
             res = None
             if formatted_text in Prompts.GREETING.value or formatted_text+'?' in Prompts.GREETING.value:
                 res = PromptResponse(prompt=input.text, response=random.choice(Prompts.GREETING_RESPONSE.value))
-            elif formatted_text in ['thanks', 'thank you', 'appreciate it',
-                                      'grateful', 'cheers', 'nice one', 'alright', 'cool'
-                                      'bye', 'exit', 'quit', 'ok', 'okay'] :
-                res = PromptResponse(prompt=input.text, response="Happy to help!")
+            elif formatted_text in Prompts.APPRECIATION.value:
+                res = PromptResponse(prompt=input.text, response=random.choice(Prompts.APPRECIATION_RESPONSE.value))
             return res
 
         ## check if input is a pleasantry
@@ -98,6 +92,7 @@ class ChatServiceImpl(ChatService):
             else:
                 self.__model_service.add_document_to_index(index=index, document=input.document.document)
             response = self.__model_service.process_document(index=index, doc_type=input.document.doc_type)
+            response = self.__clean_response(response)
             return self.__translation_service.translate(schema=response, language=input.language)
 
         if input.product == Product.WEB:

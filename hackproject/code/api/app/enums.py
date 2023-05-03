@@ -42,6 +42,15 @@ class Prompts(Enum):
                          "Salutations! What can I assist you with?",
                          "Hey! How can I be of help today?"
                      ]
+    APPRECIATION = ['thanks', 'thank you', 'appreciate it',
+         'grateful', 'cheers', 'nice one', 'alright', 'cool'
+                    'bye', 'exit', 'quit', 'ok', 'okay']
+    APPRECIATION_RESPONSE = [
+        'You\'re welcome!', 'No problem, happy to help.', 'Anytime, feel free to reach out if you need anything else.',
+        'It was my pleasure.', 'Not a problem at all, glad I could assist you.', 'You\'re most welcome!',
+        'Don\'t hesitate to contact me if you have any further questions.', 'I\'m always here to help.',
+        'It\'s my job, happy to be of service.', 'Thank you for using our service, have a great day!'
+    ]
     SUMMARY = "Can you give me a summary of the document using easy to understand words or non-legal terms"
     INSURANCE = {
         "included_in_cover" : "Describe what is included in the cover",
@@ -213,6 +222,12 @@ class Language(Enum):
     def value_of(cls, value):
         for k, v in cls.__members__.items():
             if k == value:
+                return v
+
+    @classmethod
+    def name_of(cls, value):
+        for k, v in cls.__members__.items():
+            if v.value == value:
                 return v
 
 class Product(Enum):

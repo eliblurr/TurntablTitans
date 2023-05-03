@@ -45,8 +45,7 @@ class ModelServiceImpl(ModelService):
     def add_document_to_index(self, index: BaseGPTIndex, document: List):
         from hackproject.code.api.app.main import service_context
         for doc in document:
-            index.insert(doc, service_context=service_context)
-
+            index.insert(document=doc, service_context=service_context)
 
     def process_document(self, index: BaseGPTIndex, doc_type: Document):
         match doc_type:

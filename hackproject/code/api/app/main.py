@@ -6,6 +6,7 @@ import uuid
 import telebot
 from dotenv import load_dotenv
 from fastapi import FastAPI, APIRouter
+from googletrans import Translator
 from langchain import OpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index import LLMPredictor, LangchainEmbedding, ServiceContext
@@ -40,6 +41,7 @@ bot = telebot.TeleBot(TELEGRAM_API_KEY)
 # dependencies
 prompt_service: PromptService = PromptServiceImpl()
 chat_service: ChatService = ChatServiceImpl()
+translator = Translator()
 
 @router.get("/web")
 async def web_prompt():

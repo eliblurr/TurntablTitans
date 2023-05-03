@@ -1,135 +1,57 @@
 import os.path
+from unittest import mock
 from unittest.mock import call, Mock
 
-from llama_index import SimpleDirectoryReader
-
+import pytest
+from PyPDF2 import PdfReader
+from llama_index import Document as LIDocument, ServiceContext
 from hackproject.code.api.app.enums import Document, Prompts
 from hackproject.code.api.app.services.model_service.model_service import ModelServiceImpl
 
+
 class TestModelService:
-    def setup_method(self):
+    @pytest.fixture(scope='session', autouse=True)
+    def documents(self):
         test_document_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'test_document.pdf')
-        self.__document = SimpleDirectoryReader(input_files=[test_document_path]).load_data()
+        reader = PdfReader(test_document_path)
+        pages = reader.pages
+        return [LIDocument(page.extract_text()) for page in pages]
 
-    def test_index_is_built(self):
+    @pytest.fixture(scope='session', autouse=True)
+    def mock_service_context(self):
+        with mock.patch.object(ServiceContext, 'from_defaults') as _fixture:
+            yield _fixture
 
-    def test_model_is_queried_with_necessary_prompts_for_insurance_document(self, mocker):
+    def test_new_document_can_be_added_to_existing_index(self, documents, mock_service_context):
+        mock_service_context = mock_service_context
         mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        mocker.patch('llama_index.GPTSimpleVectorIndex.from_documents')
         model_service = ModelServiceImpl()
-        model_service.get_index(self.__document)
-        model_service.process_document()
-        prompts: dict = Prompts.value_of(Document.INSURANCE.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
+        model_service.add_document_to_index(index=mock_index, document=documents)
+        calls = [call(document=doc, service_context=mock_service_context()) for doc in documents]
+        mock_index.insert.assert_has_calls(calls=calls, any_order=True)
 
+    def test_index_is_built(self, mocker, documents, mock_service_context):
+        mock_service_context = mock_service_context
+        mock_index_creator = mocker.patch('llama_index.indices.vector_store.vector_indices.GPTSimpleVectorIndex.from_documents')
+        model_service = ModelServiceImpl()
+        model_service.get_index(documents)
+        mock_index_creator.assert_called_with(documents, service_context=mock_service_context())
 
-    def test_model_is_queried_with_necessary_prompts_for_land_document(self, mocker):
+    def test_index_can_process_prompt(self, mocker):
         mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
         mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.LAND)
-        prompts: dict = Prompts.value_of(Document.LAND.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
+        model_service = ModelServiceImpl()
+        prompt = "What is covered under the insurance?"
+        model_service.process_prompt(prompt, mock_index)
+        mock_index.query.assert_called_with(prompt)
 
-    def test_model_is_queried_with_necessary_prompts_for_service_document(self, mocker):
+    def test_model_is_queried_with_necessary_prompts_for_type_of_document(self, mocker):
         mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
         mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.SERVICE_CONTRACT)
-        prompts: dict = Prompts.value_of(Document.SERVICE_CONTRACT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_employment_contract_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.EMPLOYMENT_CONTRACT)
-        prompts: dict = Prompts.value_of(Document.EMPLOYMENT_CONTRACT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_confidentiality_agreement_contract_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.CONFIDENTIALITY_AGREEMENT)
-        prompts: dict = Prompts.value_of(Document.CONFIDENTIALITY_AGREEMENT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_sales_contract_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.SALES_CONTRACT)
-        prompts: dict = Prompts.value_of(Document.SALES_CONTRACT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_independent_contractor_agreement_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.INDEPENDENT_CONTRACTOR_AGREEMENT)
-        prompts: dict = Prompts.value_of(Document.INDEPENDENT_CONTRACTOR_AGREEMENT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_loan_agreement_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.LOAN_AGREEMENT)
-        prompts: dict = Prompts.value_of(Document.LOAN_AGREEMENT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
-
-    def test_model_is_queried_with_necessary_prompts_for_partnership_agreement_document(self, mocker):
-        mock_index = Mock()
-        mock_index_creator = mocker.patch('llama_index.indices.base.BaseGPTIndex.from_documents',
-                                          return_value=mock_index)
-        mocker.patch('pydantic.main.BaseModel.__init__', return_value=None)
-        model_service = ModelServiceImpl(document=self.__document, type=Document.PARTNERSHIP_AGREEMENT)
-        prompts: dict = Prompts.value_of(Document.PARTNERSHIP_AGREEMENT.value).value
-        calls = [call(v) for v in prompts.values()]
-        calls.append(call(Prompts.SUMMARY.value))
-        model_service.process_document()
-        mock_index.query.assert_has_calls(calls, any_order=True)
-        mock_index_creator.assert_called_with(self.__document)
+        model_service = ModelServiceImpl()
+        for document in Document:
+            prompts: dict = Prompts.value_of(document.value).value
+            calls = [call(v) for v in prompts.values()]
+            calls.append(call(Prompts.SUMMARY.value))
+            model_service.process_document(mock_index, document)
+            mock_index.query.assert_has_calls(calls=calls, any_order=True)
