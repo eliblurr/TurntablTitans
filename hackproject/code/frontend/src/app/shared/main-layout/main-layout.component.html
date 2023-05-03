@@ -1,0 +1,10 @@
+<div class="row g-0" style=" padding: 0">
+  <app-top-navbar></app-top-navbar>
+  <div class="col-3 btn-primary" [ngClass]="{'sidebar-collapse': !this.sideBarService.collapseSideBar}">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-9">
+    <ng-content></ng-content>
+  </div>
+</div>
+

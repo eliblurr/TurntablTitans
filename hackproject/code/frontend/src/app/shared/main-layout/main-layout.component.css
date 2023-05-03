@@ -1,0 +1,4 @@
+.sidebar-collapse{
+  width: 0;
+  transition: 1s all ease-in;
+}
