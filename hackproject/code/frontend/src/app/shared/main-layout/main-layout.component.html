@@ -1,0 +1,8 @@
+<div class="dashboard-main-wrapper d-flex flex-column">
+  <app-top-navbar></app-top-navbar>
+  <div class="main-chat-page d-flex h-100">
+    <app-sidebar></app-sidebar>
+    <main id="main" class="chat__main-page" [ngClass]="{'sidebar-collapse': !this.sideBarService.collapseSideBar}">
+      <ng-content></ng-content>
+    </main>
+  </div>
