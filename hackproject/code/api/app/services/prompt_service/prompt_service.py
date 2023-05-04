@@ -1,20 +1,22 @@
 import datetime
 import os.path
 import time
+import magic
 from abc import abstractmethod
 
 from PyPDF2 import PdfReader
 from fastapi import HTTPException
-from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from llama_index import Document as LIDocument, SimpleDirectoryReader
+from llama_index import Document as LIDocument
 from telebot import types
+from telegram.ext import ConversationHandler
 
 from hackproject.code.api.app.enums import Language, Document, Product
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, WebDocument, \
     ProcessedPrompt, ProcessedDocument
-from telegram.ext import ConversationHandler
+from langchain.document_loaders import TextLoader
 
+mime = magic.Magic(mime=True)
 
 class PromptService:
     @abstractmethod
@@ -41,12 +43,12 @@ class PromptServiceImpl(PromptService):
         return prompt
 
     def web_prompt(self, body: WebPrompt):
-        destination_language: Language = Language.value_of(body.type.language)
+        destination_language: Language = Language.name_of(body.type.language)
         if isinstance(body.type, WebDocument):
             if os.path.exists(body.type.file_path):
                 document = self.__load_document(body.type.file_path)
             else:
-                raise HTTPException(status_code=400, detail="Bad request")
+                raise HTTPException(status_code=400, detail="File does not exist")
 
             processed_document: ProcessedDocument = ProcessedDocument(
                 document = document,
@@ -62,16 +64,25 @@ class PromptServiceImpl(PromptService):
 
     def messaging_prompt(self, message):
         if message.content_type == 'text':
-            return ProcessedPrompt(chat_id=message.chat.id, text=message.text, language=Language.ENGLISH, product=Product.MESSAGING)
+            from hackproject.code.api.app.main import translator
+            destination_language = None
+            try:
+                destination_language = Language.name_of(translator.detect(message.text).lang)
+            except:
+                pass
+            return ProcessedPrompt(chat_id=message.chat.id, text=message.text,
+                                   language=destination_language if destination_language else Language.ENGLISH,
+                                   product=Product.MESSAGING)
         else:
             details = {}
             self.handle_file(message, details)
             start_time = datetime.datetime.now()
+            ## wait for response from user or timeout
             while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 2:
                 pass
 
-            ## if too much time has passed
-            if len(details) < 3: return
+            ## if too much time has passed and full details not received
+            if len(details) < 3: return ConversationHandler.END
 
             downloaded_file_path, doc_type, language = details["downloaded_file_path"], details["doc_type"], details["language"]
             document = self.__load_document(downloaded_file_path)
@@ -82,7 +93,7 @@ class PromptServiceImpl(PromptService):
             )
             return ProcessedPrompt(chat_id=message.chat.id,
                                    document=processed_document,
-                                   language=Language.value_of(language.replace(" ", "_")),
+                                   language=Language.name_of(language.replace(" ", "_")),
                                    product=Product.MESSAGING)
 
     def handle_file(self, message, details):
@@ -148,6 +159,13 @@ class PromptServiceImpl(PromptService):
         return bot
 
     def __load_document(self, path: str):
-        reader = PdfReader(path)
-        pages = reader.pages
-        return [LIDocument(page.extract_text()) for page in pages]
+        typ = mime.from_file(path)
+        if typ == "application/pdf":
+            reader = PdfReader(path)
+            pages = reader.pages
+            return [LIDocument(page.extract_text()) for page in pages]
+        if typ == "text/plain":
+            documents = TextLoader(path).load_and_split(RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0))
+            return [LIDocument(doc.page_content) for doc in documents]
+        else:
+            raise HTTPException(status_code=400, detail="Unsupported file type")
