@@ -13,12 +13,23 @@ from llama_index import LLMPredictor, LangchainEmbedding, ServiceContext
 from starlette.requests import Request
 from telebot import types
 
+import sys
+
+sys.path.extend([
+    os.path.abspath(os.path.join('..')),
+    os.path.abspath(os.path.join('..','..')),
+    os.path.abspath(os.path.join('..','..', '..')),
+    os.path.abspath(os.path.join('..','..','..','..'))
+])
+
 from hackproject.code.api.app.enums import Product
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import PromptResponse
+from hackproject.code.api.app.schemas.tts_service.tts_schemas import TTS
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, ProcessedPrompt, \
     ChatInitialization
 from hackproject.code.api.app.services.chat_service.chat_service import ChatServiceImpl, ChatService
 from hackproject.code.api.app.services.prompt_service.prompt_service import PromptServiceImpl, PromptService
+from hackproject.code.api.app.services.tts_service.tts import tts as parrot
 
 # laod env's
 load_dotenv()
@@ -42,6 +53,15 @@ bot = telebot.TeleBot(TELEGRAM_API_KEY)
 prompt_service: PromptService = PromptServiceImpl()
 chat_service: ChatService = ChatServiceImpl()
 translator = Translator()
+
+from fastapi.responses import FileResponse
+from starlette.background import BackgroundTask
+from hackproject.code.api.app.utils import remove_file
+
+@router.post("/tts/{message_id}")
+async def tts(message_id:str, payload:TTS):
+    path = parrot(payload.text, payload.language, message_id)
+    return FileResponse(path, background=BackgroundTask(remove_file, path))
 
 @router.get("/web")
 async def web_prompt():

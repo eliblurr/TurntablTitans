@@ -1,5 +1,57 @@
+from pathlib import Path
 from enum import Enum
+import os
 
+BASE_DIR = Path(__file__).resolve().parent
+AUDIO_PATH = os.path.join(BASE_DIR, 'tmp', 'audio')
+MODEL_PATH = os.path.join(BASE_DIR, 'tmp', 'models')
+
+class TTSModel(Enum):
+    EN = {
+            'model': 'v3_en',
+            'target': 'en_model.pt',
+            'package': 'https://models.silero.ai/models/tts/en/v3_en.pt',
+            'sample_rate': [8000, 24000, 48000],
+            'speaker': 'en_0'
+        }
+
+    DE = {
+            'model': 'v3_de',
+            'target': 'de_model.pt',
+            'package': 'https://models.silero.ai/models/tts/de/v3_de.pt',
+            'sample_rate': [8000, 24000, 48000],
+            'speaker': 'karlsson'
+        }
+    
+    ES = {
+            'model': 'v3_es',
+            'target': 'es_model.pt',
+            'package': 'https://models.silero.ai/models/tts/es/v3_es.pt',
+            'sample_rate': [8000, 24000, 48000],
+            'speaker': 'es_0'
+        }
+    FR = {
+            'model': 'v3_fr',
+            'target': 'fr_model.pt',
+            'package': 'https://models.silero.ai/models/tts/fr/v3_fr.pt',
+            'sample_rate': [8000, 24000, 48000],
+            'speaker': 'fr_0'
+        }
+    
+    RU = {
+            'model': 'v3_1_ru',
+            'target': 'ru_model.pt',
+            'package': 'https://models.silero.ai/models/tts/ru/v3_1_ru.pt',
+            'sample_rate': [8000, 24000, 48000],
+            'speaker': 'baya'
+        }
+
+    def path(self):
+        return os.path.join(MODEL_PATH, self.value['target'])
+
+    @classmethod
+    def exists(cls, key:str):
+        return key.lower() in [key.lower() for key in cls.__members__.keys()]
 
 class Document(Enum):
     INSURANCE = 'INSURANCE'
@@ -256,3 +308,9 @@ if __name__ == "__main__":
         if "'" in s:
             v.append(s.lower().replace("'", ""))
     print(v)
+
+    try:
+        os.mkdir(MODEL_PATH , exist_ok=True)
+        os.mkdir(AUDIO_PATH , exist_ok=True)
+    except:
+        pass
