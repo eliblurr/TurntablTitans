@@ -1,0 +1,40 @@
+<app-main-layout>
+  <div id="chat" class="h-100">
+    <section class="section h-100">
+      <div class="chat-box p-3 h-100">
+        <div *ngFor="let message of messages" class="message">
+          <div [class]="message.type">
+            {{ message.message }}
+          </div>
+        </div>
+        <div
+          *ngIf="loading"
+          class="message"
+          style="width: 100%; display: block"
+        >
+          <div [class]="'client'">...</div>
+        </div>
+      </div>
+      <!--      footer-->
+      <div id="chat-footer" class="bg-white  p-0">
+        <form [formGroup]="chatForm" class="d-flex justify-content-between">
+          <!--          text-->
+          <input class=" mx-2 " style="border: none; height: 35px; font-size:13px; width:100%; outline: none"
+                 formControlName="message"
+                 type="text"
+                 id="user-chat-input"
+                 placeholder="Type your message here..."
+          />
+          <div class="d-flex justify-content-between pe-3 ">
+            <mat-icon id="file-icon"> attach_file</mat-icon>
+            <mat-icon id="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
+              send
+            </mat-icon>
+          </div>
+        </form>
+
+      </div>
+    </section>
+  </div>
+</app-main-layout>
+
