@@ -2,6 +2,7 @@
 DIR=$(dirname "$(readlink -f "$0")")
 
 pip install -r $DIR/requirements.txt
+pip install python-telegram-bot
 
 MODEL_DIR=$DIR/app/tmp/models
 AUDIO_DIR=$DIR/app/tmp/audio
