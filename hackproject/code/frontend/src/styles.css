@@ -4,3 +4,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.colorBlind{
+    background-color: rgb(90, 160, 137);
+  }
+  
+  .Dyslexia{
+    background-color:rgb(70, 46, 92);
+  }
+
+  .DarkMode{
+    background-color:rgb(42, 65, 33);
+    color: white;
+  }
+
+  

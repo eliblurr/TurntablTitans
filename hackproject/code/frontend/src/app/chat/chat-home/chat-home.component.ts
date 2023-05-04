@@ -14,6 +14,7 @@ export interface Message {
   styleUrls: ['./chat-home.component.css']
 })
 export class ChatHomeComponent {
+  currentTheme:any = localStorage.getItem('theme');
 
   selectedCategory: number = 0;
   fileName = '';

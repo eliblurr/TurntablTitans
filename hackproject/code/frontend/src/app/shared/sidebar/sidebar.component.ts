@@ -7,9 +7,16 @@ import {SidebarService} from "../services/sidebar/sidebar.service";
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  currentTheme:any = localStorage.getItem('theme');
 
   constructor(
     public sidebarService: SidebarService
   ) {}
+
+  setTheme(newTheme:any){
+    localStorage.setItem('theme',newTheme)
+    this.currentTheme = localStorage.getItem('theme');
+    location.reload()
+  }
 
 }
