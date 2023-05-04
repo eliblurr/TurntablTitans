@@ -8,11 +8,10 @@
 }
 
 .sidebar {
-  height: 90.8vh;
-  background-color: #fff;
+  height: 100%;
   color: black;
-  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
   padding-left: 15px;
   padding-top: 15px;
-  /*position: fixed;*/
+  width: 250px;
 }

@@ -12,7 +12,17 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
+  // sendMessage(message: string):Observable<MessageResponse>{
+  //   return this.http.post<MessageResponse>('http://localhost:5050/api/v1/message', {message})
+  // }
+
   sendMessage(message: string):Observable<MessageResponse>{
-    return this.http.post<MessageResponse>('http://localhost:5050/api/v1/message', {message})
+    const response = {message: "Turntabl Titans to the rescue"}
+    return new Observable(observer => {
+      setTimeout(() => {
+        observer.next(response);
+        observer.complete();
+      }, 200);
+    });
   }
 }

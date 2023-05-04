@@ -1,4 +1,12 @@
-.sidebar-collapse{
-  width: 0;
-  transition: 1s all ease-in;
+.sidebar-collapse {
+  margin-left: 0 !important;
 }
+
+.dashboard-main-wrapper {
+  height: 100vh;
+}
+
+.chat__main-page {
+  width: 100%;
+}
+

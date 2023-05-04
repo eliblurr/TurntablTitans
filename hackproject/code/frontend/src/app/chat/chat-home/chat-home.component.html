@@ -1,101 +1,40 @@
-<app-main-layout >
-  <div id="chat">
-    <div class="chat-box p-3">
-      <div *ngFor="let message of messages" class="message">
-        <div [class]="message.type">
-          {{ message.message }}
+<app-main-layout>
+  <div id="chat" class="h-100">
+    <section class="section h-100">
+      <div class="chat-box p-3 h-100">
+        <div *ngFor="let message of messages" class="message">
+          <div [class]="message.type">
+            {{ message.message }}
+          </div>
+        </div>
+        <div
+          *ngIf="loading"
+          class="message"
+          style="width: 100%; display: block"
+        >
+          <div [class]="'client'">...</div>
         </div>
       </div>
-      <div
-        *ngIf="loading"
-        class="message"
-        style="width: 100%; display: block"
-      >
-        <div [class]="'client'">...</div>
+      <!--      footer-->
+      <div id="chat-footer" class="bg-white  p-0">
+        <form [formGroup]="chatForm" class="d-flex justify-content-between">
+          <!--          text-->
+          <input class=" mx-2 " style="border: none; height: 35px; font-size:13px; width:100%; outline: none"
+                 formControlName="message"
+                 type="text"
+                 id="user-chat-input"
+                 placeholder="Type your message here..."
+          />
+          <div class="d-flex justify-content-between pe-3 ">
+            <mat-icon id="file-icon"> attach_file</mat-icon>
+            <mat-icon id="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
+              send
+            </mat-icon>
+          </div>
+        </form>
+
       </div>
-    </div>
-    <!--      footer-->
-    <div id= "chat-footer" class="bg-white  p-0">
-      <form [formGroup]="chatForm" class="d-flex justify-content-between">
-        <!--          text-->
-        <input class=" mx-2 " style="border: none; height: 35px; font-size:13px; width:18vw; outline: none"
-               formControlName="message"
-               type="text"
-               id="user-chat-input"
-               placeholder="Type your message here..."
-        />
-        <div class="d-flex justify-content-between">
-          <mat-icon id="file-icon"> attach_file</mat-icon>
-          <mat-icon id="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
-            send
-          </mat-icon>
-        </div>
-
-<!--        <div class="d-flex">-->
-<!--          &lt;!&ndash;          category&ndash;&gt;-->
-<!--          <select-->
-<!--            id="category"-->
-<!--            class="form-select"-->
-<!--            style="width: 150px">-->
-<!--            <option [ngValue]=null disabled selected hidden>Category</option>-->
-<!--            <option>Land</option>-->
-<!--            <option>Insurance</option>-->
-<!--          </select>-->
-<!--          &lt;!&ndash;          language&ndash;&gt;-->
-<!--          <select-->
-<!--            id="language"-->
-<!--            class="form-select"-->
-<!--            style="width: 150px">-->
-<!--            <option [ngValue]=null disabled selected hidden>Language</option>-->
-<!--            <option>English</option>-->
-<!--            <option>French</option>-->
-<!--          </select>-->
-<!--        </div>-->
-        <!--          send message button-->
-
-
-
-      </form>
-
-
-      <!--        <div class="row p-0" style="height: 100%">-->
-      <!--          <div class="col-4 d-flex justify-content-between" style="margin-left: 10px; margin-top: 5px">-->
-      <!--&lt;!&ndash;            <span class="mx-2 fw-lighter"> Upload file</span>&ndash;&gt;-->
-      <!--&lt;!&ndash;            <input type="file" class="file-input"&ndash;&gt;-->
-      <!--&lt;!&ndash;                   (change)="onFileSelected($event)" #fileUpload>&ndash;&gt;-->
-      <!--&lt;!&ndash;            <i class="bi bi-paperclip text-primary"></i>&ndash;&gt;-->
-      <!--&lt;!&ndash;            <div class="file-upload">&ndash;&gt;-->
-
-      <!--&lt;!&ndash;              {{fileName || "Upload file"}}&ndash;&gt;-->
-
-      <!--&lt;!&ndash;              <button mat-mini-fab color="primary" class="upload-btn"&ndash;&gt;-->
-      <!--&lt;!&ndash;                      (click)="fileUpload.click()">&ndash;&gt;-->
-      <!--&lt;!&ndash;                <mat-icon>attach_file</mat-icon>&ndash;&gt;-->
-      <!--&lt;!&ndash;              </button>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </div>&ndash;&gt;-->
-      <!--          </div>-->
-      <!--          <div class="col d-flex justify-content-start">-->
-      <!--          <ng-select class="" style="width:180px"-->
-      <!--                     [items]="category"-->
-      <!--                     bindLabel="name"-->
-      <!--                     bindValue="id"-->
-      <!--                     [(ngModel)]="selectedCategory">-->
-      <!--          </ng-select>-->
-      <!--          <ng-select style="width: 180px"-->
-      <!--                     [items]="category"-->
-      <!--                     bindLabel="name"-->
-      <!--                     placeholder="Select category"-->
-      <!--                     [(ngModel)]="selectedCategory">-->
-      <!--          >-->
-      <!--          </ng-select>-->
-      <!--          </div>-->
-      <!--          <div class="col d-flex justify-content-end py-2" style="margin-right: 10px">-->
-      <!--&lt;!&ndash;            <i class="bi bi-send-fill"></i>&ndash;&gt;-->
-      <!--            <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-      <!--              <path d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z" fill="blue"/>-->
-      <!--            </svg>-->
-      <!--          </div>-->
-      <!--        </div>-->
-    </div>
+    </section>
   </div>
 </app-main-layout>
+

@@ -3,19 +3,19 @@
 }
 
 #user-chat-submit-button {
-  color: #FFFFFF;
-  background-color: #5D5FEF;
-  border-radius: 4px;
+  color: #5D5FEF;
   font-size: 19px;
   padding: 4px;
   height: 25px;
   width: 27px;
-  margin-top:5px;
+  margin-top: 5px;
 }
-#file-icon{
+
+#file-icon {
   margin-top: 5px;
   color: #5D5FEF;
 }
+
 .messages {
   height: 100%;
   overflow: auto;
@@ -24,10 +24,10 @@
 .message {
   display: flow-root;
   width: 100%;
+
 }
 
 .client {
-  /*background-color: #333;*/
   border: 0.5px solid #333;
   background-color: #fff;
   color: #333;
@@ -47,8 +47,10 @@
   margin-bottom: 10px;
   display: inline-block;
   max-width: 80%;
-  text-align: right;
   float: right;
+  word-wrap: break-word;
+  text-align: left;
+
 }
 
 #category, #language {
@@ -58,20 +60,14 @@
   border-color: #A5A6F6;
 }
 
-#chat{
+#chat {
   position: relative;
-  height: 90.8vh;
-  /*background-color: yellow;*/
-  /*padding: 5px;*/
-  /*width: 98vw;*/
 }
 
-#chat-footer{
+#chat-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   border: 1px solid #A5A6F6;
-
-  /*border-radius: 10px;*/
   height: 38px;
 }

@@ -1,5 +1,5 @@
-#topnav{
+.header {
   /*height: 43px; */
-  /*background-color: #5D5FEF;*/
-
+  background-color: #fff;
+  box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
 }

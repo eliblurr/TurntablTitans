@@ -1,10 +1,8 @@
-<div class="row g-0" style=" padding: 0">
+<div class="dashboard-main-wrapper d-flex flex-column">
   <app-top-navbar></app-top-navbar>
-  <div class="col-3 btn-primary" [ngClass]="{'sidebar-collapse': !this.sideBarService.collapseSideBar}">
+  <div class="main-chat-page d-flex h-100">
     <app-sidebar></app-sidebar>
+    <main id="main" class="chat__main-page" [ngClass]="{'sidebar-collapse': !this.sideBarService.collapseSideBar}">
+      <ng-content></ng-content>
+    </main>
   </div>
-  <div class="col-9">
-    <ng-content></ng-content>
-  </div>
-</div>
-
