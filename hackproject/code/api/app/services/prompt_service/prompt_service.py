@@ -44,16 +44,21 @@ class PromptServiceImpl(PromptService):
 
     def web_prompt(self, body: WebPrompt):
         response_language: Language = Language.name_of(body.prompt.native_language.replace(" ", "_"))
+        if not response_language: raise HTTPException(status_code=400, detail="Unsupported native language")
+
         if isinstance(body.prompt, WebDocument):
             if os.path.exists(body.prompt.file_path):
                 document = self.__load_document(body.prompt.file_path)
             else:
                 raise HTTPException(status_code=400, detail="File does not exist")
 
+            doc_language = Language.name_of(body.prompt.doc_language)
+            if not doc_language: raise HTTPException(status_code=400, detail="Unsupported document language")
+
             processed_document: ProcessedDocument = ProcessedDocument(
                 document = document,
                 doc_type = body.prompt.type,
-                doc_language = Language.name_of(body.prompt.doc_language)
+                doc_language = doc_language
             )
 
             return ProcessedPrompt(chat_id=body.chat_id, document=processed_document, native_language=response_language,
@@ -76,7 +81,8 @@ class PromptServiceImpl(PromptService):
             self.handle_file(message, details)
             start_time = datetime.datetime.now()
             ## wait for response from user or timeout
-            while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 2:
+            while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 3:
+                time.sleep(2)
                 pass
 
             ## if too much time has passed and full details not received
@@ -87,12 +93,12 @@ class PromptServiceImpl(PromptService):
             os.remove(downloaded_file_path)
             processed_document: ProcessedDocument = ProcessedDocument(
                 document=document,
-                doc_type=Document.value_of(doc_type.replace(" ", "_")),
-                doc_language=Language.name_of(language.replace(" ", "_"))
+                doc_type=doc_type,
+                doc_language=language
             )
             return ProcessedPrompt(chat_id=message.chat.id,
                                    document=processed_document,
-                                   native_language=Language.name_of(language.replace(" ", "_")),
+                                   native_language=language,
                                    product=Product.MESSAGING)
 
     def handle_file(self, message, details):
@@ -122,15 +128,30 @@ class PromptServiceImpl(PromptService):
         time.sleep(1)
         msg = bot.reply_to(message, 'What type of document is it?', reply_markup=keyboard)
 
-        bot.register_next_step_handler(msg, self.__ask_language, details)
+        bot.register_next_step_handler(msg, self.__receive_document_type, details)
 
-    def __ask_language(self, message, details):
+    def __receive_document_type(self, message, details):
         bot = self.__get_bot()
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
 
         option = message.text
         bot.reply_to(message, f"You selected: {option}", reply_markup=types.ReplyKeyboardRemove())
+
+        option = Document.value_of(option.replace(" ", "_"))
+
+        if not option:
+            bot.reply_to(message, "Invalid selection, please try again")
+            self.__ask_document_type(message, details)
+            return
+
         details["doc_type"] = option
+        self.__ask_language(message, details)
+
+
+    def __ask_language(self, message, details):
+        bot = self.__get_bot()
+        bot.send_chat_action(chat_id=message.chat.id, action='typing')
+
         text = "Awesome!, what language is the document in?"
         options = [language.name.replace("_", " ") for language in Language]
 
@@ -149,6 +170,14 @@ class PromptServiceImpl(PromptService):
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
         option = message.text
         bot.reply_to(message, f"You selected: {option}", reply_markup=types.ReplyKeyboardRemove())
+
+        option = Language.name_of(option.replace(" ", "_"))
+
+        if not option:
+            bot.reply_to(message, "Invalid selection, please try again")
+            self.__ask_language(message, details)
+            return
+
         details["native_language"] = option
         bot.reply_to(message, "Awesome!, hold on while I read your document.")
         return ConversationHandler.END

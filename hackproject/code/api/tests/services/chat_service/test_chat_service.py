@@ -37,6 +37,37 @@ def processed_document():
 @pytest.mark.usefixtures("prepare_mocks")
 @pytest.mark.usefixtures("processed_document")
 class TestChatService:
+    ## general
+    def test_text_prompts_are_translated_to_native_language_given(self, mocker):
+        chat_id = "chat_id"
+        appreciation = random.choice(Prompts.APPRECIATION.value)
+        processed_prompt: ProcessedPrompt = ProcessedPrompt(text=appreciation, native_language=Language.ENGLISH,
+                                                            product=Product.WEB, chat_id=chat_id)
+        mock_translation_func = mocker.patch("hackproject.code.api.app.services.translation_service.translation_service.TranslationServiceImpl"
+                     ".translate_response", side_effect=lambda schema, language: schema)
+        cs = ChatServiceImpl()
+        response: PromptResponse = cs.reply_prompt(processed_prompt)
+        mock_translation_func.assert_called_with(schema=response, language=processed_prompt.native_language)
+
+    def test_document_prompts_are_translated_to_native_language_given(self, mocker, processed_document):
+        chat_id = "chat_id"
+        document_prompt = ProcessedPrompt(document=processed_document, native_language=Language.FRENCH,
+                                          product=Product.WEB, chat_id=chat_id)
+        mock_index_information = Mock()
+        mocker.patch("hackproject.code.api.app.schemas.chat_service.chat_service_schemas.IndexInformation.__new__",
+                     return_value=mock_index_information)
+        mock_translation_func = mocker.patch("hackproject.code.api.app.services.translation_service.translation_service.TranslationServiceImpl"
+                     ".translate_response", side_effect=lambda schema, language: schema)
+        mocker.patch(
+            "hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.get_index")
+        mocker.patch(
+            "hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.process_document")
+        cs = ChatServiceImpl()
+        mock_response_from_index = "Return value from mock"
+        mock_index_information.index.query.return_value.response = mock_response_from_index
+        response = cs.reply_prompt(document_prompt)
+        mock_translation_func.assert_called_with(schema=response, language=document_prompt.native_language)
+
     ## web prompts
     def test_web_chat_initialization(self):
         chat_id = "chat_id"
@@ -102,6 +133,25 @@ class TestChatService:
         response: PromptResponse = cs.reply_prompt(text_prompt)
         assert response.prompt == prompt
         assert response.response == mock_response_from_index
+
+    def test_web_index_is_built_from_document_and_processed(self, mocker, processed_document):
+        chat_id = "chat_id"
+        document_prompt = ProcessedPrompt(document=processed_document, native_language=Language.FRENCH,
+                                          product=Product.WEB, chat_id=chat_id)
+        mock_index_information = Mock()
+        mocker.patch("hackproject.code.api.app.schemas.chat_service.chat_service_schemas.IndexInformation.__new__",
+                     return_value=mock_index_information)
+        mocker.patch("hackproject.code.api.app.services.translation_service.translation_service.TranslationServiceImpl"
+                     ".translate_response", side_effect=lambda schema, language: schema)
+        mock_get_index_func = mocker.patch("hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.get_index")
+        mock_process_document_with_index_func = mocker.patch("hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.process_document")
+        cs = ChatServiceImpl()
+        mock_response_from_index = "Return value from mock"
+        mock_index_information.index.query.return_value.response = mock_response_from_index
+        response = cs.reply_prompt(document_prompt)
+        mock_get_index_func.assert_called_with(document=document_prompt.document.document)
+        mock_process_document_with_index_func.assert_called_with(index_information=mock_index_information, doc_type=document_prompt.document.doc_type)
+        assert response
 
     ## mobile prompts
     def test_messaging_chat_initialization(self, mocker, mock_bot, prepare_mocks):
@@ -192,3 +242,24 @@ class TestChatService:
         assert kwargs['chat_id'] == chat_id
         assert kwargs['text'] == mock_response_from_index
         assert not response
+
+    def test_mobile_index_is_built_from_document_and_processed(self, mocker, mock_bot, prepare_mocks,
+                                                               processed_document):
+        mocker.patch("telebot.TeleBot", return_value=mock_bot)
+        mock_bot.token = "token"
+        chat_id = "chat_id"
+        document_prompt = ProcessedPrompt(document=processed_document, native_language=Language.FRENCH,
+                                          product=Product.MESSAGING, chat_id=chat_id)
+        mock_index_information = Mock()
+        mocker.patch("hackproject.code.api.app.schemas.chat_service.chat_service_schemas.IndexInformation.__new__",
+                     return_value=mock_index_information)
+        mocker.patch("hackproject.code.api.app.services.translation_service.translation_service.TranslationServiceImpl"
+                     ".translate_response", side_effect=lambda schema, language: schema)
+        mock_get_index_func = mocker.patch("hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.get_index")
+        mock_process_document_with_index_func = mocker.patch("hackproject.code.api.app.services.model_service.model_service.ModelServiceImpl.process_document")
+        cs = ChatServiceImpl()
+        mock_response_from_index = "Return value from mock"
+        mock_index_information.index.query.return_value.response = mock_response_from_index
+        cs.reply_prompt(document_prompt)
+        mock_get_index_func.assert_called_with(document=document_prompt.document.document)
+        mock_process_document_with_index_func.assert_called_with(index_information=mock_index_information, doc_type=document_prompt.document.doc_type)

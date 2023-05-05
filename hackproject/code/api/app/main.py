@@ -81,9 +81,12 @@ async def web_prompt():
 
 @router.post("/chat/web")
 async def web_prompt(request: WebPrompt):
-    processed_prompt: ProcessedPrompt = prompt_service.process_prompt(request)
-    prompt_response: PromptResponse = chat_service.reply_prompt(processed_prompt)
-    return prompt_response
+    try:
+        processed_prompt: ProcessedPrompt = prompt_service.process_prompt(request)
+        prompt_response: PromptResponse = chat_service.reply_prompt(processed_prompt)
+        return prompt_response
+    except:
+        traceback.print_exc()
 
 @router.post("/chat/messaging/" + bot.token)
 async def mobile_prompt(request: Request):
@@ -102,7 +105,7 @@ def handle_message(message: types.Message):
             processed_prompt: ProcessedPrompt = prompt_service.process_prompt(message)
             chat_service.reply_prompt(processed_prompt)
         except:
-            bot.reply_to(message, "An error occurred, please try again later.")
+            bot.reply_to(message, "Oops, an error occurred please try again later.")
             traceback.print_exc()
         finally:
             return {'ok': True}
