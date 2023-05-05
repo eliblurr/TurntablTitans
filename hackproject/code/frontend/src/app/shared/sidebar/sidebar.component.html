@@ -2,7 +2,7 @@
        [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar">
   <div class="chats">
     <div class="">
-      <button type="submit" class="chat-button btn btn-outline-light m-lg-2">New Chat</button>
+      <button type="submit" class="chat-button btn btn-outline-light m-lg-2" (click)="openUploadFileDialog()">New Chat</button>
     </div>
     <div id="chat-list">
       <button class="chat btn btn-outline-light m-lg-2">

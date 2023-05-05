@@ -36,6 +36,10 @@ export class FileUploadService {
     return this.http.get<Language>(this.languageBaseUrl)
   }
 
+  uploadDocument(request: FileUploadRequest): Observable<any> {
+    return this.http.post<any>(this.fileBaseUrl, request)
+  }
+
   uploadInsuranceDocument(request: FileUploadRequest): Observable<InsuranceDocumentResponse> {
     return this.http.post<InsuranceDocumentResponse>(this.fileBaseUrl, request)
   }
