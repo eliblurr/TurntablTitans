@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Upload file</h2>
+
+<mat-dialog-content>
+
+  <form [formGroup]="uploadFileForm">
+    <div class="flex">
+      <div class="form-group mb-2 mt-2">
+        <label for="type">Category</label>
+        <mat-select id="type" class="form-select" formControlName="type"  required>
+          <mat-option [value]="null" disabled>Select category</mat-option>
+          <mat-option *ngFor="let category of categories"  [value]="category">{{category}}</mat-option>
+        </mat-select>
+      </div>
+      <div class="form-group mb-2 mt-2">
+        <label for="file_path">File</label>
+        <input
+          id="file_path"
+          type="file_path"
+          class="form-control"
+          placeholder="upload file"
+          formControlName="file_path"
+          required
+        />
+      </div>
+      <div class="form-group mb-2 mt-2">
+        <label for="doc_language"> Language</label>
+        <mat-select id="doc_language" class="form-select"
+                    formControlName="doc_language" required>
+          <mat-option [value]="null" disabled>Select language</mat-option>
+          <mat-option *ngFor="let language of languages" [value]="language" >{{language}}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button type="submit" class="btn btn-outline-primary s-lg-2" [disabled]="!this.uploadFileForm.valid" (click)="uploadFile()">Upload</button>
+  <button type="submit" class="btn btn-outline-danger m-lg-2" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

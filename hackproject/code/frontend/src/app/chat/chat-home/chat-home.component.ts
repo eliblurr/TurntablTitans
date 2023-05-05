@@ -1,7 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ChatService} from "../../shared/services/chat.service";
+import {ChatService} from "../../shared/services/chat/chat.service";
+import {MatDialog} from "@angular/material/dialog";
+import {FileUploadComponent} from "../../features/file-upload/file-upload.component";
 
 export interface Message {
   type: string;
@@ -20,21 +22,17 @@ export class ChatHomeComponent {
   fileName = '';
   loading = false
   messages: Message[] = [];
-  chatForm:FormGroup = this.formBuilder.group({
+  chatForm: FormGroup = this.formBuilder.group({
     message: this.formBuilder.control('', Validators.required),
   })
 
-  category = [
-    {id: 1, name: 'Insurance'},
-    {id: 2, name: 'Land'},
-
-  ];
 
   @ViewChild('scrollMe') private myScrollContainer: any;
 
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
     private chatService: ChatService) {
     this.messages.push(
       {
@@ -105,5 +103,9 @@ export class ChatHomeComponent {
 
       upload$.subscribe();
     }
+  }
+
+  openUploadFileDialog() {
+    this.dialog.open(FileUploadComponent, {width: '450px'});
   }
 }
