@@ -12,6 +12,7 @@ from langchain import OpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index import LLMPredictor, LangchainEmbedding, ServiceContext
 from starlette.background import BackgroundTask
+from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from telebot import types
 
@@ -50,6 +51,17 @@ service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, embe
 
 # web
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 router = APIRouter(prefix="/api/v1")
 
 # messaging
