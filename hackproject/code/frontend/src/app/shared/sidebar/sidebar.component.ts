@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ThemeServiceService } from 'src/app/theming/theme-service.service';
 import {SidebarService} from "../services/sidebar/sidebar.service";
 
 @Component({
@@ -6,17 +7,17 @@ import {SidebarService} from "../services/sidebar/sidebar.service";
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
-  currentTheme:any = localStorage.getItem('theme');
+export class SidebarComponent implements OnInit{
 
   constructor(
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,private themeService:ThemeServiceService
   ) {}
+  ngOnInit(){
+    this.changeTheme('spotify')
+    }
 
-  setTheme(newTheme:any){
-    localStorage.setItem('theme',newTheme)
-    this.currentTheme = localStorage.getItem('theme');
-    location.reload()
+
+  changeTheme(name:any) {
+    this.themeService.setTheme(name);
   }
-
 }

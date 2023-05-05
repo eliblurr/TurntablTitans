@@ -1,16 +1,19 @@
-<aside class=" sidebar {{currentTheme}}"
+<aside class=" sidebar sidebartheme"
        [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar">
   <div id="accessibility">
     <span style="font-size: 17px;">Accessibilty</span>
     <ul id="accessibility-list">
       <li>
-        <mat-checkbox (change)="setTheme('colorBlind')" id= "colorBlind" class="example-margin">Color blind</mat-checkbox>
+        <mat-checkbox color="primary" (change)="changeTheme('spotify')" id= "colorBlind" class="example-margin ">Color blind</mat-checkbox>
       </li>
       <li>
-        <mat-checkbox (change)="setTheme('Dyslexia')" id= "Dyslexia" class="example-margin">Dyslexia</mat-checkbox>
+        <mat-checkbox color="primary" (change)="changeTheme('dyslexia')" id= "Dyslexia" class="example-margin checkboxTheme">Dyslexia</mat-checkbox>
       </li>
       <li>
-        <mat-checkbox class="example-margin" (change)="setTheme('DarkMode')">Dark mode</mat-checkbox>
+        <mat-checkbox color="primary" class="example-margin " (change)="changeTheme('motionsensitive')">Motion Sensitivity</mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox color="primary" class="example-margin " (change)="changeTheme('dark')">Dark</mat-checkbox>
       </li>
     </ul>
   </div>

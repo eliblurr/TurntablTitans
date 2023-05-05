@@ -1,7 +1,7 @@
 <app-main-layout>
   <div id="chat" class="h-100 {{currentTheme}}">
     <section class="section h-100">
-      <div class="chat-box p-3 h-100">
+      <div class="chat-box p-3 h-100 message">
         <div *ngFor="let message of messages" class="message">
           <div [class]="message.type">
             {{ message.message }}
@@ -16,7 +16,7 @@
         </div>
       </div>
       <!--      footer-->
-      <div id="chat-footer" class="bg-white  p-0">
+      <div id="chat-footer" class="bg-white  p-0 form">
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
           <!--          text-->
           <input class=" mx-2 " style="border: none; height: 35px; font-size:13px; width:100%; outline: none"
