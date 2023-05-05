@@ -7,7 +7,7 @@
       <div class="form-group mb-2 mt-2">
         <label for="category">Category</label>
         <mat-select id="category" class="form-select" formControlName="category"  required>
-          <mat-option [value]="null" disabled>Select currency</mat-option>
+          <mat-option [value]="null" disabled>Select category</mat-option>
           <mat-option *ngFor="let category of categories"  [value]="category">{{category}}</mat-option>
         </mat-select>
       </div>

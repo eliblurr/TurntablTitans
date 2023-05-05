@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FileUploadService } from '../services/file-upload/file-upload.service';
 import {SidebarService} from "../services/sidebar/sidebar.service";
+// import { Option } from 'ng-select';
 
 @Component({
   selector: 'app-top-navbar',
@@ -8,10 +10,26 @@ import {SidebarService} from "../services/sidebar/sidebar.service";
 })
 export class TopNavbarComponent {
   constructor(
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private fileService: FileUploadService,
   ) {}
+
+  languages: string[] = [
+    
+  ];
+  selectedItem: string =  "Here";
+
+  ngOnInit(): void {
+    this.getLanguages()
+  }
 
   controlSideBar() {
     this.sidebarService.collapseSideBar = !this.sidebarService.collapseSideBar;
+  }
+
+  getLanguages(){
+    this.fileService.getLanguages().subscribe(
+      (res) => this.languages = res.languages
+    )
   }
 }

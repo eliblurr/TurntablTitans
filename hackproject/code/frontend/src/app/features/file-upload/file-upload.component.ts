@@ -17,17 +17,22 @@ export class FileUploadComponent {
   ) {
   }
 
+  ngOnInit(): void {
+    this.getFileTypes()
+    this.getLanguages()
+  }
+
   uploadFileForm: FormGroup = this.formBuilder.group({
     file: this.formBuilder.control('', Validators.required),
     category: this.formBuilder.control(null, Validators.required),
     language: this.formBuilder.control('', Validators.required)
   })
   categories: string [] = [
-    'Insurance', 'Land'
+    
   ]
 
   languages: string[] = [
-    'English', 'French'
+    
   ]
 
   cancel() {

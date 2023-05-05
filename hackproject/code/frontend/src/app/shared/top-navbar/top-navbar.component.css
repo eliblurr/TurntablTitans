@@ -3,3 +3,30 @@
   background-color: #fff;
   box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
 }
+
+.menu {
+  width: 5%;
+  background-color: blue;
+}
+
+.brand-name-language-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: red;
+  align-items: center;
+  width: 95%;
+  height: 100%;
+}
+
+.dropdown {
+  width: 50%;
+}
+
+.language-selector {
+  display: flex;
+  width: 20%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: pink;
+}

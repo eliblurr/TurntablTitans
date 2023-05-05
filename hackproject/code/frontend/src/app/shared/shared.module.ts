@@ -14,6 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
   ],
     imports: [
         CommonModule,
-        SharedRoutingModule, NgSelectModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatListModule, MatExpansionModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCheckboxModule
+        SharedRoutingModule, NgSelectModule, FormsModule, ReactiveFormsModule, MatSidenavModule, 
+        MatListModule, MatExpansionModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCheckboxModule,
+        MatOptionModule
     ],
   exports:[MainLayoutComponent, NgSelectModule, FormsModule, ReactiveFormsModule]
 })
