@@ -7,6 +7,7 @@ import {SharedModule} from "../shared/shared.module";
 import { FileUploadZoneComponent } from './file-upload-zone/file-upload-zone.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import {MatButtonModule} from "@angular/material/button";
     ChatHomeComponent,
     FileUploadZoneComponent
   ],
-  imports: [
-    CommonModule,
-    ChatRoutingModule,
-    SharedModule,
-    MatIconModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        ChatRoutingModule,
+        SharedModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule
+    ]
 })
 export class ChatModule { }
