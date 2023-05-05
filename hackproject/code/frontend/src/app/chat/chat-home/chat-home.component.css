@@ -11,7 +11,7 @@
   margin-top: 5px;
 }
 
-#file-icon {
+.file-icon {
   margin-top: 5px;
   color: #5D5FEF;
 }
@@ -70,4 +70,8 @@
   width: 100%;
   border: 1px solid #A5A6F6;
   height: 38px;
+}
+
+.chat-box{
+  overflow: auto;
 }
