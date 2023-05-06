@@ -67,14 +67,7 @@
   width: 50%;
 }
 
-.language-selector {
-  display: flex;
-  width: 250px;
-  height: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 6%;
-}
+
 
 @media (max-width: 450px) {
   .language-selector { width: 130px;}
