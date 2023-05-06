@@ -2,8 +2,6 @@
 DIR=$(dirname "$(readlink -f "$0")")
 
 cat $DIR/requirements.txt | xargs -n 1 -L 1 pip install
-pip install python-telegram-bot
-pip install python-magic-bin==0.4.14
 
 MODEL_DIR=$DIR/app/tmp/models
 AUDIO_DIR=$DIR/app/tmp/audio

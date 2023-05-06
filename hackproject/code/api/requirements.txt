@@ -6,9 +6,11 @@ python-dotenv==1.0.0
 pydantic==1.10.4
 PyPDF2==3.0.1
 pyTelegramBotAPI==4.11.0
+python-telegram-bot==20.2
 tiktoken==0.3.3
 tokenizers==0.13.3
 python-magic==0.4.27
+python-magic-bin==0.4.14
 llama-index==0.5.25
 langchain==0.0.142
 openai==0.27.6
