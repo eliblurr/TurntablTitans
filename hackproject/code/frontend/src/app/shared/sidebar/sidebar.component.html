@@ -73,7 +73,7 @@
 }
 
 .header {
-  background-color: #0f172a;
+  background-color: #435f7a;
   color: #fff;
   padding: 20px;
   display: flex;
@@ -87,14 +87,37 @@
 }
 
 .new-chat-btn {
-  background-color: #c2e1f5;
-  color: #0f172a;
+  background-color: #1CB0F6;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 3px 7px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+
+  appearance: none;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  
 }
 
 .new-chat-btn:hover {
@@ -105,12 +128,12 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  height: calc(100% - 220px);
+  height: calc(100% - 510px);
   overflow-y: scroll;
 }
 
 .chat-list li {
-  padding: 20px;
+  padding: 5px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -122,62 +145,68 @@
 }
 
 .chat-list li:hover {
-  background-color: #f8f8f8;
+  background-color: #8491a6;
 }
 
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #c2e1f5;
-  margin-right: 20px;
-}
-
-.chat-info h3 {
-  font-size: 16px;
-  margin: 0;
-}
-
-.chat-info p {
+.chat-info h4 {
   font-size: 14px;
   margin: 0;
-  color: #888;
 }
-
-.timestamp {
-  font-size: 12px;
-  color: #aaa;
-}
-
-.footer {
-  position: absolute;
-}
-
  </style>
 
- 
 
- <div class="side-panel">
+
+ <div [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar" class="side-panel">
   <div class="header">
     <h2>Chats</h2>
     <button class="new-chat-btn"> <mat-icon> add_comment</mat-icon>
       New Chat</button>
+      
   </div>
   <ul class="chat-list">
     <li class="active">
       <div class="chat-info">
-        <h3> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 1</h3>
-        <p>Chat on motor insurance</p>
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 1 on Motor</h4>
       </div>
-      <div class="timestamp">10:30 AM</div>
     </li>
     <li>
       <div class="chat-info">
-        <h3> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 2</h3>
-        <p>Chat on car insurance</p>
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 2 on Land</h4>
       </div>
-      <div class="timestamp">9:45 AM</div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 3 on car</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 4 on insurance</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 5 on insurance</h4>
+      </div>
     </li>
   </ul>
-
+  <div class="accessibility" id="accessibility">
+    <span style="font-size: 17px;" class="header">Accessibilty</span>
+    <div id="accessibility-list">
+      <ng-container *ngFor="let disability of disabilities">
+        <label class="chat-info accessibility-item">
+          <input type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+          {{ disability }}
+        </label>
+      </ng-container>
+    </div>
+    <div class="header toggle-container">
+      <span>Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" (change)="toggleDarkMode($event)">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+  
 </div>

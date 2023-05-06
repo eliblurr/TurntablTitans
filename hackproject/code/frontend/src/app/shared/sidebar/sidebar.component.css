@@ -1,9 +1,9 @@
 #accessibility-list, #feature-list {
   /* list-style-type: none; */
   color: black;
-  background-color: pink;
   display: flex;
   flex-direction: column;
+ 
 }
 
 .example-margin {
@@ -52,8 +52,11 @@
 .accessibility {
   /*position: absolute;*/
   /*bottom: 0;*/
-  margin-top: 10px;
+  margin-top: 231px;
   /*background-color: red*/
+  /* position: fixed;
+  bottom: 0;
+  width: 100%; */
 }
 
 .accessibility-item {
@@ -61,6 +64,7 @@
   font-size: 15px;
   padding-bottom: 10px;
   /* line-height: 2px; */
+  
 }
 
 .switch {
@@ -135,7 +139,9 @@ input:checked + .slider:before {
   justify-content: space-around;
   align-items: center;
   border-top: 2px solid black;
+  color: white;
   padding-top: 3px;
-  background-color: red;
+  background-color: black;
   height: 38px;
+
 }
