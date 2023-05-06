@@ -22,7 +22,7 @@ class TTSModel(Enum):
             'sample_rate': [8000, 24000, 48000],
             'speaker': 'karlsson'
         }
-    
+
     ES = {
             'model': 'v3_es',
             'target': 'es_model.pt',
@@ -37,7 +37,7 @@ class TTSModel(Enum):
             'sample_rate': [8000, 24000, 48000],
             'speaker': 'fr_0'
         }
-    
+
     RU = {
             'model': 'v3_1_ru',
             'target': 'ru_model.pt',
@@ -103,6 +103,7 @@ class Prompts(Enum):
         'Don\'t hesitate to contact me if you have any further questions.', 'I\'m always here to help.',
         'It\'s my job, happy to be of service.', 'Thank you for using our service, have a great day!'
     ]
+    NO_DOCUMENT_PROVIDED_REPLY = "I need a document first before I can answer questions"
     SUMMARY = "Can you give me a summary of the document using easy to understand words or non-legal terms"
     INSURANCE = {
         "included_in_cover" : "Describe what is included in the cover",
@@ -273,13 +274,13 @@ class Language(Enum):
     @classmethod
     def value_of(cls, value):
         for k, v in cls.__members__.items():
-            if k == value:
+            if v.value == value:
                 return v
 
     @classmethod
     def name_of(cls, value):
         for k, v in cls.__members__.items():
-            if v.value == value:
+            if k == value:
                 return v
 
 class Product(Enum):
@@ -301,16 +302,3 @@ l = ["Greetings",
                 "How's it going",
                 "How's life",
                 "How do you do"]
-
-if __name__ == "__main__":
-    v = []
-    for s in l:
-        if "'" in s:
-            v.append(s.lower().replace("'", ""))
-    print(v)
-
-    try:
-        os.mkdir(MODEL_PATH , exist_ok=True)
-        os.mkdir(AUDIO_PATH , exist_ok=True)
-    except:
-        pass

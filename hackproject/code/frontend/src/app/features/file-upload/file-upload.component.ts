@@ -4,6 +4,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {FileUploadService} from "../../shared/services/file-upload/file-upload.service";
 import {File, FileUploadRequest} from "../../shared/models/file-upload";
 
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -17,6 +18,7 @@ export class FileUploadComponent {
 
   ) {
   }
+
 
   ngOnInit(): void {
     this.getFileTypes()
@@ -33,6 +35,7 @@ export class FileUploadComponent {
 
   languages: string[] = []
 
+
   cancel() {
     this.dialog.close()
   }
@@ -42,6 +45,7 @@ export class FileUploadComponent {
     if(!chatId) return
     const request: FileUploadRequest = {prompt: this.uploadFileForm.value, chat_id:chatId}
     this.fileService.uploadDocument(request)
+
   console.log(this.uploadFileForm.value)
   }
 

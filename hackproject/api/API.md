@@ -93,7 +93,7 @@ Sending a payload with an empty state will return a full list of questions in or
       "priority": -1,
       "source": "MAIN",
       "response": "EV0011",
-      "type": "enum",
+      "prompt": "enum",
       "order": 0
     },
     {...} // truncated

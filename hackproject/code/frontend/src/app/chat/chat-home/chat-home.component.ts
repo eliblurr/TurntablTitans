@@ -107,5 +107,6 @@ export class ChatHomeComponent {
 
   openUploadFileDialog() {
     this.dialog.open(FileUploadComponent, {width: '450px'});
+
   }
 }

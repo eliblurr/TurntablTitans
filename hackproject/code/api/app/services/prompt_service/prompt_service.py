@@ -43,57 +43,62 @@ class PromptServiceImpl(PromptService):
         return prompt
 
     def web_prompt(self, body: WebPrompt):
-        destination_language: Language = Language.name_of(body.type.language)
-        if isinstance(body.type, WebDocument):
-            if os.path.exists(body.type.file_path):
-                document = self.__load_document(body.type.file_path)
+        response_language: Language = Language.name_of(body.prompt.native_language.replace(" ", "_"))
+        if not response_language: raise HTTPException(status_code=400, detail="Unsupported native language")
+
+        if isinstance(body.prompt, WebDocument):
+            if os.path.exists(body.prompt.file_path):
+                document = self.__load_document(body.prompt.file_path)
             else:
                 raise HTTPException(status_code=400, detail="File does not exist")
 
+            doc_language = Language.name_of(body.prompt.doc_language)
+            if not doc_language: raise HTTPException(status_code=400, detail="Unsupported document language")
+
             processed_document: ProcessedDocument = ProcessedDocument(
                 document = document,
-                doc_type = body.type.type
+                doc_type = body.prompt.type,
+                doc_language = doc_language
             )
 
-            return ProcessedPrompt(chat_id=body.chat_id, document=processed_document, language=destination_language,
+            return ProcessedPrompt(chat_id=body.chat_id, document=processed_document, native_language=response_language,
                                    product=Product.WEB)
         else:
-            text = self.__sanitize_prompt(body.type.body)
+            text = self.__sanitize_prompt(body.prompt.body)
 
-            return ProcessedPrompt(chat_id=body.chat_id, text=text, language=destination_language, product=Product.WEB)
+            return ProcessedPrompt(chat_id=body.chat_id, text=text, native_language=response_language, product=Product.WEB)
 
     def messaging_prompt(self, message):
         if message.content_type == 'text':
-            from hackproject.code.api.app.main import translator
-            destination_language = None
-            try:
-                destination_language = Language.name_of(translator.detect(message.text).lang)
-            except:
-                pass
+            from hackproject.code.api.app.main import translation_service
+
+            destination_language = Language.value_of(translation_service.detect_language(message.text))
             return ProcessedPrompt(chat_id=message.chat.id, text=message.text,
-                                   language=destination_language if destination_language else Language.ENGLISH,
+                                   native_language=destination_language if destination_language else Language.ENGLISH,
                                    product=Product.MESSAGING)
         else:
             details = {}
             self.handle_file(message, details)
             start_time = datetime.datetime.now()
             ## wait for response from user or timeout
-            while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 2:
+            while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 3:
+                time.sleep(2)
                 pass
 
             ## if too much time has passed and full details not received
             if len(details) < 3: return ConversationHandler.END
 
-            downloaded_file_path, doc_type, language = details["downloaded_file_path"], details["doc_type"], details["language"]
+            downloaded_file_path, doc_type, language = details["downloaded_file_path"], details["doc_type"], details["native_language"]
             document = self.__load_document(downloaded_file_path)
             os.remove(downloaded_file_path)
             processed_document: ProcessedDocument = ProcessedDocument(
                 document=document,
-                doc_type=Document.value_of(doc_type.replace(" ", "_"))
+                doc_type=doc_type,
+                doc_language=language
             )
             return ProcessedPrompt(chat_id=message.chat.id,
                                    document=processed_document,
-                                   language=Language.name_of(language.replace(" ", "_")),
+                                   native_language=language,
                                    product=Product.MESSAGING)
 
     def handle_file(self, message, details):
@@ -123,16 +128,31 @@ class PromptServiceImpl(PromptService):
         time.sleep(1)
         msg = bot.reply_to(message, 'What type of document is it?', reply_markup=keyboard)
 
-        bot.register_next_step_handler(msg, self.__ask_language, details)
+        bot.register_next_step_handler(msg, self.__receive_document_type, details)
+
+    def __receive_document_type(self, message, details):
+        bot = self.__get_bot()
+        bot.send_chat_action(chat_id=message.chat.id, action='typing')
+
+        option = message.text
+        bot.reply_to(message, f"You selected: {option}", reply_markup=types.ReplyKeyboardRemove())
+
+        option = Document.value_of(option.replace(" ", "_"))
+
+        if not option:
+            bot.reply_to(message, "Invalid selection, please try again")
+            self.__ask_document_type(message, details)
+            return
+
+        details["doc_type"] = option
+        self.__ask_language(message, details)
+
 
     def __ask_language(self, message, details):
         bot = self.__get_bot()
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
 
-        option = message.text
-        details["doc_type"] = option
-        bot.reply_to(message, f"You selected: {option}", reply_markup=types.ReplyKeyboardRemove())
-        text = "Awesome!, select the language you want to interact with the document in."
+        text = "Awesome!, what language is the document in?"
         options = [language.name.replace("_", " ") for language in Language]
 
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -149,8 +169,16 @@ class PromptServiceImpl(PromptService):
         bot = self.__get_bot()
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
         option = message.text
-        details["language"] = option
         bot.reply_to(message, f"You selected: {option}", reply_markup=types.ReplyKeyboardRemove())
+
+        option = Language.name_of(option.replace(" ", "_"))
+
+        if not option:
+            bot.reply_to(message, "Invalid selection, please try again")
+            self.__ask_language(message, details)
+            return
+
+        details["native_language"] = option
         bot.reply_to(message, "Awesome!, hold on while I read your document.")
         return ConversationHandler.END
 
@@ -168,4 +196,4 @@ class PromptServiceImpl(PromptService):
             documents = TextLoader(path).load_and_split(RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0))
             return [LIDocument(doc.page_content) for doc in documents]
         else:
-            raise HTTPException(status_code=400, detail="Unsupported file type")
+            raise HTTPException(status_code=400, detail="Unsupported file prompt")
