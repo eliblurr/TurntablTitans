@@ -24,9 +24,9 @@ export class SidebarComponent {
   }
 
   disabilities: string[] = [
-    "Color Blindness", "Dyslexia", "Autism"
+    "Default","Color Blindness", "Dyslexia", "Autism"
   ];
-  selectedDisability: string =  "Here";
+  selectedDisability: string =  "Default";
 
 
 }
