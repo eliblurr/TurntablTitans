@@ -14,25 +14,27 @@ class ChatInitialization(BaseModel):
 ## web prompts
 class WebDocument(BaseModel):
     type: Document
-    language: str
+    doc_language: str
     file_path: str
+    native_language: str
 
 class WebText(BaseModel):
     body: str
-    language: str
+    native_language: str
 
 class WebPrompt(BaseModel):
-    type: Union[WebDocument | WebText]
+    prompt: Union[WebDocument | WebText]
     chat_id: str
 
 ## processed prompt
 class ProcessedDocument(BaseModel):
     document: List[LIDocument]
     doc_type: Document
+    doc_language: Language
 
 class ProcessedPrompt(BaseModel):
     chat_id: str
     text: str = None
-    language: Language
+    native_language: Language
     document: ProcessedDocument = None
     product: Product
