@@ -68,7 +68,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--background);
+  background-color: var(--secondaryColor);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
@@ -81,7 +81,7 @@
   width: 22px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
@@ -128,6 +128,7 @@ input:checked + .slider:before {
 
 .side-panel {
   background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
   width: 300px;
   height: 100%;
   top: 0;
@@ -174,7 +175,7 @@ input:checked + .slider:before {
 }
 
 .new-chat-btn:hover {
-  background-color: rgba(12, 80, 99, 0.934);
+  background-color: var(--primaryColor);
 }
 
 .chat-list {
@@ -194,7 +195,7 @@ input:checked + .slider:before {
 }
 
 .chat-list li.active {
-  background-color: #f2f2f2;
+  background-color: var(--tertiaryColor);
 }
 
 .chat-list li:hover {
