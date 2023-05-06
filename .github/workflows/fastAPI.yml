@@ -31,4 +31,5 @@ jobs:
       timeout-minutes: 5
     - name: Run Tests with Pytest
       run: |
+        chmod +x ./run_tests.sh
         ./run_tests.sh
