@@ -103,7 +103,7 @@ async def get_question_by_id(product:str, question_id:str, language: str = 'en')
 @router.post("/axa/{product}/compute", response_model=SubmissionResponse)
 async def submit(product:str, payload:list[State], language: str = 'en'):
     return await compute(product, language, payload)
-    
+
 @router.get("/chat/web")
 async def web_prompt():
     chat_id = str(uuid.uuid4())
