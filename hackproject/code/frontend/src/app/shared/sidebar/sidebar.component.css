@@ -1,9 +1,7 @@
 #accessibility-list, #feature-list {
-  /* list-style-type: none; */
-  color: black;
+  color: var(--textOnSecondary);
   display: flex;
   flex-direction: column;
- 
 }
 
 .example-margin {
@@ -12,7 +10,7 @@
 
 .sidebar {
   height: 100%;
-  color: black;
+  color: var(--textOnSecondary);
   box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
   padding-left: 15px;
   padding-top: 10px;
@@ -25,48 +23,29 @@
 .chat {
   width: 200px;
   border: none;
-  color: #4f5050
+  color: var(--background)
 }
 
-.chat-button {
-  width: 200px;
-  color: #4f5050;
-  border: 1px solid #ced4da;
-}
 
 .chat-icon {
   font-size: 15px;
   padding-top: 9.9px;
 }
 
-.chat-label {
-  font-size: 15px;
-  background-color: #2196F3;
-}
-
 #chat-list {
   line-height: 2px;
-  background-color: #333;
 }
 
 .accessibility {
-  /*position: absolute;*/
-  /*bottom: 0;*/
   margin-top: 5px;
   padding: 1%;
-  /*background-color: red*/
-  /* position: fixed;
-  bottom: 0;
-  width: 100%; */
 }
 
 .accessibility-item {
   padding: 5%;
   padding-left: 10px;
   font-size: 15px;
-  padding-bottom: 10px;
-  /* line-height: 2px; */
-  
+  padding-bottom: 10px;  
 }
 
 .switch {
@@ -89,7 +68,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--background);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
@@ -102,18 +81,18 @@
   width: 22px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--secondaryColor);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--tertiaryColor);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--tertiaryColor);
 }
 
 input:checked + .slider:before {
@@ -148,7 +127,7 @@ input:checked + .slider:before {
 }
 
 .side-panel {
-  background-color: #fff;
+  background-color: var(--secondaryColor);
   width: 300px;
   height: 100%;
   top: 0;
@@ -164,8 +143,8 @@ input:checked + .slider:before {
 }
 
 .header {
-  background-color: #435f7a;
-  color: #fff;
+  background-color: var(--primaryColor);
+  color: var(--textOnPrimary);
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -180,8 +159,8 @@ input:checked + .slider:before {
 }
 
 .new-chat-btn {
-  background-color: rgba(18, 177, 245, 0.409);
-  color: white;
+  background-color: var(--tertiaryColor);
+  color: var(--textOnPrimary);
   border: none;
   padding: 8px 10px;
   font-size: 14px;
@@ -192,7 +171,6 @@ input:checked + .slider:before {
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
-  color: #fff;
 }
 
 .new-chat-btn:hover {
@@ -220,7 +198,7 @@ input:checked + .slider:before {
 }
 
 .chat-list li:hover {
-  background-color: #8491a6;
+  background-color: var(--tertiaryColor);
 }
 
 .chat-info h4 {

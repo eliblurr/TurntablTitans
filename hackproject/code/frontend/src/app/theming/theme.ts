@@ -23,7 +23,7 @@ export const THEMES:any = {
       textOnPrimary: '#f5f5f5',
       tertiaryColor: 'rgba(18, 177, 245, 0.409)',
       textOnTertiary: 'hsl(0, 0%, 100%)',
-      textOnSecondary: ' #ffffff ',
+      textOnSecondary: 'black',
       background: '#E6EAEA',
     },
     'Color Blindness': {

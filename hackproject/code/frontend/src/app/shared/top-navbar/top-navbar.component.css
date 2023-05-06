@@ -51,8 +51,6 @@
   width: 50%;
 }
 
-
-
 @media (max-width: 450px) {
   .language-selector { width: 130px;}
   .brand-name-language-container {width: 86%;}
