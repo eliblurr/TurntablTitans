@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit{
 
 
   ngOnInit(){
-    this.changeTheme('spotify')
+    this.changeTheme('Default')
     }
 
 

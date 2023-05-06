@@ -17,9 +17,14 @@ export const THEMES:any = {
       textOnSecondary: ' #ffffff ',
       background: ' #F5F5F5',
     },
-    
     Default: {
-      //no changes from the original
+      primaryColor: '#435f7a',
+      secondaryColor: '#fff',
+      textOnPrimary: '#f5f5f5',
+      tertiaryColor: 'rgba(18, 177, 245, 0.409)',
+      textOnTertiary: 'hsl(0, 0%, 100%)',
+      textOnSecondary: ' #ffffff ',
+      background: '#E6EAEA',
     },
     'Color Blindness': {
       primaryColor: ' #0066CC',
@@ -29,4 +34,4 @@ export const THEMES:any = {
       background: 'hsl(0, 0%, 100%)',
     },
   };
-  
+
