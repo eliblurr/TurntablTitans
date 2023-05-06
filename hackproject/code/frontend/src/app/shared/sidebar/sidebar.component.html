@@ -5,27 +5,27 @@
       <button type="submit" class="chat-button btn btn-outline-light m-lg-2">New Chat</button>
     </div>
     <div id="chat-list">
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
-      <button class="chat btn btn-outline-light m-lg-2">
+      <button class="chat btn btn-outline-light">
         <div class="chat-label">
           <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
       </button>
@@ -33,27 +33,22 @@
   </div>
 
   <div class="accessibility" id="accessibility">
-    <span style="font-size: 17px;">Accessibilty</span>
-    <ul id="accessibility-list">
-      <li>
-        <mat-checkbox class="example-margin">Color blind</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Dyslexia</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Dark mode</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Text to speech</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Language</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Bla bla</mat-checkbox>
-      </li>
-    </ul>
+    <div style="font-size: 18px; width: 100%; text-align: center; padding-bottom: 10px;">Accessibilty</div>
+    <div id="accessibility-list">
+      <ng-container *ngFor="let disability of disabilities">
+        <label class="accessibility-item">
+          <input type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+          {{ disability }}
+        </label>
+      </ng-container>
+    </div>
+    <div class="toggle-container">
+      <span style="margin-left: 19px;">Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" (change)="toggleDarkMode($event)">
+        <span class="slider"></span>
+      </label>
+    </div>
   </div>
 
 </aside>

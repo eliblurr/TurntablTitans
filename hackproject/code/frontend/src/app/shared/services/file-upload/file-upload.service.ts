@@ -26,7 +26,7 @@ export class FileUploadService {
 
   fileBaseUrl = "http://127.0.0.1:8000/api/v1/chat/web"
   languageBaseUrl = "http://127.0.0.1:8000/api/v1/languages"
-  fileTypeBaseUrl = "http://127.0.0.1:8000/api/v1/languages"
+  fileTypeBaseUrl = "http://127.0.0.1:8000/api/v1/documents"
 
   getFileTypes() {
     return this.http.get<FileTypes>(this.fileTypeBaseUrl)

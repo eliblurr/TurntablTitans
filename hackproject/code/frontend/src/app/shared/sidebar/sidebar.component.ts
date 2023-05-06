@@ -12,4 +12,21 @@ export class SidebarComponent {
     public sidebarService: SidebarService
   ) {}
 
+  isDarkMode: Boolean = false;
+
+  toggleDarkMode(event: any) {
+    this.isDarkMode = event.target.checked;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }
+
+  disabilities: string[] = [
+    "Color Blindness", "Dyslexia", "Autism"
+  ];
+  selectedDisability: string =  "Here";
+
+
 }
