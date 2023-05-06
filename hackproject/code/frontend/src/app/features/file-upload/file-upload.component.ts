@@ -19,7 +19,6 @@ export class FileUploadComponent {
   ) {
   }
 
-
   ngOnInit(): void {
     this.getFileTypes()
     this.getLanguages()
@@ -35,7 +34,6 @@ export class FileUploadComponent {
   categories: string [] = []
 
   languages: string[] = []
-
 
   cancel() {
     this.dialog.close()

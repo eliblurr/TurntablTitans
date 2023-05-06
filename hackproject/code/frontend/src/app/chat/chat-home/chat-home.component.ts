@@ -41,7 +41,7 @@ export class ChatHomeComponent {
       },
       {
         type: 'user',
-        message: 'I need help'
+        message: 'I need help. How can I use this chatBot efficiently?'
       },
       {
         type: 'client',
@@ -53,7 +53,7 @@ export class ChatHomeComponent {
       },
       {
         type: 'client',
-        message: 'Yeahh I know I am cool ;)'
+        message: 'Yeahh I know I am cool and I will always be here to help you with any questions you might have.'
       }
     )
   }
