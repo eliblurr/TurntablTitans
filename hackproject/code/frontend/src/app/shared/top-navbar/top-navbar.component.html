@@ -1,10 +1,25 @@
-<div id="topnav" class=" navbars header fixed d-flex align-items-center">
-  <div class="row ">
-    <div class="col d-flex ">
-      <button mat-icon-button (click)="controlSideBar()" matTooltip="Menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="fw-bold mt-3 fs-4 ">Turntabl Titans</span>
+
+<div id="topnav" class="header fixed d-flex align-items-center w-100">
+    <div class="wrapper">
+      <div class="menu">
+        <button mat-icon-button (click)="controlSideBar()" matTooltip="Menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div class="brand-name-language-container">
+        <div style="display: flex; align-items: center;">
+          <h1 class="title">Turntabl Titans</h1>
+        </div>
+        <div >
+          <!-- <div style="margin-right: 10px; color: white">Language:</div> -->
+          <ng-select class="language-selector" [items]=languages
+           bindLabel="name"
+           bindValue="id"
+           placeholder=selectedItem
+           [(ngModel)]=selectedItem>
+          </ng-select>
+        </div>
+      </div>
+
     </div>
-  </div>
 </div>

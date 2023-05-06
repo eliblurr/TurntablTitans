@@ -31,6 +31,7 @@ export class FileUploadComponent {
     file_path: this.formBuilder.control('', Validators.required),
     native_language: this.formBuilder.control('English', Validators.required)
   })
+
   categories: string [] = []
 
   languages: string[] = []

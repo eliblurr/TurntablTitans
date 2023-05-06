@@ -19,6 +19,7 @@ venv
 # Miscellaneous
 .idea
 .vscode
+**/.angular
 
 # Python directories
 __pycache__
