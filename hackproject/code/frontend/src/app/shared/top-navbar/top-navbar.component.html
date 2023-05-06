@@ -7,15 +7,15 @@
       </button>
     </div>
       <div class="brand-name-language-container">
-        <div style="display: flex; align-items: center; background-color: aqua;">
-          <h1 >Turntabl Titans</h1>
+        <div >
+          <h1 style="margin: 0%">Turntabl Titans</h1>
         </div>
         <div class="language-selector">
-          <div>Language</div>
+          <!-- <div>Language</div> -->
           <ng-select class="dropdown" [items]="languages"
            bindLabel="name"
            bindValue="id"
-           placeholder="Select an item"
+           placeholder="Select your language"
            [(ngModel)]="selectedItem">
 </ng-select>
         </div>
