@@ -1,4 +1,4 @@
-<aside class=" sidebar " style="position: relative"
+<!-- <aside class=" sidebar " style="position: relative"
        [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar">
   <div class="chats">
     <div class="">
@@ -52,4 +52,132 @@
   </div>
 
 </aside>
+ -->
 
+
+ 
+ <style>
+  .side-panel {
+  background-color: #fff;
+  width: 300px;
+  height: 100%;
+  top: 0;
+  left: -300px;
+  z-index: 999;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.side-panel.show {
+  left: 0;
+}
+
+.header {
+  background-color: #0f172a;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.new-chat-btn {
+  background-color: #c2e1f5;
+  color: #0f172a;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.new-chat-btn:hover {
+  background-color: #a3c7e3;
+}
+
+.chat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: calc(100% - 220px);
+  overflow-y: scroll;
+}
+
+.chat-list li {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.chat-list li.active {
+  background-color: #f2f2f2;
+}
+
+.chat-list li:hover {
+  background-color: #f8f8f8;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #c2e1f5;
+  margin-right: 20px;
+}
+
+.chat-info h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.chat-info p {
+  font-size: 14px;
+  margin: 0;
+  color: #888;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.footer {
+  position: absolute;
+}
+
+ </style>
+
+ 
+
+ <div class="side-panel">
+  <div class="header">
+    <h2>Chats</h2>
+    <button class="new-chat-btn"> <mat-icon> add_comment</mat-icon>
+      New Chat</button>
+  </div>
+  <ul class="chat-list">
+    <li class="active">
+      <div class="chat-info">
+        <h3> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 1</h3>
+        <p>Chat on motor insurance</p>
+      </div>
+      <div class="timestamp">10:30 AM</div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h3> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 2</h3>
+        <p>Chat on car insurance</p>
+      </div>
+      <div class="timestamp">9:45 AM</div>
+    </li>
+  </ul>
+
+</div>
