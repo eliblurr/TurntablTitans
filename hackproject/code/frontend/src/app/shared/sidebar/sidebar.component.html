@@ -37,7 +37,7 @@
     <div id="accessibility-list">
       <ng-container *ngFor="let disability of disabilities">
         <label class="chat-info accessibility-item">
-          <input (click)="changeTheme('Autism')"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+          <input (click)="changeTheme(disability)"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
           {{ disability }}
         </label>
       </ng-container>

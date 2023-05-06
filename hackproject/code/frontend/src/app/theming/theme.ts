@@ -2,7 +2,7 @@ export const THEMES:any = {
   Dyslexia: {
       primaryColor: 'var(--primary)',
       secondaryColor: 'var(--secondary)',
-      tertiaryColor: 'var(--tertiary)',
+      tertiaryColor: 'var(--dm-tertiary-300)',
       textOnTertiary: 'var(--textOnTertiary)',
       textOnPrimary: 'var(--textLight)',
       textOnSecondary: 'var(--on-secondary)',
@@ -29,11 +29,11 @@ export const THEMES:any = {
     'Color Blindness': {
       primaryColor: 'var(--cb-primary)',
       secondaryColor: 'var(--cb-secondary)',
-      textOnPrimary: ' #FFFFFF',
+      textOnPrimary: ' var(--cb-textOnPrimary)',
       textOnSecondary: 'var(--cb-textOnSecondary)',
       tertiaryColor: 'var(--cb-tertiary)',
       textOnTertiary: 'var(--cb-textOnTertiary)',
-      background: 'var(--background)',
+      background: '#E6EAEA',
     },
   };
 

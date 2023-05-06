@@ -912,15 +912,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   --on-elevation-bg-8: var(--white);
   --elevation-bg-9: #373737;
   --on-elevation-bg-9: var(--white);
-  --cb-primary: #001253;
-  --cb-secondary: #F9D36B;
-  --cb-textOnSecondary: #121212;
+  --cb-primary:  #eec964;
+  --cb-secondary: white;
+  --cb-textOnPrimary: #black;
   --cb-tertiary: #cdbd8f;
   --cb-textOnTertiary: black;
+  --cb-background:  var(--background);
   --at-primary: #2C663C;
   --at-secondary: white;
   --at-textOnSecondary: black;
-  --at-tertiary: #70D79A;
+  --at-tertiary: #91e5b3;
   --at-textOnTertiary: #121212;
 }
 
