@@ -33,16 +33,16 @@ class PromptServiceImpl(PromptService):
 
     def process_prompt(self, body: WebPrompt | types.Message):
         if isinstance(body, types.Message):
-            return self.messaging_prompt(body)
+            return self.__messaging_prompt(body)
         else:
-            return self.web_prompt(body)
+            return self.__web_prompt(body)
 
 
     def __sanitize_prompt(self, prompt: str):
         ## remove malicious prompts
         return prompt
 
-    def web_prompt(self, body: WebPrompt):
+    def __web_prompt(self, body: WebPrompt):
         response_language: Language = Language.name_of(body.prompt.native_language.replace(" ", "_"))
         if not response_language: raise HTTPException(status_code=400, detail="Unsupported native language")
 
@@ -68,7 +68,7 @@ class PromptServiceImpl(PromptService):
 
             return ProcessedPrompt(chat_id=body.chat_id, text=text, native_language=response_language, product=Product.WEB)
 
-    def messaging_prompt(self, message):
+    def __messaging_prompt(self, message):
         if message.content_type == 'text':
             from hackproject.code.api.app.main import translation_service
 
@@ -78,7 +78,7 @@ class PromptServiceImpl(PromptService):
                                    product=Product.MESSAGING)
         else:
             details = {}
-            self.handle_file(message, details)
+            self.__handle_file(message, details)
             start_time = datetime.datetime.now()
             ## wait for response from user or timeout
             while len(details) < 3 and (datetime.datetime.now() - start_time).total_seconds()/60 < 3:
@@ -101,7 +101,7 @@ class PromptServiceImpl(PromptService):
                                    native_language=language,
                                    product=Product.MESSAGING)
 
-    def handle_file(self, message, details):
+    def __handle_file(self, message, details):
         bot = self.__get_bot()
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
         file_info = bot.get_file(message.document.file_id)
