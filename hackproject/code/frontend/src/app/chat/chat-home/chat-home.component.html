@@ -1,7 +1,7 @@
 <app-main-layout>
-  <div id="chat" class="h-100">
+  <div id="chat" class="h-100 {{currentTheme}}">
     <section class="section h-100">
-      <div class="chat-box p-3 h-100">
+      <div class="chat-box p-3 h-100 message">
         <div *ngFor="let message of messages" class="message">
           <div [class]="message.type">
             {{ message.message }}
