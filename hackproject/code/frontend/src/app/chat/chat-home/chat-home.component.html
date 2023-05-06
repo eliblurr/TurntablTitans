@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <app-main-layout>
-
-
   <div id="chat" class="h-100">
     <section class="section h-100 content">
       <div class="chat-box p-3 h-100 messages">
@@ -9,7 +7,6 @@
         <li *ngFor="let message of messages" class="message">
           <div id = "divstyle" [class]="message.type"><img src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png" alt="" /></div>
           <p [class]="message.type">
-
             {{ message.message }}
           </p>
         </li>
