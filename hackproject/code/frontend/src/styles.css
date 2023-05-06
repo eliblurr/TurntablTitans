@@ -14,10 +14,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     margin-bottom: 3px;
     }
 
-  .message{
-    background-color: var(--background);
-  }
-
   .navbars{
     background-color: var(--primaryColor);
     color: var(--textOnPrimary);
@@ -33,3 +29,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     padding: 3%;
     margin: 5%;
   } */
+
+
+  .messages{
+    background-color: var(--background);
+  }

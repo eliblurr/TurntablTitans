@@ -42,6 +42,8 @@ export class SidebarComponent implements OnInit{
 
 
   changeTheme(name:any) {
+    console.log("disability");
+    console.log(name);
     this.themeService.setTheme(name);
   }
 

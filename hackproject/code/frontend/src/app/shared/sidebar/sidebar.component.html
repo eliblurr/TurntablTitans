@@ -33,13 +33,11 @@
     </li>
   </ul>
   <div class="accessibility" id="accessibility">
-
     <span style="font-size: 17px;" class="header">Accessibilty</span>
     <div id="accessibility-list">
       <ng-container *ngFor="let disability of disabilities">
         <label class="chat-info accessibility-item">
-
-          <input type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+          <input (click)="changeTheme('Color Blindness')"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
           {{ disability }}
         </label>
       </ng-container>
