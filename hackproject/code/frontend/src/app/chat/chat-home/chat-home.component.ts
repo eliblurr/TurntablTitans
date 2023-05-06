@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ChatService} from "../../shared/services/chat.service";
+import {ChatService} from "../../shared/services/chat/chat.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FileUploadComponent} from "../../features/file-upload/file-upload.component";
 
@@ -16,6 +16,7 @@ export interface Message {
   styleUrls: ['./chat-home.component.css']
 })
 export class ChatHomeComponent {
+  currentTheme:any = localStorage.getItem('theme');
 
   selectedCategory: number = 0;
   fileName = '';
@@ -25,11 +26,6 @@ export class ChatHomeComponent {
     message: this.formBuilder.control('', Validators.required),
   })
 
-  category = [
-    {id: 1, name: 'Insurance'},
-    {id: 2, name: 'Land'},
-
-  ];
 
   @ViewChild('scrollMe') private myScrollContainer: any;
 

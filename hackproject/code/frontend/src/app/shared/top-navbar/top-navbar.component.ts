@@ -15,9 +15,9 @@ export class TopNavbarComponent {
   ) {}
 
   languages: string[] = [
-    
+    "ENGLISH", "FRENCH"
   ];
-  selectedItem: string =  "Here";
+  selectedItem: string = "ENGLISH";
 
   ngOnInit(): void {
     this.getLanguages()

@@ -3,7 +3,6 @@
   color: black;
   display: flex;
   flex-direction: column;
- 
 }
 
 .example-margin {
@@ -14,18 +13,31 @@
   height: 100%;
   color: black;
   box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+
   padding-left: 15px;
+
   padding-top: 10px;
   width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-right: 1px solid grey;
+
 }
 
 .chat {
   width: 200px;
-  border: none;
-  color: #4f5050
+  border-radius: 10px;
+  color: #4f5050;
+  background-color: #2196F3;
+  height: 45px;
+  margin-bottom: 5px
+}
+
+.chats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .chat-button {
@@ -36,22 +48,39 @@
 
 .chat-icon {
   font-size: 15px;
-  padding-top: 9.9px;
+  padding-top: 6px;
+  padding-right: 6px;
 }
 
 .chat-label {
   font-size: 15px;
+
   background-color: #2196F3;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 #chat-list {
   line-height: 2px;
+
   background-color: #333;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 10px;
+
+
 }
 
 .accessibility {
   /*position: absolute;*/
   /*bottom: 0;*/
+
   margin-top: 5px;
   padding: 1%;
   /*background-color: red*/
@@ -74,6 +103,9 @@
   display: inline-block;
   width: 50px;
   height: 22px;
+
+  margin-left: 37%;
+
 }
 
 .switch input { 
@@ -138,6 +170,7 @@ input:checked + .slider:before {
 
 .toggle-container {
   display: flex;
+
   justify-content: space-around;
   align-items: center;
   border-top: 2px solid black;
