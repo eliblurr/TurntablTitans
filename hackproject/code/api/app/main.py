@@ -30,6 +30,8 @@ from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema impor
 from hackproject.code.api.app.services.chat_service.chat_service import ChatServiceImpl, ChatService
 from hackproject.code.api.app.services.prompt_service.prompt_service import PromptServiceImpl, PromptService
 from hackproject.code.api.app.services.tts_service.tts import tts as parrot
+from hackproject.code.api.app.services.axa.axa_service import get_questions, compute, products
+from hackproject.code.api.app.schemas.axa_service.axa_schemas import Question, QuestionDetail, SubmissionResponse, State
 
 # laod env's
 load_dotenv()
@@ -62,6 +64,22 @@ from hackproject.code.api.app.utils import remove_file
 async def tts(message_id:str, payload:TTS):
     path = parrot(payload.text, payload.language, message_id)
     return FileResponse(path, background=BackgroundTask(remove_file, path))
+
+@router.get("/axa/products", response_model=list[Product])
+async def get_products():
+    return await products()
+
+@router.get("/axa/{product}/questions", response_model=list[Question])
+async def questions(product:str, language: str = 'en'):
+    return await get_questions(product, language)
+
+@router.get("/axa/{product}/questions/{question_id}", response_model=QuestionDetail)
+async def get_question_by_id(product:str, question_id:str, language: str = 'en'):
+    return await get_questions(product, language, question_id)
+
+@router.post("/axa/{product}/compute", response_model=SubmissionResponse)
+async def submit(product:str, payload:list[State], language: str = 'en'):
+    return await compute(product, language, payload)
 
 @router.get("/web")
 async def web_prompt():
