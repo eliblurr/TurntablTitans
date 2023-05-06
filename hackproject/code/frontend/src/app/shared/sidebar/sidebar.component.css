@@ -180,10 +180,10 @@ input:checked + .slider:before {
 }
 
 .new-chat-btn {
-  background-color: rgb(26, 19, 50);
+  background-color: #378bcf;
   color: white;
   border: none;
-  padding: 3px 7px;
+  padding: 8px 10px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
@@ -191,30 +191,12 @@ input:checked + .slider:before {
   appearance: none;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
   color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 6px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-
-  
 }
 
 .new-chat-btn:hover {
-  background-color: green;
+  background-color: rgba(14, 14, 223, 0.345);
 }
 
 .chat-list {
