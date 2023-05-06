@@ -5,26 +5,30 @@
   <form [formGroup]="uploadFileForm">
     <div class="flex">
       <div class="form-group mb-2 mt-2">
-        <label for="category">Category</label>
-        <mat-select id="category" class="form-select" formControlName="category"  required>
-          <mat-option [value]="null" disabled>Select currency</mat-option>
+
+        <label for="type">Category</label>
+        <mat-select id="type" class="form-select" formControlName="type"  required>
+
+
+          <mat-option [value]="null" disabled>Select category</mat-option>
           <mat-option *ngFor="let category of categories"  [value]="category">{{category}}</mat-option>
         </mat-select>
       </div>
       <div class="form-group mb-2 mt-2">
-        <label for="file">File</label>
+        <label for="file_path">File</label>
         <input
-          id="file"
-          type="file"
+          id="file_path"
+          type="file_path"
           class="form-control"
           placeholder="upload file"
-          formControlName="file"
+          formControlName="file_path"
           required
         />
       </div>
       <div class="form-group mb-2 mt-2">
-        <label for="language"> Language</label>
-        <mat-select id="language" class="form-select" formControlName="language" required>
+        <label for="doc_language"> Language</label>
+        <mat-select id="doc_language" class="form-select"
+                    formControlName="doc_language" required>
           <mat-option [value]="null" disabled>Select language</mat-option>
           <mat-option *ngFor="let language of languages" [value]="language" >{{language}}</mat-option>
         </mat-select>

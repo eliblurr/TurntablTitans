@@ -1,60 +1,58 @@
-<aside class=" sidebar " style="position: relative"
-       [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar">
-  <div class="chats">
-    <div class="">
-      <button type="submit" class="chat-button btn btn-outline-light m-lg-2">New Chat</button>
-    </div>
-    <div id="chat-list">
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light m-lg-2">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-    </div>
-  </div>
 
+<div [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar" class="side-panel">
+  <div class="header">
+    <h2>Chats</h2>
+    <button class="new-chat-btn"> <mat-icon> add_comment</mat-icon>
+      New Chat</button>
+      
+  </div>
+  <ul class="chat-list">
+    <li class="active">
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 1 on Motor</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 2 on Land</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 3 on car</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 4 on insurance</h4>
+      </div>
+    </li>
+    <li>
+      <div class="chat-info">
+        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 5 on insurance</h4>
+      </div>
+    </li>
+  </ul>
   <div class="accessibility" id="accessibility">
-    <span style="font-size: 17px;">Accessibilty</span>
-    <ul id="accessibility-list">
-      <li>
-        <mat-checkbox class="example-margin">Color blind</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Dyslexia</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Dark mode</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Text to speech</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Language</mat-checkbox>
-      </li>
-      <li>
-        <mat-checkbox class="example-margin">Bla bla</mat-checkbox>
-      </li>
-    </ul>
+
+    <span style="font-size: 17px;" class="header">Accessibilty</span>
+    <div id="accessibility-list">
+      <ng-container *ngFor="let disability of disabilities">
+        <label class="chat-info accessibility-item">
+
+          <input type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+          {{ disability }}
+        </label>
+      </ng-container>
+    </div>
+
+    <div class="header toggle-container">
+      <span style="margin-left: 19px;">Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" (change)="toggleDarkMode($event)">
+        <span class="slider"></span>
+      </label>
+    </div>
   </div>
-
-</aside>
-
+  
+</div>

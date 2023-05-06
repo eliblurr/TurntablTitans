@@ -1,40 +1,40 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <app-main-layout>
+
+
   <div id="chat" class="h-100">
-    <section class="section h-100">
-      <div class="chat-box p-3 h-100">
-        <div *ngFor="let message of messages" class="message">
-          <div [class]="message.type">
+    <section class="section h-100 content">
+      <div class="chat-box p-3 h-100 messages">
+        <ul>
+        <li *ngFor="let message of messages" class="message">
+          <div id = "divstyle" [class]="message.type"><img src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png" alt="" /></div>
+          <p [class]="message.type">
+
             {{ message.message }}
-          </div>
-        </div>
-        <div
+          </p>
+        </li>
+        <li
           *ngIf="loading"
           class="message"
           style="width: 100%; display: block"
         >
-          <div [class]="'client'">...</div>
-        </div>
+          <p [class]="'client'">...</p>
+      </li>
+      </ul>
       </div>
-      <!--      footer-->
-      <div id="chat-footer" class="bg-white  p-0">
-        <form [formGroup]="chatForm" class="d-flex justify-content-between">
-          <!--          text-->
-          <input class=" mx-2 " style="border: none; height: 35px; font-size:13px; width:100%; outline: none"
-                 formControlName="message"
-                 type="text"
-                 id="user-chat-input"
-                 placeholder="Type your message here..."
-          />
-          <div class="d-flex justify-content-between pe-3 ">
-            <mat-icon class="file-icon" matTooltipPosition="above" matTooltip="Upload file"  (click)="openUploadFileDialog()"> attach_file</mat-icon>
-            <mat-icon id="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
-              send
-            </mat-icon>
-          </div>
-        </form>
-
-      </div>
+    
+      <div class="message-input send-message">
+			  <form [formGroup]="chatForm" class="d-flex justify-content-between">
+			      <input type="text" class="form-control" formControlName="message" id="user-chat-input" placeholder="Type your message here ..."/>
+			    <ul class="list-inline"> 
+				 <li>
+				  <a matTooltip="Upload file"  (click)="openUploadFileDialog()">  <i class="fas fa-paperclip"></i> </a> 
+				   
+				  </li>	  
+				  <li> <i (click)="sendMessage()" disabled="!chatForm.valid" class="fas fa-paper-plane"></i> </li>
+				</ul>
+			  </form>
+			</div>
     </section>
   </div>
 </app-main-layout>
-
