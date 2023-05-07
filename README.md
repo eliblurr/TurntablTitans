@@ -82,9 +82,16 @@ Mark is relieved to find that he can easily understand the information and can a
 
 Our team members came together because ...
  
+<<<<<<< Updated upstream
 | Name                                 | Organization |
 |--------------------------------------|--------------|
 | [Afsanat Ineza](social-url)          | Turntabl     |
 | [Judith Serwaa Ofosu](social-url)    | Turntabl     |
 | [Elvis Segbawu](social-url)          | Turntabl     |
 | [Kwame Adu - Poku Sarfo](social-url) | Turntabl     |
+=======
+| Name | Organization |
+| --- | --- |
+| [Name](social-url) | ??? |
+| [Name](social-url) | ??? |
+>>>>>>> Stashed changes
