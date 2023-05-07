@@ -22,13 +22,12 @@ export class ChatHomeComponent {
 
   selectedCategory: number = 0;
   fileName = '';
+  showButton = false;
   loading = false
   chatForm: FormGroup = this.formBuilder.group({
-    message: this.formBuilder.control('', Validators.required),
+    body: this.formBuilder.control('', Validators.required),
   })
 
-
-  @ViewChild('scrollMe') private myScrollContainer: any;
 
   constructor(
     private http: HttpClient,
@@ -38,50 +37,29 @@ export class ChatHomeComponent {
     private chatService: ChatService) {
   }
 
-  //to do : work on the native language
   sendMessage() {
     this.loading = true;
-    this.scrollToBottom();
+    // this.scrollToBottom();
     const chatId = this.sharedService.chatId
-    const chatPrompt: ChatPrompt = {body: this.chatForm.value.get('message'), native_language: 'ENGLISH'}
+    const chatMessage = this.chatForm.get('body')?.value
+    const chatPrompt: ChatPrompt = {body: chatMessage, native_language: this.sharedService.nativeLanguage}
     const request: ChatRequest = {prompt: chatPrompt, chat_id: chatId}
+    this.chatForm.reset()
+    const newMessage = this.sharedService.createMessage('user', chatMessage);
+    this.sharedService.addMessage(chatId, newMessage)
+    this.sharedService.loading = true
+    console.log('Request', request)
     this.chatService.sendMessage(request).subscribe((res) => {
-      this.chatForm.reset();
-      this.sharedService.loading = true
       this.sharedService.addMessage(chatId, {type: 'client', message: res.response})
-      this.sharedService.loading = true
+      this.sharedService.loading = false
     })
-  }
-
-  scrollToBottom() {
-    setTimeout(() => {
-      try {
-        this.myScrollContainer.nativeElement.scrollTop =
-          this.myScrollContainer.nativeElement.scrollHeight + 500;
-      } catch (err) {
-      }
-    }, 150);
-  }
-
-  onFileSelected(event: any) {
-
-    const file: File = event.target.files[0];
-
-    if (file) {
-
-      this.fileName = file.name;
-
-      const formData = new FormData();
-
-      formData.append("thumbnail", file);
-
-      const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-      upload$.subscribe();
-    }
   }
 
   openUploadFileDialog() {
     this.dialog.open(FileUploadComponent, {width: '450px'});
+  }
+
+  updateButtonVisibility() {
+    this.showButton = this.chatForm.get('body')?.value.trim().length > 0;
   }
 }

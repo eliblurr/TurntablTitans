@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {FileUploadService} from "../../shared/services/file-upload/file-upload.service";
-import {File, FileUploadRequest} from "../../shared/models/file-upload";
+import {Document, FileUploadRequest} from "../../shared/models/file-upload";
 import {SharedService} from "../../shared/services/shared/shared.service";
 import {tap} from "rxjs";
 
@@ -13,6 +13,7 @@ import {tap} from "rxjs";
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent {
+  selectedFile: File | undefined;
   constructor(
     private formBuilder: FormBuilder,
     public sharedService: SharedService,
@@ -30,7 +31,7 @@ export class FileUploadComponent {
     type: this.formBuilder.control('', Validators.required),
     doc_language: this.formBuilder.control('', Validators.required),
     file_path: this.formBuilder.control(this.filepath, Validators.required),
-    native_language: this.formBuilder.control('ENGLISH', Validators.required)
+    native_language: this.formBuilder.control(this.sharedService.nativeLanguage, Validators.required)
   })
 
   categories: string [] = []
@@ -45,7 +46,6 @@ export class FileUploadComponent {
     console.log(chatId)
     if (!chatId) return
     const request: FileUploadRequest = {prompt: this.uploadFileForm.value, chat_id: chatId}
-    this.sharedService.newFileName = 'Motor.pdf'
     this.sharedService.startNewChat()
     this.dialog.close()
     this.fileService.uploadDocument(request)
@@ -65,5 +65,14 @@ export class FileUploadComponent {
     this.fileService.getLanguages().subscribe(
       (res) => this.languages = res.languages
     )
+  }
+
+  onFileInputChange(event: any) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+      this.sharedService.newFileName = this.selectedFile!.name;
+      console.log('File Name', this.sharedService.newFileName);
+    }
   }
 }

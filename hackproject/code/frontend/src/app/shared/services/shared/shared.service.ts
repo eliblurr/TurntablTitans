@@ -10,6 +10,7 @@ export class SharedService {
 
   chatId!: string
   loading = false
+  nativeLanguage: string = 'ENGLISH'
   messages: Message[] = []
   chats: Chat[] = []
   newFileName!: string
