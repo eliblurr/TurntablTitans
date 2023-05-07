@@ -1,10 +1,4 @@
 <!---  Submission Readme Instructions  
-  Remove the warning below.
---->
-![warning](./challenges/challenge1/usecase/images/misc/warning.png) Before submitting your project repo, modify this README as instructed to meet the expectations of the judges.
-
-
-<!---  Submission Readme Instructions  
   Welcome to the FINOS GAAD Hackathon!
 
   This GitHub Repo represents a template for your project. It represents the central repository of all artifacts produced by your team. This repository will be referenced during the judging activity and after the event has completed.
@@ -16,7 +10,7 @@
     b) Add the mandatory GitHub Topics.
 --->
  
-# Project Name
+# ComprehendNow
 <!--- Template Instructions  
   Each Participating Team will have a unique name. Each Team will create a unique name for their project. Replace above "Project Name" with Participating Team Project Name which is different from the Team Name.
 --->
@@ -30,17 +24,23 @@
     Event Track should have one of the following values: "Hack the Code", "Design Thinking", "Not Applicable".
 --->
 
-| Event Attribute| Description |
-| --- | --- |
-| Project Team Name | xxxxxxxx |
-| Project Name | xxxxxxxx |
-| Challenge | xxxxxxxx |
-| Event Track | xxxxxxxx |
+| Event Attribute| Description    |
+| --- |----------------|
+| Project Team Name | TurntablTitans |
+| Project Name | ComprehendNow       |
+| Challenge | 2              |
+| Event Track | Hack the Code  |
 
 ## Use Case Abstract
 <!--- Template Instructions  
   Provide a brief description of the use case tackled by the team.
 --->
+Mark received a notification from his insurance company informing him that new covers have been added to his policy. He is excited to know more about the new covers, but he is also concerned that he might not be able to understand the information properly due to his cognitive disability.
+
+Mark decides to contact the insurance company and request for the new policy documents to be explained to him in a simple and clear manner. The customer service representative understands Mark's needs and sends him the link to ComprehendNow so that he can find what he needs in the policy document in simplified language and with clear explanations of the new covers.
+
+Mark is relieved to find that he can easily understand the information and can access it at any time he wants, even from his favorite messaging app. He is also pleased that he can easily ask questions on the policy document if he has any questions or needs clarification.
+
 ## Project Artifacts
 <!--- Template Instructions  
   Complete the table below. Replace URLs where necessary.
@@ -73,7 +73,7 @@
 ---> 
 
 1. [ADR 01](./decisions/adr-01.md)
-2. [BDR 01](./decisions/bdr-01.md)
+2. [BDR 01](./hackproject/decisions/bdr-01.md)
 
 ## Team Information
 <!--- Template Instructions  
@@ -81,9 +81,10 @@
 --->  
 
 Our team members came together because ...
- 
-| Name | Organization |
-| --- | --- |
-| [Name](social-url) | ??? |
-| [Name](social-url) | ??? |
 
+| Name                                 | Organization |
+|--------------------------------------|--------------|
+| [Afsanat Ineza](social-url)          | Turntabl     |
+| [Judith Serwaa Ofosu](social-url)    | Turntabl     |
+| [Elvis Segbawu](social-url)          | Turntabl     |
+| [Kwame Adu - Poku Sarfo](social-url) | Turntabl     |

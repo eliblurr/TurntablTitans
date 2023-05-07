@@ -9,6 +9,7 @@ def get_model(language:str):
     torch.set_num_threads(4)
     if TTSModel.exists(language):
         _model = TTSModel[language.upper()]
+        torch.hub.set_dir(_model.path())
         if not os.path.isfile(_model.path()):
             torch.hub.download_url_to_file(_model.value['package'], _model.path()) 
         model = torch.package.PackageImporter(_model.path()).load_pickle("tts_models", "model")

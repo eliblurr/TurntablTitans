@@ -33,15 +33,17 @@ export class SidebarComponent implements OnInit{
   }
 
   disabilities: string[] = [
-    "Default","Color Blindness", "Dyslexia", "Autism"
+    "Color Blindness", "Dyslexia", "Autism"
   ];
-  selectedDisability: string =  "Default";
+  selectedDisability: string =  "Here";
 
   ngOnInit(){
-    this.changeTheme('spotify')
+    this.changeTheme('Default')
     }
 
   changeTheme(name:any) {
+    console.log("disability");
+    console.log(name);
     this.themeService.setTheme(name);
   }
 
