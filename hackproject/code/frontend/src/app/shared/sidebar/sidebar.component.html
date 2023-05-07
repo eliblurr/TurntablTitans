@@ -1,44 +1,18 @@
-<aside class=" sidebar " style="position: relative"
-       [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar">
-  <div class="chats">
-    <div class="">
-      <button type="submit" class="chat-button btn btn-outline-light m-lg-2" (click)="openUploadFileDialog()">New Chat</button>
-    </div>
-    <div id="chat-list">
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-      <button class="chat btn btn-outline-light">
-        <div class="chat-label">
-          <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat name</div>
-      </button>
-    </div>
+<div [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar" class="side-panel">
+  <div class="header">
+    <h2>Chats</h2>
+    <button class="new-chat-btn"> <mat-icon> add_comment</mat-icon>
+      New Chat</button>
+      
   </div>
 
   <div class="accessibility" id="accessibility">
-
-    <div style="font-size: 18px; width: 100%; text-align: center; padding-bottom: 10px;">Accessibilty</div>
+    <span style="font-size: 17px;" class="header">Accessibilty</span>
     <div id="accessibility-list">
       <ng-container *ngFor="let disability of disabilities">
-        <label class="accessibility-item">
-          <input type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+        <label class="chat-info accessibility-item">
+          <input (click)="changeTheme(disability)"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+
           {{ disability }}
         </label>
       </ng-container>
@@ -52,6 +26,4 @@
     </div>
 
   </div>
-
-</aside>
 
