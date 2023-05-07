@@ -6,6 +6,19 @@ BASE_DIR = Path(__file__).resolve().parent
 AUDIO_PATH = os.path.join(BASE_DIR, 'tmp', 'audio')
 MODEL_PATH = os.path.join(BASE_DIR, 'tmp', 'models')
 
+class STTModel(Enum):
+    EN = {
+            'target': 'en_stt_model.jit',
+            'package': 'https://models.silero.ai/models/en/en_v6.jit',
+        }
+
+    def path(self):
+        return os.path.join(MODEL_PATH, self.value['target'])
+
+    @classmethod
+    def exists(cls, key:str):
+        return key.lower() in [key.lower() for key in cls.__members__.keys()]
+
 class TTSModel(Enum):
     EN = {
             'model': 'v3_en',
