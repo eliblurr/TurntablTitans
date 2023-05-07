@@ -15,6 +15,7 @@ from hackproject.code.api.app.enums import Language, Document, Product
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, WebDocument, \
     ProcessedPrompt, ProcessedDocument
 from langchain.document_loaders import TextLoader
+import docx2txt
 
 mime = magic.Magic(mime=True)
 
@@ -195,5 +196,9 @@ class PromptServiceImpl(PromptService):
         if typ == "text/plain":
             documents = TextLoader(path).load_and_split(RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0))
             return [LIDocument(doc.page_content) for doc in documents]
+        if typ == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
+            documents = splitter.split_text(docx2txt.process(path))
+            return [LIDocument(doc) for doc in documents]
         else:
             raise HTTPException(status_code=400, detail="Unsupported file prompt")
