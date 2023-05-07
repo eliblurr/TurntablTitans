@@ -25,8 +25,10 @@ export class SidebarComponent implements OnInit{
     this.isDarkMode = event.target.checked;
     if (this.isDarkMode) {
       document.body.classList.add('dark-mode');
+      localStorage.setItem('ThemeMode','true');
       this.themeService.changeThemeToDark('B'+localStorage.getItem('BuilderTheme'));
     } else {
+      localStorage.setItem('ThemeMode','false');
       document.body.classList.remove('dark-mode');
       this.changeTheme(localStorage.getItem("BuilderTheme"))
     }
@@ -38,16 +40,22 @@ export class SidebarComponent implements OnInit{
 
   selectedDisability: any =  localStorage.getItem("BuilderTheme");
 
-  ngOnInit(){
+  ngOnInit(){    
     if(localStorage.getItem("BuilderTheme") === null){
       localStorage.setItem('BuilderTheme','Default');
+      this.selectedDisability='Default';
     }
     this.changeTheme(localStorage.getItem("BuilderTheme"))
   }
 
   changeTheme(name:any) {
-    this.themeService.setTheme(name);
     localStorage.setItem('BuilderTheme',name);
+    if (localStorage.getItem('ThemeMode')==='true') {
+      this.themeService.changeThemeToDark('B'+localStorage.getItem('BuilderTheme'));
+    } 
+    else {
+      this.themeService.setTheme(name);
+    }
   }
 
   openUploadFileDialog() {
