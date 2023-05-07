@@ -6,7 +6,7 @@ import uuid
 
 import telebot
 from dotenv import load_dotenv
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from langchain import OpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -16,15 +16,15 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from telebot import types
 
-from hackproject.code.api.app.enums import Language, Document
-from hackproject.code.api.app.utils import remove_file
-
 sys.path.extend([
     os.path.abspath(os.path.join('..')),
     os.path.abspath(os.path.join('..','..')),
     os.path.abspath(os.path.join('..','..', '..')),
     os.path.abspath(os.path.join('..','..','..','..'))
 ])
+
+from hackproject.code.api.app.enums import Language, Document
+from hackproject.code.api.app.utils import remove_file
 
 from hackproject.code.api.app.enums import Product
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import PromptResponse
@@ -37,6 +37,7 @@ from hackproject.code.api.app.services.prompt_service.prompt_service import Prom
 from hackproject.code.api.app.services.translation_service.translation_service import TranslationService, \
     TranslationServiceImpl
 from hackproject.code.api.app.services.tts_service.tts import tts as parrot
+from hackproject.code.api.app.services.stt_service.stt import stt
 from hackproject.code.api.app.services.axa.axa_service import get_questions, compute, products
 from hackproject.code.api.app.schemas.axa_service.axa_schemas import Question, QuestionDetail, SubmissionResponse, State
 
@@ -83,6 +84,17 @@ async def get_languages():
 async def get_document_types():
     return {"doc_types": [d.name.split(".")[-1].replace("_", " ") for d in Document]}
 
+from typing import Annotated
+from fastapi import File, UploadFile
+
+@router.post("/stt")
+def stt_(audio: UploadFile, language: str = 'en'):
+    try:
+        return stt(audio, language)
+    except Exception as e:
+        code = 400 if isinstance(e, e.__class__) else 500
+        raise HTTPException(status_code=code, detail=str(e))
+
 @router.post("/tts/{message_id}")
 async def tts(message_id:str, payload:TTS):
     path = parrot(payload.text, payload.language, message_id)
@@ -103,7 +115,7 @@ async def get_question_by_id(product:str, question_id:str, language: str = 'en')
 @router.post("/axa/{product}/compute", response_model=SubmissionResponse)
 async def submit(product:str, payload:list[State], language: str = 'en'):
     return await compute(product, language, payload)
-    
+
 @router.get("/chat/web")
 async def web_prompt():
     chat_id = str(uuid.uuid4())
