@@ -3,10 +3,12 @@ export const THEMES:any = {
       primaryColor: 'var(--primary)',
       secondaryColor: 'var(--secondary)',
       tertiaryColor: 'var(--dm-tertiary-300)',
-      textOnTertiary: 'var(--textOnTertiary)',
-      textOnPrimary: 'var(--textLight)',
+      textOnTertiary: 'var(--dm-on-tertiary-300)',
+      textOnPrimary: 'var(--on-primary)',
       textOnSecondary: 'var(--on-secondary)',
       background: 'var(--background)',
+
+      bdyPrimary: 'var(--primaryDarkBG)',
     },
     Autism: {
       primaryColor: 'var(--at-primary)',

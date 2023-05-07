@@ -33,18 +33,19 @@ export class SidebarComponent implements OnInit{
   disabilities: string[] = [
     "Default","Color Blindness", "Dyslexia", "Autism"
   ];
-  selectedDisability: string =  "Default";
 
+  selectedDisability: any =  localStorage.getItem("BuilderTheme");
 
   ngOnInit(){
-    this.changeTheme('Default')
+    if(localStorage.getItem("BuilderTheme") === null){
+      localStorage.setItem('BuilderTheme','Default');
     }
-
+    this.changeTheme(localStorage.getItem("BuilderTheme"))
+  }
 
   changeTheme(name:any) {
-    console.log("disability");
-    console.log(name);
     this.themeService.setTheme(name);
+    localStorage.setItem('BuilderTheme',name);
   }
 
   openUploadFileDialog() {
