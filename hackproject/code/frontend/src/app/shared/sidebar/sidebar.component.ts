@@ -31,9 +31,9 @@ export class SidebarComponent implements OnInit{
   }
 
   disabilities: string[] = [
-    "Default","Color Blindness", "Dyslexia", "Autism"
+    "Color Blindness", "Dyslexia", "Autism"
   ];
-  selectedDisability: string =  "Default";
+  selectedDisability: string =  "Here";
 
 
   ngOnInit(){
