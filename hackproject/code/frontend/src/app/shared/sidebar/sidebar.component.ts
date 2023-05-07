@@ -25,8 +25,10 @@ export class SidebarComponent implements OnInit{
     this.isDarkMode = event.target.checked;
     if (this.isDarkMode) {
       document.body.classList.add('dark-mode');
+      this.themeService.changeThemeToDark('B'+localStorage.getItem('BuilderTheme'));
     } else {
       document.body.classList.remove('dark-mode');
+      this.changeTheme(localStorage.getItem("BuilderTheme"))
     }
   }
 
