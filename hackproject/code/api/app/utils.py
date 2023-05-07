@@ -16,9 +16,6 @@ def save_file(path:str, file: UploadFile, ext:str=".wav"):
     with open(path+ext, "wb+") as buffer:
         buffer.write(file.file.read())
     return path+ext
-    # file_location = f"files/{uploaded_file.filename}"
-    # with open(file_location, "wb+") as file_object:
-    #     file_object.write(uploaded_file.file.read())
 
 def remove_file(path: str):
     if os.path.exists(path):
