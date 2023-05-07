@@ -4,6 +4,7 @@ import {SidebarService} from "../services/sidebar/sidebar.service";
 import {FileUploadComponent} from "../../features/file-upload/file-upload.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChatService} from "../services/chat/chat.service";
+import {SharedService} from "../services/shared/shared.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +13,11 @@ import {ChatService} from "../services/chat/chat.service";
 })
 export class SidebarComponent implements OnInit{
   chatId!: string
-
   constructor(
-    public sidebarService: SidebarService,private themeService:ThemeServiceService,
-    public chatService: ChatService,
+    public sidebarService: SidebarService,
+    private themeService:ThemeServiceService,
+    private chatService: ChatService,
+    public sharedService: SharedService,
     public dialog: MatDialog,
   ) {}
 
@@ -35,11 +37,9 @@ export class SidebarComponent implements OnInit{
   ];
   selectedDisability: string =  "Here";
 
-
   ngOnInit(){
     this.changeTheme('Default')
     }
-
 
   changeTheme(name:any) {
     console.log("disability");
@@ -50,8 +50,12 @@ export class SidebarComponent implements OnInit{
   openUploadFileDialog() {
     this.chatService.getChatId().subscribe((res) => {
       localStorage.setItem('chat_id', res.chat_id)
+      this.sharedService.chatId = res.chat_id
     })
     this.dialog.open(FileUploadComponent, {width: '450px'});
   }
 
+  getChatLists(){
+
+  }
 }

@@ -11,8 +11,9 @@ import {
   SalesContractDocumentResponse,
   ServiceContractDocumentResponse
 } from "../../models/file-upload";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -24,56 +25,21 @@ export class FileUploadService {
   ) {
   }
 
-  fileBaseUrl = "http://127.0.0.1:8000/api/v1/chat/web"
-  languageBaseUrl = "http://127.0.0.1:8000/api/v1/languages"
-  fileTypeBaseUrl = "http://127.0.0.1:8000/api/v1/documents"
+  fileBaseUrl = `${environment.baseUri}/chat/web`
+  languageBaseUrl = `${environment.baseUri}/languages`
+  fileTypeBaseUrl = `${environment.baseUri}/documents`
+  headers = new HttpHeaders().set('ngrok-skip-browser-warning','6024')
 
   getFileTypes() {
-    return this.http.get<FileTypes>(this.fileTypeBaseUrl)
+    return this.http.get<FileTypes>(this.fileTypeBaseUrl, {headers: this.headers})
   }
 
   getLanguages(): Observable<Language> {
-    return this.http.get<Language>(this.languageBaseUrl)
+
+    return this.http.get<Language>(this.languageBaseUrl, {headers: this.headers})
   }
 
   uploadDocument(request: FileUploadRequest): Observable<any> {
-    return this.http.post<any>(this.fileBaseUrl, request)
+    return this.http.post<any>(this.fileBaseUrl, request, {headers: this.headers})
   }
-  
-  uploadInsuranceDocument(request: FileUploadRequest): Observable<InsuranceDocumentResponse> {
-    return this.http.post<InsuranceDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadLandDocument(request: FileUploadRequest): Observable<LandDocumentResponse> {
-    return this.http.post<LandDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadServiceContract(request: FileUploadRequest): Observable<ServiceContractDocumentResponse> {
-    return this.http.post<ServiceContractDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadEmploymentContract(request: FileUploadRequest): Observable<EmploymentContractDocumentResponse> {
-    return this.http.post<EmploymentContractDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadConfidentialityAgreementDocument(request: FileUploadRequest): Observable<ConfidentialityAgreementDocumentResponse> {
-    return this.http.post<ConfidentialityAgreementDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadSalesContractDocument(request: FileUploadRequest): Observable<SalesContractDocumentResponse> {
-    return this.http.post<SalesContractDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadIndependentContractorAgreementDocument(request: FileUploadRequest): Observable<IndependentContractorAgreementResponse> {
-    return this.http.post<IndependentContractorAgreementResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadLoanAgreementDocumentResponse(request: FileUploadRequest): Observable<LoanAgreementDocumentResponse> {
-    return this.http.post<LoanAgreementDocumentResponse>(this.fileBaseUrl, request)
-  }
-
-  uploadPartnershipAgreementDocument(request: FileUploadRequest): Observable<PartnershipAgreementDocumentResponse> {
-    return this.http.post<PartnershipAgreementDocumentResponse>(this.fileBaseUrl, request)
-  }
-
 }
