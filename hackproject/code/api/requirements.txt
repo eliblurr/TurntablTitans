@@ -20,3 +20,12 @@ sentencepiece==0.1.99
 googletrans==4.0.0rc1
 httpcore==0.9.1
 httpx==0.13.3
+torchaudio==2.0.1
+omegaconf==2.3.0
+python-multipart==0.0.6
+# onnx==1.14.0 
+# protobuf==4.22.4
+sox==1.4.1
+cffi==1.15.1 
+pycparser==2.21 
+soundfile==0.12.1
