@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ChatService} from "../../shared/services/chat/chat.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FileUploadComponent} from "../../features/file-upload/file-upload.component";
+import {SharedService} from "../../shared/services/shared/shared.service";
+import {ChatPrompt, ChatRequest} from "../../shared/models/chat";
 
 export interface Message {
   type: string;
@@ -16,12 +18,11 @@ export interface Message {
   styleUrls: ['./chat-home.component.css']
 })
 export class ChatHomeComponent {
-  currentTheme:any = localStorage.getItem('theme');
+  currentTheme: any = localStorage.getItem('theme');
 
   selectedCategory: number = 0;
   fileName = '';
   loading = false
-  messages: Message[] = [];
   chatForm: FormGroup = this.formBuilder.group({
     message: this.formBuilder.control('', Validators.required),
   })
@@ -32,48 +33,23 @@ export class ChatHomeComponent {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
+    public sharedService: SharedService,
     private chatService: ChatService) {
-    this.messages.push(
-      {
-        type: 'client',
-        message: 'Hi, how can I help?'
-      },
-      {
-        type: 'user',
-        message: 'I need help. How can I use this chatBot efficiently?'
-      },
-      {
-        type: 'client',
-        message: 'I am here to help'
-      },
-      {
-        type: 'user',
-        message: 'Ouu that is nice'
-      },
-      {
-        type: 'client',
-        message: 'Yeahh I know I am cool and I will always be here to help you with any questions you might have.'
-      }
-    )
   }
 
+  //to do : work on the native language
   sendMessage() {
-    const sentMessage = this.chatForm.value.message!;
     this.loading = true;
-    this.messages.push({
-      type: 'user',
-      message: sentMessage,
-    });
-    this.chatForm.reset();
     this.scrollToBottom();
-    this.chatService.sendMessage(sentMessage).subscribe((response) => {
-      this.loading = false
-      this.messages.push({
-        type: 'client',
-        message: response.message,
-      });
-      this.scrollToBottom();
+    const chatId = this.sharedService.chatId
+    const chatPrompt: ChatPrompt = {body: this.chatForm.value.get('message'), native_language: 'ENGLISH'}
+    const request: ChatRequest = {prompt: chatPrompt, chat_id: chatId}
+    this.chatService.sendMessage(request).subscribe((res) => {
+      this.chatForm.reset();
+      this.sharedService.loading = true
+      this.sharedService.addMessage(chatId, {type: 'client', message: res.response})
+      this.sharedService.loading = true
     })
   }
 
@@ -107,6 +83,5 @@ export class ChatHomeComponent {
 
   openUploadFileDialog() {
     this.dialog.open(FileUploadComponent, {width: '450px'});
-
   }
 }

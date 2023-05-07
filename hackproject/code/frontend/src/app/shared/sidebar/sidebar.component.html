@@ -1,40 +1,22 @@
-
 <div [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar" class="side-panel">
   <div class="header">
     <h2>Chats</h2>
-    <button class="new-chat-btn"> <mat-icon> add_comment</mat-icon>
-      New Chat</button>
-      
+    <button class="new-chat-btn" (click)="openUploadFileDialog()">
+      <mat-icon> add_comment</mat-icon>
+      New Chat
+    </button>
   </div>
-  <ul class="chat-list">
-    <li class="active">
+  <div *ngIf="sharedService.chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center"><h2>No Chats</h2></div>
+  <ul *ngIf="sharedService.chats.length !== 0"class="chat-list" >
+    <li *ngFor="let chat of sharedService.chats">
       <div class="chat-info">
-        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 1 on Motor</h4>
+        <h4>
+          <mat-icon class="chat-icon">chat_bubble_outline</mat-icon>
+          {{chat.chatName}}</h4>
       </div>
-    </li>
-    <li>
-      <div class="chat-info">
-        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 2 on Land</h4>
-      </div>
-    </li>
-    <li>
-      <div class="chat-info">
-        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 3 on car</h4>
-      </div>
-    </li>
-    <li>
-      <div class="chat-info">
-        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 4 on insurance</h4>
-      </div>
-    </li>
-    <li>
-      <div class="chat-info">
-        <h4> <mat-icon class="chat-icon" >chat_bubble_outline</mat-icon> Chat 5 on insurance</h4>
-      </div>
-    </li>
   </ul>
-  <div class="accessibility" id="accessibility">
 
+  <div class="accessibility" id="accessibility">
     <span style="font-size: 17px;" class="header">Accessibilty</span>
     <div id="accessibility-list">
       <ng-container *ngFor="let disability of disabilities">
@@ -54,5 +36,5 @@
       </label>
     </div>
   </div>
-  
+
 </div>

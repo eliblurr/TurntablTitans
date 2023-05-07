@@ -14,9 +14,7 @@ export class TopNavbarComponent {
     private fileService: FileUploadService,
   ) {}
 
-  languages: string[] = [
-    "ENGLISH", "FRENCH"
-  ];
+  languages: string[] = [];
   selectedItem: string = "ENGLISH";
 
   ngOnInit(): void {

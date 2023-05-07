@@ -10,8 +10,8 @@ export interface FileUploadRequest {
   chat_id: string
 }
 
-export interface Language{
-  languages:string[]
+export interface Language {
+  languages: string[]
 }
 
 export interface FileTypes{
