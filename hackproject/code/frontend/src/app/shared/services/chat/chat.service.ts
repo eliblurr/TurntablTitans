@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Chat} from "../../models/chat";
+import {ChatId} from "../../models/chatId";
+import {environment} from "../../../../environments/environment";
+import {ChatRequest, ChatResponse} from "../../models/chat";
 
 export interface MessageResponse {
   message: string
@@ -15,23 +17,14 @@ export class ChatService {
   constructor(private http: HttpClient) {
   }
 
-  chatBaseUrl = "http://127.0.0.1:8000/api/v1/chat/web"
+  chatBaseUrl = `${environment.baseUri}/chat/web`
+  headers = new HttpHeaders().set('ngrok-skip-browser-warning','6024')
 
-  getChatId(): Observable<Chat> {
-    return this.http.get<Chat>(this.chatBaseUrl)
+  getChatId(): Observable<ChatId> {
+    return this.http.get<ChatId>(this.chatBaseUrl, {headers: this.headers})
   }
 
-  // sendMessage(message: string):Observable<MessageResponse>{
-  //   return this.http.post<MessageResponse>('http://localhost:5050/api/v1/message', {message})
-  // }
-
-  sendMessage(message: string): Observable<MessageResponse> {
-    const response = {message: "Turntabl Titans to the rescue"}
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next(response);
-        observer.complete();
-      }, 200);
-    });
+  sendMessage(request: ChatRequest): Observable<ChatResponse> {
+    return this.http.post<any>(this.chatBaseUrl, request, {headers: this.headers})
   }
 }

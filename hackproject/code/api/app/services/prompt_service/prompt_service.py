@@ -15,12 +15,17 @@ from hackproject.code.api.app.enums import Language, Document, Product
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, WebDocument, \
     ProcessedPrompt, ProcessedDocument
 from langchain.document_loaders import TextLoader
+import docx2txt
 
 mime = magic.Magic(mime=True)
 
 class PromptService:
     @abstractmethod
     def process_prompt(self, body: WebPrompt | types.Message):
+        pass
+
+    @abstractmethod
+    def mime_is_supported(self, mime: str):
         pass
 
 class PromptServiceImpl(PromptService):
@@ -105,9 +110,9 @@ class PromptServiceImpl(PromptService):
         bot = self.__get_bot()
         bot.send_chat_action(chat_id=message.chat.id, action='typing')
         file_info = bot.get_file(message.document.file_id)
-        downloaded_file = bot.download_file(file_info.file_path)
+        downloaded_file = bot.download_file(file_info.file)
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        file_name = file_info.file_path.split("/")[-1]
+        file_name = file_info.file.split("/")[-1]
         save_file_path = os.path.join(dir_path, "downloads", file_name)
         with open(save_file_path, 'wb') as new_file:
             new_file.write(downloaded_file)
@@ -195,5 +200,12 @@ class PromptServiceImpl(PromptService):
         if typ == "text/plain":
             documents = TextLoader(path).load_and_split(RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0))
             return [LIDocument(doc.page_content) for doc in documents]
+        if typ == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
+            documents = splitter.split_text(docx2txt.process(path))
+            return [LIDocument(doc) for doc in documents]
         else:
             raise HTTPException(status_code=400, detail="Unsupported file prompt")
+
+    def mime_is_supported(self, mime: str):
+        return mime in ["application/pdf", "text/plain", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
