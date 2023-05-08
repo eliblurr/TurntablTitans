@@ -115,14 +115,14 @@ input:checked + .slider:before {
 }
 
 .toggle-container {
-  display: flex;
-  background-color: var(--primaryColor);
-  color: var(--textOnPrimary);
+ display: flex;
   justify-content: space-around;
   align-items: center;
+  border-top: 2px solid black;
+  color: white;
   padding-top: 3px;
-  height: 67px;
-  margin-bottom: -3px;
+  background-color: black;
+  height: 38px;
 }
 
 .side-panel {
