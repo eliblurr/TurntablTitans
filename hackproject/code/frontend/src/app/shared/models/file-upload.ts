@@ -1,4 +1,4 @@
-export interface File{
+export interface Document {
   type: string
   doc_language: string
   file_path: string
@@ -6,12 +6,12 @@ export interface File{
 }
 
 export interface FileUploadRequest {
-  prompt: File
+  prompt: Document
   chat_id: string
 }
 
-export interface Language{
-  languages:string[]
+export interface Language {
+  languages: string[]
 }
 
 export interface FileTypes{

@@ -4,34 +4,35 @@
     <section class="section h-100 content">
       <div class="chat-box p-3 h-100 messages">
         <ul>
-        <li *ngFor="let message of messages" class="message">
-          <div id = "divstyle" [class]="message.type"><img src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png" alt="" /></div>
-          <p [class]="message.type">
-            {{ message.message }}
-          </p>
-        </li>
-        <li
-          *ngIf="loading"
-          class="message"
-          style="width: 100%; display: block"
-        >
-          <p [class]="'client'">...</p>
-      </li>
-      </ul>
+          <li *ngFor="let message of sharedService.messages" class="message">
+            <div id="divstyle" [class]="message.type"><img
+              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+              alt=""/></div>
+            <p [class]="message.type">
+              {{ message.message }}
+            </p>
+          </li>
+          <li
+            *ngIf="sharedService.loading"
+            class="message"
+            style="width: 100%; display: block"
+          >
+            <p [class]="'client'">...</p>
+          </li>
+        </ul>
       </div>
-    
+
       <div class="message-input send-message">
-			  <form [formGroup]="chatForm" class="d-flex justify-content-between">
-			      <input type="text" class="form-control" formControlName="message" id="user-chat-input" placeholder="Type your message here ..."/>
-			    <ul class="list-inline"> 
-				 <li>
-				  <a matTooltip="Upload file"  (click)="openUploadFileDialog()">  <i class="fas fa-paperclip"></i> </a> 
-				   
-				  </li>	  
-				  <li> <i (click)="sendMessage()" disabled="!chatForm.valid" class="fas fa-paper-plane"></i> </li>
-				</ul>
-			  </form>
-			</div>
+        <form [formGroup]="chatForm" class="d-flex justify-content-between">
+          <input type="text" class="form-control" formControlName="body" id="user-chat-input"
+                 placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
+          <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">
+            <mat-icon class="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
+              send
+            </mat-icon>
+          </div>
+        </form>
+      </div>
     </section>
   </div>
 </app-main-layout>
