@@ -12,10 +12,11 @@ export class SharedService {
 
   chatId!: string
   loading = false
+  nativeLanguage: string = 'ENGLISH'
   messages: Message[] = []
   chats: Chat[] = []
-  newFileName!: string
   chatMap: Map<string, Message[]> = new Map<string, Message[]>();
+  file!: File
 
   constructor(private synthesisService: SynthesisService) {
     this.synthesisService = synthesisService
@@ -25,8 +26,8 @@ export class SharedService {
 
   startNewChat() {
     this.clearMessages()
-    const newMessage = this.createMessage('user', this.newFileName)
-    this.addToChatsList(this.chatId, this.newFileName)
+    const newMessage = this.createMessage('user', this.file.name)
+    this.addToChatsList(this.chatId, this.file.name)
     this.addMessage(this.chatId, newMessage)
     this.loading = true
   }

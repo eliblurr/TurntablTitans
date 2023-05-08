@@ -29,3 +29,4 @@ sox==1.4.1
 cffi==1.15.1 
 pycparser==2.21 
 soundfile==0.12.1
+docx2txt==0.8

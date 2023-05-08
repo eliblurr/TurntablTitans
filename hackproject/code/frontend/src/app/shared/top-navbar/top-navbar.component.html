@@ -11,18 +11,23 @@
         <div style="display: flex; align-items: center;">
           <h1 class="title">ComprehendNow</h1>
         </div>
-        <div>
-          <h1 class="title">ComprehendNow</h1>
-        </div>
         <div >
-          <ng-select class="language-selector" [items]=languages
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">AXA</a>
+            </li>
+          </ul>
+        </div>
+          <ng-select class="language-selector" [items]="languages"
            bindLabel="name"
            bindValue="id"
-           placeholder=selectedItem
-           [(ngModel)]=selectedItem>
+           placeholder="Select language"
+                     (ngModelChange)="onSelectionChange($event)"
+                     [(ngModel)]=selectedOption>
           </ng-select>
-        </div>
       </div>
-
     </div>
 </div>
