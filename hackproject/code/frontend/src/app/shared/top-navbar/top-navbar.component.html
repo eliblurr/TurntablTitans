@@ -8,11 +8,11 @@
         </button>
       </div>
       <div class="brand-name-language-container">
-        <div style="display: flex; align-items: center;">
-          <h1 class="title">ComprehendNow</h1>
-        </div>
         <div >
-          <ng-select class="language-selector" [items]=languages
+          <h1 style="margin: 0%">ComprehendNow</h1>
+        </div>
+        <div class="language-selector">
+          <ng-select class="dropdown" [items]="languages"
            bindLabel="name"
            bindValue="id"
            placeholder="Select language"

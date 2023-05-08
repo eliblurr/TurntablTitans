@@ -7,7 +7,7 @@
     </button>
   </div>
   <div *ngIf="sharedService.chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center"><h2>No Chats</h2></div>
-  <ul *ngIf="sharedService.chats.length !== 0" class="chat-list" >
+  <ul *ngIf="sharedService.chats.length !== 0"class="chat-list" >
     <li *ngFor="let chat of sharedService.chats">
       <div class="chat-info">
         <h4>
@@ -22,7 +22,6 @@
       <ng-container *ngFor="let disability of disabilities">
         <label class="chat-info accessibility-item">
           <input (click)="changeTheme(disability)"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
-
           {{ disability }}
         </label>
       </ng-container>

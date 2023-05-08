@@ -5,19 +5,6 @@
   <form [formGroup]="uploadFileForm">
     <div class="flex">
       <div class="form-group mb-2 mt-2">
-        <label for="file_path">File</label>
-        <input
-          id="file_path"
-          type="file"
-          class="form-control"
-          accept=".pdf, .docx"
-          placeholder="upload file"
-          formControlName="file_path"
-          (change)="onFileInputChange($event)"
-          required
-        />
-      </div>
-      <div class="form-group mb-2 mt-2">
 
 
         <label for="type">Category</label>
@@ -26,6 +13,17 @@
           <mat-option [value]="null" disabled>Select category</mat-option>
           <mat-option *ngFor="let category of categories"  [value]="category">{{category}}</mat-option>
         </mat-select>
+      </div>
+      <div class="form-group mb-2 mt-2">
+        <label for="file_path">File</label>
+        <input
+          id="file_path"
+          type="file"
+          class="form-control"
+          placeholder="upload file"
+          formControlName="file_path"
+          required
+        />
       </div>
       <div class="form-group mb-2 mt-2">
         <label for="doc_language"> Language</label>

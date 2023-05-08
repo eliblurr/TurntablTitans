@@ -12,6 +12,7 @@
   height: 100%;
   color: var(--textOnSecondary);
   box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+  padding-left: 15px;
   padding-top: 10px;
   width: 250px;
   display: flex;
@@ -41,10 +42,10 @@
 }
 
 .accessibility-item {
-  padding-left: 20px;
+  padding: 5%;
+  padding-left: 10px;
   font-size: 15px;
   padding-bottom: 10px;  
-  padding-top: 5px;
 }
 
 .switch {
@@ -114,14 +115,14 @@ input:checked + .slider:before {
 }
 
 .toggle-container {
-  display: flex;
-  background-color: var(--primaryColor);
-  color: var(--textOnPrimary);
+ display: flex;
   justify-content: space-around;
   align-items: center;
+  border-top: 2px solid black;
+  color: white;
   padding-top: 3px;
-  height: 67px;
-  margin-bottom: -3px;
+  background-color: black;
+  height: 38px;
 }
 
 .side-panel {
