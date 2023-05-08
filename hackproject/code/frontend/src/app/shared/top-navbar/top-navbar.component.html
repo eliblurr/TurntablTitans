@@ -15,8 +15,9 @@
           <ng-select class="language-selector" [items]=languages
            bindLabel="name"
            bindValue="id"
-           placeholder=selectedItem
-           [(ngModel)]=selectedItem>
+           placeholder="Select language"
+                     (ngModelChange)="onSelectionChange($event)"
+                     [(ngModel)]=selectedOption>
           </ng-select>
         </div>
       </div>

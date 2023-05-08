@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FileUploadService } from '../services/file-upload/file-upload.service';
+import {Component} from '@angular/core';
+import {FileUploadService} from '../services/file-upload/file-upload.service';
 import {SidebarService} from "../services/sidebar/sidebar.service";
+import {SharedService} from "../services/shared/shared.service";
+
 // import { Option } from 'ng-select';
 
 @Component({
@@ -12,12 +14,12 @@ export class TopNavbarComponent {
   constructor(
     private sidebarService: SidebarService,
     private fileService: FileUploadService,
-  ) {}
+    private sharedService: SharedService
+  ) {
+  }
 
-  languages: string[] = [
-    "ENGLISH", "FRENCH"
-  ];
-  selectedItem: string = "ENGLISH";
+  languages: string[] = [];
+  selectedOption: string = this.sharedService.nativeLanguage;
 
   ngOnInit(): void {
     this.getLanguages()
@@ -27,9 +29,14 @@ export class TopNavbarComponent {
     this.sidebarService.collapseSideBar = !this.sidebarService.collapseSideBar;
   }
 
-  getLanguages(){
+  getLanguages() {
     this.fileService.getLanguages().subscribe(
       (res) => this.languages = res.languages
     )
+  }
+
+  onSelectionChange(event: any) {
+    this.selectedOption = event
+    this.sharedService.nativeLanguage = event
   }
 }
