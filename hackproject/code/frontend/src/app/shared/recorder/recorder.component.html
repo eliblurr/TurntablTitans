@@ -1,0 +1,28 @@
+<button class="icon-btn btn-align" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">
+  <mat-icon>mic</mat-icon>
+</button>
+
+<div class="align-row">
+
+  <div *ngIf="isRecording && !blobUrl" class="icon-btn btn-align" > {{recordedTime || '00:00'}} </div>
+
+  <div>
+    <button class="icon-btn btn-align" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">
+      <mat-icon class="cancel-icon">cancel_presentation</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button class="icon-btn btn-align" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">
+      <mat-icon class="stop-icon">stop</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button class="icon-btn btn-align" *ngIf="!isRecording && blobUrl" (click)="submitAudio()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+</div>
+
