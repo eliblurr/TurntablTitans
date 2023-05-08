@@ -25,7 +25,7 @@ export class FileUploadService {
   ) {
   }
 
-  fileBaseUrl = `${environment.baseUri}/chat/web`
+  fileBaseUrl = `${environment.baseUri}/file/web`
   languageBaseUrl = `${environment.baseUri}/languages`
   fileTypeBaseUrl = `${environment.baseUri}/documents`
   headers = new HttpHeaders().set('ngrok-skip-browser-warning','6024')
@@ -39,7 +39,7 @@ export class FileUploadService {
     return this.http.get<Language>(this.languageBaseUrl, {headers: this.headers})
   }
 
-  uploadDocument(request: FileUploadRequest): Observable<any> {
+  uploadDocument(request: FormData): Observable<any> {
     return this.http.post<any>(this.fileBaseUrl, request, {headers: this.headers})
   }
 }

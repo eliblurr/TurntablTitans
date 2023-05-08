@@ -6,12 +6,11 @@ import uuid
 
 import telebot
 from dotenv import load_dotenv
-from fastapi import FastAPI, APIRouter, HTTPException, Form, Depends
+from fastapi import FastAPI, APIRouter, HTTPException, Form
 from fastapi.responses import FileResponse
 from langchain import OpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index import LLMPredictor, LangchainEmbedding, ServiceContext
-from magic import magic
 from starlette.background import BackgroundTask
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
@@ -31,7 +30,7 @@ from hackproject.code.api.app.enums import Product
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import PromptResponse
 from hackproject.code.api.app.schemas.tts_service.tts_schemas import TTS
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, ProcessedPrompt, \
-    ChatInitialization, WebDocument, WebText
+    ChatInitialization, WebDocument
 from hackproject.code.api.app.services.chat_service.chat_service import ChatServiceImpl, ChatService
 from hackproject.code.api.app.services.model_service.model_service import ModelService, ModelServiceImpl
 from hackproject.code.api.app.services.prompt_service.prompt_service import PromptServiceImpl, PromptService
@@ -85,7 +84,7 @@ async def get_languages():
 async def get_document_types():
     return {"doc_types": [d.name.split(".")[-1].replace("_", " ") for d in Document]}
 
-from typing import Annotated
+
 from fastapi import File, UploadFile
 
 @router.post("/file/web")
@@ -96,8 +95,10 @@ async def file(type: str = Form(...),
                file: UploadFile = File(...)):
     try:
         contents = file.file.read()
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        file_path = os.path.join(dir_path, file.filename)
         if prompt_service.mime_is_supported(file.content_type):
-            with open(file.filename, 'wb') as f:
+            with open(file_path, 'wb') as f:
                 f.write(contents)
         document = WebDocument(type=Document.value_of(type.replace(" ", "-")),
                                doc_language=doc_language,
@@ -105,7 +106,7 @@ async def file(type: str = Form(...),
                                file_path=file.filename)
         prompt = WebPrompt(prompt=document, chat_id=chat_id)
         response = await web_prompt(prompt)
-        os.remove(file.filename)
+        os.remove(file_path)
         return response
     except Exception:
         return {"message": "There was an error uploading the file"}
