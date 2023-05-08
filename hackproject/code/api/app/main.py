@@ -30,7 +30,7 @@ from hackproject.code.api.app.enums import Product
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import PromptResponse
 from hackproject.code.api.app.schemas.tts_service.tts_schemas import TTS
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, ProcessedPrompt, \
-    ChatInitialization, WebDocument
+    ChatInitialization, WebDocument, WebText
 from hackproject.code.api.app.services.chat_service.chat_service import ChatServiceImpl, ChatService
 from hackproject.code.api.app.services.model_service.model_service import ModelService, ModelServiceImpl
 from hackproject.code.api.app.services.prompt_service.prompt_service import PromptServiceImpl, PromptService
@@ -114,9 +114,17 @@ async def file(type: str = Form(...),
         return {"message": "There was an error uploading the file"}
 
 @router.post("/stt")
-def stt_(audio: UploadFile, language: str = 'en'):
+async def stt_(
+        native_language: str = Form(...),
+       chat_id: str = Form(...),
+       audio: UploadFile = File(...),
+        language: str = 'en'):
     try:
-        return stt(audio, language)
+        text = stt(audio, language)
+        text_schema = WebText(body=text, native_language=native_language)
+        prompt = WebPrompt(prompt=text_schema, chat_id=chat_id)
+        response = await web_prompt(prompt)
+        return response
     except Exception as e:
         code = 400 if isinstance(e, e.__class__) else 500
         raise HTTPException(status_code=code, detail=str(e))
