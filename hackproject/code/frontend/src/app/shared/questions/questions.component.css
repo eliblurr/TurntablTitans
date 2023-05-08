@@ -1,0 +1,21 @@
+.card-theme{
+  background-color: var(--tertiaryColor);
+  color: var(--textOnPrimary);
+  
+}
+
+.card-body-theme{
+  background-color: var(--secondaryColor); 
+  display: flex; 
+  flex-direction: row; 
+  color: var(--textOnSecondary);
+  cursor: help;
+}
+
+.card-body-theme:hover {
+  filter: brightness(140%);
+}
+
+.disable {
+  opacity: 10%;
+}

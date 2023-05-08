@@ -19,21 +19,25 @@ export class SynthesisService {
   }
 
   BaseUrl = `${environment.baseUri}`
-  headers = new HttpHeaders().set('ngrok-skip-browser-warning','6024')
+  // headers = new HttpHeaders().set('ngrok-skip-browser-warning','6024')
+  
 
   fetch_audio(payload:TTS, message_id:string): Observable<any> {
-    return this.http.post<any>(`${this.BaseUrl}/tts/${message_id}`, payload, {headers: this.headers, responseType:'blob' as 'json'})
+    return this.http.post<any>(`${this.BaseUrl}/tts/${message_id}`, payload, {headers: new HttpHeaders().set('ngrok-skip-browser-warning','6024'), responseType:'blob' as 'json'})
   }
 
-  // fetch_text(text:string, message_id:string): Observable<any> {
-  //   return this.http.post<any>(`${this.BaseUrl}/tts/${message_id}`, {headers: this.headers})
-  // }
+  fetch_text(file:File, chatId:string):Observable<string>{
+    const formData = new FormData();
+    formData.append("audio", file)
+    formData.append("chat_id", chatId);
+    formData.append("native_language", "en");
+    return this.http.post<any>(
+      `${this.BaseUrl}/stt`, 
+      formData, 
+      { 
+        headers: new HttpHeaders().set('ngrok-skip-browser-warning','6024').set('Content-Type','multipart/form-data')
+      }
+    )
+  }
 
-//   getChatId(): Observable<ChatId> {
-//     return this.http.get<ChatId>(this.chatBaseUrl, {headers: this.headers})
-//   }
-
-//   sendMessage(request: ChatRequest): Observable<ChatResponse> {
-//     return this.http.post<any>(this.chatBaseUrl, request, {headers: this.headers})
-//   }
 }

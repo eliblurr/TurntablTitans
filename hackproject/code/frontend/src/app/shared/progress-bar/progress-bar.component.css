@@ -1,0 +1,14 @@
+.progress-container {
+  background-color: var(--secondaryColor); 
+  color: var(--textOnSecondary);
+}
+
+.outer-bar {
+  background-color: #ddd;
+  color: var(--textOnSecondary);
+}
+
+.inner-bar {
+  background-color: var(--primaryColor); 
+  min-height: 20px;
+}

@@ -15,12 +15,18 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { MatOptionModule } from '@angular/material/core';
-
+import {RecorderComponent} from './recorder/recorder.component'
+import { AccordionComponent } from './accordion/accordion.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { ComputeAnswerComponent } from './compute-answer/compute-answer.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { AXADocsComponent } from './axa-docs/axa-docs.component';
+import { AXAInputComponent } from './axa-input/axa-input.component';
 
 @NgModule({
   declarations: [
-    TopNavbarComponent,MainLayoutComponent, SidebarComponent
-
+    TopNavbarComponent,MainLayoutComponent, SidebarComponent, RecorderComponent, AccordionComponent, ProgressBarComponent,
+    ComputeAnswerComponent, QuestionsComponent, AXADocsComponent, AXAInputComponent
   ],
     imports: [
         CommonModule,
