@@ -13,6 +13,7 @@ export class RecorderComponent implements OnInit{
   isRecording = false;
   recordedTime: any;
   blobUrl: any;
+  blob: any;
   teste:any;
 
   constructor(
@@ -29,6 +30,7 @@ export class RecorderComponent implements OnInit{
       .subscribe(time => (this.recordedTime = time));
     this.audioRecordingService.getRecordedBlob().subscribe(data => {
       this.teste = data;
+      this.blob = data.blob;
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(data.blob)
       );
@@ -73,14 +75,13 @@ export class RecorderComponent implements OnInit{
 
   submitAudio(){
     const chatId = this.sharedService.chatId;
-    var file = this.audioRecordingService.blobUrlToFile(this.teste, "audio.wav")
-    let val = this.synthesisService.fetch_text(file, chatId).subscribe(
+    console.log(this.blob)
+    console.log(this.teste)
+    this.synthesisService.fetch_text(this.blob, "audio.wav", chatId).subscribe(
       (res:string)=>{
         console.log(res)
       }
     )
-    console.log(this.teste)
-    console.log(file)
   }
 
 
