@@ -24,10 +24,10 @@
 
       <div class="message-input send-message">
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
-          <input type="text" class="form-control" formControlName="message" id="user-chat-input"
-                 placeholder="Type your message here ..." style="background-color: red; width: 90%">
-          <div class="d-flex justify-content-between pe-3">
-            <mat-icon id="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
+          <input type="text" class="form-control" formControlName="body" id="user-chat-input"
+                 placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
+          <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">
+            <mat-icon class="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
               send
             </mat-icon>
           </div>
