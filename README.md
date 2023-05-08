@@ -1,28 +1,7 @@
-<!---  Submission Readme Instructions  
-  Welcome to the FINOS GAAD Hackathon!
-
-  This GitHub Repo represents a template for your project. It represents the central repository of all artifacts produced by your team. This repository will be referenced during the judging activity and after the event has completed.
-
-  Please follow the Template Instructions herein to update this README.
-
-  Remember to:
-    a) Remove all Template Instructions once complete.
-    b) Add the mandatory GitHub Topics.
---->
  
 # ComprehendNow
-<!--- Template Instructions  
-  Each Participating Team will have a unique name. Each Team will create a unique name for their project. Replace above "Project Name" with Participating Team Project Name which is different from the Team Name.
---->
 
 ## Project Details
-<!--- Template Instructions  
-  Provide your team specific details:
-
-    Challenge should have a numeric value {1, 2, etc}.
-
-    Event Track should have one of the following values: "Hack the Code", "Design Thinking", "Not Applicable".
---->
 
 | Event Attribute| Description    |
 | --- |----------------|
@@ -32,9 +11,7 @@
 | Event Track | Hack the Code  |
 
 ## Use Case Abstract
-<!--- Template Instructions  
-  Provide a brief description of the use case tackled by the team.
---->
+
 Mark received a notification from his insurance company informing him that new covers have been added to his policy. He is excited to know more about the new covers, but he is also concerned that he might not be able to understand the information properly due to his cognitive disability.
 
 Mark decides to contact the insurance company and request for the new policy documents to be explained to him in a simple and clear manner. The customer service representative understands Mark's needs and sends him the link to ComprehendNow so that he can find what he needs in the policy document in simplified language and with clear explanations of the new covers.
@@ -68,19 +45,13 @@ Mark is relieved to find that he can easily understand the information and can a
 | [Solution Code](./hackproject/README.md)                                                                                                                                                 | | Supporting material for judging depending on track.   | 
 
 ## Solution Decisions
-<!--- Template Instructions  
-  Optional Section. If the team has documented reasons for any of their business or technical decisions, use this section to  itemize the links to the decision documents using the template in the /decisions folder.  Remove this section if nothing to list.
----> 
 
 1. [ADR 01](./decisions/adr-01.md)
 2. [BDR 01](./hackproject/decisions/bdr-01.md)
 
 ## Team Information
-<!--- Template Instructions  
-  Provide a brief description of your team, how it came to be, etc.
---->  
 
-Our team members came together because ...
+Our team members came together because we bring a diverse set of skills to the table, such as natural language processing, machine learning, software engineering, user experience design and user testing.  This allowed us to build a solution that satisfies the problem domain.
 
 | Name                                 | Organization |
 |--------------------------------------|--------------|
