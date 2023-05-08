@@ -8,10 +8,18 @@ import { THEMES } from './theme';
 export class ThemeServiceService {
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  setTheme(name = 'dyslexia') {
+  setTheme(name = 'Default') {
     const theme:any = THEMES[name];
     Object.keys(theme).forEach((key) => {
       this.document.documentElement.style.setProperty(`--${key}`, theme[key]);
     });
   }
+
+  changeThemeToDark(name:any){
+    const theme:any = THEMES[name];
+    Object.keys(theme).forEach((key) => {
+      this.document.documentElement.style.setProperty(`--${key}`, theme[key]);
+    });
+  }
+
 }

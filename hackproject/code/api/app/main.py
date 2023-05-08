@@ -97,13 +97,15 @@ async def file(type: str = Form(...),
         contents = file.file.read()
         dir_path = os.path.dirname(os.path.realpath(__file__))
         file_path = os.path.join(dir_path, file.filename)
-        if prompt_service.mime_is_supported(file.content_type):
-            with open(file_path, 'wb') as f:
-                f.write(contents)
-        document = WebDocument(type=Document.value_of(type.replace(" ", "-")),
+        if not prompt_service.mime_is_supported(file.content_type):
+            return {"message": "Unsupported file type"}
+
+        with open(file_path, 'wb') as f:
+            f.write(contents)
+        document = WebDocument(type=Document.value_of(type.replace(" ", "_")),
                                doc_language=doc_language,
                                native_language=native_language,
-                               file_path=file.filename)
+                               file_path=file_path)
         prompt = WebPrompt(prompt=document, chat_id=chat_id)
         response = await web_prompt(prompt)
         os.remove(file_path)

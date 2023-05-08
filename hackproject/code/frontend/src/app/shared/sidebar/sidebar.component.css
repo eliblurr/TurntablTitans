@@ -12,6 +12,7 @@
   height: 100%;
   color: var(--textOnSecondary);
   box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+  padding-left: 15px;
   padding-top: 10px;
   width: 250px;
   display: flex;
@@ -41,10 +42,14 @@
 }
 
 .accessibility-item {
-  padding-left: 20px;
+  padding: 5%;
+  padding-left: 10px;
   font-size: 15px;
   padding-bottom: 10px;  
   padding-top: 5px;
+  color: var(--textOnSecondary);
+  display: flex;
+  justify-content: space-between;
 }
 
 .switch {
@@ -113,6 +118,10 @@ input:checked + .slider:before {
   background-color: #ccc;
 }
 
+.title {
+  font-weight: 600;
+}
+
 .toggle-container {
   display: flex;
   background-color: var(--primaryColor);
@@ -162,6 +171,16 @@ input:checked + .slider:before {
   margin: 0;
 }
 
+.btn-text {
+  padding-left: 5px;
+}
+
+.btn-align {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
 .new-chat-btn {
   background-color: var(--tertiaryColor);
   color: var(--textOnPrimary);
@@ -170,7 +189,20 @@ input:checked + .slider:before {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  appearance: none;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
+}
 
+.icon-btn {
+  background-color: var(--primaryColor);
+  color: var(--textOnPrimary);
+  border: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
   appearance: none;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
