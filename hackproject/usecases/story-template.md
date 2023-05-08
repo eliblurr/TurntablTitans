@@ -89,7 +89,7 @@
 
 <img src="./img/Peter.png" width="50" height="40">  Mark is relieved to find that he can easily understand the information and can access it at any time he wants, even from his favorite messaging app. He is also pleased that he can easily ask questions on the policy document if he has any questions or needs clarification.
  
-## Demo Workflow
+## Demo Web App Workflow
 <!--- Template Instructions   
   Using the sample persona images in the /images/persona folder, describe the steps of the use case story as they relate to one or more UML Sequence Diagrams.  
 --->
@@ -103,6 +103,42 @@
 ### Step 2
 
 <img src="./img/Peter.png" width="40" height="40"> Mark chooses the language that he wants to interact in and an accessibility profile(Generated with  Atomic Accessibility Design Tool from Discover <img src="./img/Discover.png" width="40" height="40"> Mark opens ComprehendNow.) that fits his needs.
+ 
+![step2](./images/uml/sample-sequence-diagram.png)
+
+### Step 3
+
+<img src="./img/Peter.png" width="40" height="40"> Mark uploads the document from his insurance company.
+ 
+![step3](./images/uml/sample-sequence-diagram.png)
+
+### Step 4
+
+<img src="./img/Peter.png" width="40" height="40"> Mark's document is analyzed and explained to him in simplied language.
+ 
+![step4](./images/uml/sample-sequence-diagram.png)
+
+### Step 5
+
+<img src="./img/Peter.png" width="40" height="40"> Mark asks questions on the areas that he would like more information on and he is answered.
+ 
+![step5](./images/uml/sample-sequence-diagram.png)
+
+
+## Demo Messaging App Workflow
+<!--- Template Instructions   
+  Using the sample persona images in the /images/persona folder, describe the steps of the use case story as they relate to one or more UML Sequence Diagrams.  
+--->
+ 
+### Step 1
+
+<img src="./img/Peter.png" width="40" height="40"> Mark opens his favorite messaging app Telegram and starts a chat with the ComprehendNow Telegram bot.
+ 
+![step1](./images/uml/sample-sequence-diagram.png)
+ 
+### Step 2
+
+<img src="./img/Peter.png" width="40" height="40"> Mark replies in the language that he wants to interact in.
  
 ![step2](./images/uml/sample-sequence-diagram.png)
 
