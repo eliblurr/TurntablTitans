@@ -26,7 +26,7 @@ export class FileUploadComponent {
     this.getFileTypes()
     this.getLanguages()
   }
-  
+
   uploadFileForm: FormGroup = this.formBuilder.group({
     type: this.formBuilder.control('', Validators.required),
     doc_language: this.formBuilder.control('', Validators.required),
