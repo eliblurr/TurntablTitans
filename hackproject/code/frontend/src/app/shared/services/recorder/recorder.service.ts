@@ -58,8 +58,6 @@ export class AudioRecorderService {
       mimeType: "audio/wav"
     });
 
-    // this.recorder
-
     this.recorder.record();
     this.startTime = moment();
     this.interval = setInterval(() => {
@@ -85,11 +83,11 @@ export class AudioRecorderService {
       this.recorder.stop(
         (blob:any) => {
           if (this.startTime) {
-            const mp3Name = encodeURIComponent(
+            const wavName = encodeURIComponent(
               "audio_" + new Date().getTime() + ".wav"
             );
             this.stopMedia();
-            this._recorded.next({ blob: blob, title: mp3Name });
+            this._recorded.next({ blob: blob, title: wavName });
           }
         },
         () => {

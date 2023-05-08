@@ -26,17 +26,24 @@ export class SynthesisService {
     return this.http.post<any>(`${this.BaseUrl}/tts/${message_id}`, payload, {headers: new HttpHeaders().set('ngrok-skip-browser-warning','6024'), responseType:'blob' as 'json'})
   }
 
-  fetch_text(file:File, chatId:string):Observable<string>{
+  fetch_text(blob:Blob, fileName:string, chatId:string):Observable<string>{
     const formData = new FormData();
-    formData.append("audio", file)
+    const headers = new HttpHeaders();
+    const file = new File([blob], fileName, {type:'audio/wav'});
+
+    // headers
+    headers.set('ngrok-skip-browser-warning','6024')
+    headers.set('Content-Type', "multipart/form-data")
+   
+    // form
     formData.append("chat_id", chatId);
-    formData.append("native_language", "en");
+    formData.append("native_language", "ENGLISH");
+    formData.append("audio", file, fileName)
+
     return this.http.post<any>(
       `${this.BaseUrl}/stt`, 
       formData, 
-      { 
-        headers: new HttpHeaders().set('ngrok-skip-browser-warning','6024').set('Content-Type','multipart/form-data')
-      }
+      { headers: headers}
     )
   }
 
