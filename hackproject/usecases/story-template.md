@@ -54,41 +54,41 @@
 <!--- Template Instructions   
   List and describe any terms that will be used in the story and referenced in diagrams. The current list provides a sample starter list. Leverage Design Thinking exercises to aid in the identification of use case archetypes. 
 --->
- 
-1. **Impaired Person**: A content consumer with one or more disabilities or disorders. Needs to be able to interact with accessible content to achieve goals.
-2. **Designer**: Defines consistent design language components and style. Needs to be able to create accessible styling for content creators and developers with minimal effort.
-3. **Developer**: Implements design language in software systems that generate content. Needs to be able to create accessibly inclusive renderings with ease.
-4. **Content Creator**: Utilizes the design language to produce consistently styled content. Needs to publish accessible content without extra steps or effort.
-5. **Content Publishing System**: Any system that consumes artifacts from an accessible theme builder to produce physical or digital content that is accessibly compliant. 
- 
 
 ## Assumptions
 <!--- Template Instructions   
   List any assumptions to be considered in this use case story.  Leverage Design Thinking exercises to aid in this endeavor. 
 --->
  
-1. *Enter assumption text ...*
-2. *Enter assumption text ...*
+1. *it's assumed that people with disabilities who want to understand a document have access to it in a digital format*
+
+2. *It's assumed that people with disabilities who use the solution have some level of familiarity with digital technology and are able to use a web or messaging application to upload documents*
  
 ## Persona
 <!--- Template Instructions   
   Using the sample persona images in the /images/persona folder, describe the roles of the entities involved in this use case story. The current list provides a sample starter list. 
 --->
  
-| Actor | Role | Goals | Details |
-| --- | --- | --- | --- |
-| <img src="./images/sponsors/discover_logo.png" width="50" height="50"> | Financial Institution, Content Creator | Generate accessibly complaint content. |  |  
-|  <img src="./images/persona/acme-logo.png" width="50" height="40"> Acme Enterprise |  |  |  |
-| <img src="./images/persona/Angelica.png" width="40" height="40"> Angelica | Designer |  |  | |
-| <img src="./images/persona/Darius.png" width="40" height="40"> Darius | Impaired Person |  |  | |
-| <img src="./images/persona/themebuilder.svg" width="40" height="40"> Atomic Accessibility Design Tool | Theme Builder |  | |
+| Actor                                                                    | Role                                   | Goals                                                                                             | Details |
+|--------------------------------------------------------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------| --- |
+| <img src="./img/Axa.png" width="50" height="50">   Axa                   | Insurance Company                      | Help users with disabilities understand their policies.                                           |  |  
+| <img src="./img/Laura.png" width="50" height="40"> Laura                 | Customer Service Representative at Axa | Ensure customers get all the help they need                                                       |  |
+| 
+| <img src="./img/Peter.png" width="40" height="40"> Mark                  | Person with Disability                 | Has difficulty understanding complex language and would like a solution that helps him understand |  | |
+| <img src="./img/ComprehendNow.png" width="40" height="40"> ComprehendNow | Web and Mobile messaging app           | Breakdown complex language in documents so that it's easily understandable.                       | |
  
 ## Story
 <!--- Template Instructions   
   Using the sample persona images in the /images/persona folder, describe the steps that are involved in the interactive use case story. The story below is offered as an exemplar.
 --->
 
-<img src="./images/persona/acme-logo.png" width="50" height="40"> Acme Enterprise has been contracted by <img src="./images/sponsors/discover_logo.png" width="50" height="50"> to provide accessible themes. <img src="./images/persona/Angelica.png" width="40" height="40"> Angelica uses a theme builder to generate a theme for <img src="./images/persona/Darius.png" width="40" height="40"> Darius. 
+<img src="./img/Axa.png" width="50" height="40"> Axa has rolled out new and exciting covers on their insurance policies, they sent out the details of the new covers in a .pdf format to their customers. 
+
+<img src="./img/Peter.png" width="50" height="40"> Mark received the notification from his insurance company AXA informing him that new covers have been added to his policy. He is excited to know more about the new covers, but he is also concerned that he might not be able to understand the information properly due to his cognitive disability.
+
+<img src="./img/Peter.png" width="50" height="40">  Mark decides to contact the insurance company and request for the new policy documents to be explained to him in a simple and clear manner. The customer service representative, <img src="./img/Laura.png" width="50" height="40">  Laura understands <img src="./img/Peter.png" width="50" height="40">  Mark's needs and sends him the link to <img src="./img/ComprehendNow.png" width="50" height="40">  ComprehendNow so that he can find what he needs in the policy document in simplified language and with clear explanations of the new covers.
+
+<img src="./img/Peter.png" width="50" height="40">  Mark is relieved to find that he can easily understand the information and can access it at any time he wants, even from his favorite messaging app. He is also pleased that he can easily ask questions on the policy document if he has any questions or needs clarification.
 
 ![process-workflow](./images/workflow/process-workflow.png)
 
