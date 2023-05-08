@@ -1,13 +1,15 @@
 <div [class.open]="sidebarService.collapseSideBar" [hidden]="!sidebarService.collapseSideBar" class="side-panel">
   <div class="header">
-    <h2>Chats</h2>
-    <button class="new-chat-btn" (click)="openUploadFileDialog()">
+    <h2>Sessions</h2>
+    <button class="new-chat-btn btn-align" (click)="openUploadFileDialog()">
       <mat-icon> add_comment</mat-icon>
-      New Chat
+      <span class="btn-text">
+        New Session
+      </span>
     </button>
   </div>
-  <div *ngIf="sharedService.chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center"><h2>No Chats</h2></div>
-  <ul *ngIf="sharedService.chats.length !== 0" class="chat-list" >
+  <div *ngIf="sharedService.chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center"><h2>No Sessions</h2></div>
+  <ul *ngIf="sharedService.chats.length !== 0"class="chat-list" >
     <li *ngFor="let chat of sharedService.chats">
       <div class="chat-info">
         <h4>
@@ -20,14 +22,20 @@
     <span style="font-size: 17px;" class="header">Accessibilty</span>
     <div id="accessibility-list">
       <ng-container *ngFor="let disability of disabilities">
-        <label class="chat-info accessibility-item">
-          <input (click)="changeTheme(disability)"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
-          {{ disability }}
+        <label class="chat-info accessibility-item btn-align" style="justify-content: space-between;">
+          <div>
+            <input (click)="changeTheme(disability)" class="radio"  type="radio" [(ngModel)]="selectedDisability" [value]="disability">
+            <span class="btn-text">{{ disability }}</span>
+          </div>
+          <button class="icon-btn btn-align" (click)="textToSpeech(disability)">
+            <mat-icon>surround_sound</mat-icon>
+          </button>
         </label>
       </ng-container>
     </div>
-    <div class="toggle-container">
-      <span style="margin-left: -25px;">Dark Mode</span>
+    <div class="toggle-container ">
+      <!-- <span style="margin-left: -25px;">Dark Mode</span> -->
+      <span class="title">Dark Mode</span>
       <label class="switch">
         <input type="checkbox" (change)="toggleDarkMode($event)">
         <span class="slider"></span>

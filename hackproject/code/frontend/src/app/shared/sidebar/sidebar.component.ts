@@ -4,6 +4,7 @@ import {SidebarService} from "../services/sidebar/sidebar.service";
 import {FileUploadComponent} from "../../features/file-upload/file-upload.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChatService} from "../services/chat/chat.service";
+import {SynthesisService} from "../services/text-speech-synth/synthesis.service"
 import {SharedService} from "../services/shared/shared.service";
 
 @Component({
@@ -18,6 +19,7 @@ export class SidebarComponent implements OnInit{
     private themeService:ThemeServiceService,
     private chatService: ChatService,
     public sharedService: SharedService,
+    public synthesisService: SynthesisService,
     public dialog: MatDialog,
   ) {}
 
@@ -68,6 +70,14 @@ export class SidebarComponent implements OnInit{
     })
     this.dialog.open(FileUploadComponent, {width: '450px'});
   }
+
+  textToSpeech(text:string){
+    this.sharedService.textToSpeech(text, "en")
+  }
+
+  // speechToText(){
+  //   // this.sharedService.speechToText()
+  // }
 
   getChatLists(){
 
