@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AxaLayoutComponent } from '../shared/axa-layout/axa-layout.component';
 import {ChatHomeComponent} from "./chat-home/chat-home.component";
 
 const routes: Routes = [
@@ -9,6 +10,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: ChatHomeComponent
+      },
+      {
+        path: 'axa',
+        component: AxaLayoutComponent
       }
     ],
   },

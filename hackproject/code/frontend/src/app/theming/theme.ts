@@ -9,8 +9,8 @@ export const THEMES:any = {
       background: 'var(--background)',
     },
     BDyslexia: {
-      primaryColor: 'var(--primaryDarkBG)',
-      secondaryColor: '#311B14',
+      primaryColor: '#311B14',
+      secondaryColor: 'var(--primaryDarkBG)',
       tertiaryColor: 'var(--primary)',
       textOnTertiary: 'var(--dm-on-tertiary-300)',
       textOnPrimary: 'var(--on-primary)',
