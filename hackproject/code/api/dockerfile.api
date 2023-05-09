@@ -1,0 +1,12 @@
+FROM tiangolo/uvicorn-gunicorn:python3.10
+
+RUN mkdir -p /home/app
+ENV APP_HOME=/home/app/
+
+WORKDIR $APP_HOME
+COPY . $APP_HOME
+
+RUN $APP_HOME/setup.sh
+EXPOSE 80
+
+CMD [ "gunicorn", "main:app", "--workers" , "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80" ]
