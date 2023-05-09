@@ -1,63 +1,63 @@
 from pydantic import BaseModel
 
 class InsuranceDocumentResponse(BaseModel):
-    summary: str
-    included_in_cover: str
-    excluded_from_cover: str
-    emergency_information: str
+    Summary: str
+    What_is_included_in_cover: str
+    What_is_excluded_from_cover: str
+    Who_to_contact_in_case_of_emergency: str
 
 class LandDocumentResponse(BaseModel):
-    summary: str
-    description: str
-    terms_of_use: str
-    warranties_and_guarantees: str
+    Summary: str
+    Description_of_property: str
+    Terms_of_use: str
+    Warranties_and_guarantees: str
 
 class ServiceContractDocumentResponse(BaseModel):
-    summary: str
-    payment_and_services: str
-    obligations: str
-    liability: str
+    Summary: str
+    Terms_of_payment_and_services: str
+    Obligations: str
+    Liabilities: str
 
 class EmploymentContractDocumentResponse(BaseModel):
-    summary: str
-    start_date: str
-    benefits_and_packages: str
-    schedule: str
-    response_deadline: str
+    Summary: str
+    Start_date: str
+    Benefits_and_packages: str
+    Schedule: str
+    Response_deadline: str
 
 class ConfidentialityAgreementDocumentResponse(BaseModel):
-    summary: str
-    confidential_info: str
-    timeframe: str
-    breach: str
-    obligations: str
-    steps_upon_violation: str
+    Summary: str
+    What_constitutes_confidential_information: str
+    Timeframe_within_which_the_agreement_holds: str
+    What_constitutes_a_breach: str
+    Obligations: str
+    What_steps_will_be_taken_if_I_violate: str
 
 class SalesContractDocumentResponse(BaseModel):
-    summary: str
-    coverage: str
-    payment_plan: str
-    details_of_delivery: str
+    Summary: str
+    What_goods_and_services_are_covered: str
+    Is_there_a_payment_plan: str
+    Details_of_delivery: str
 
 class IndependentContractorAgreementDocumentResponse(BaseModel):
-    summary: str
-    schedule: str
-    payment_terms: str
-    details_of_termination: str
+    Summary: str
+    Will_I_be_required_to_work_a_set_schedule: str
+    Payment_terms: str
+    Details_of_termination: str
 
 class LoanAgreementDocumentResponse(BaseModel):
-    summary: str
-    loan_amount: str
-    interest_rate: str
-    timeframe: str
-    method_of_repayment: str
-    late_payment_info: str
+    Summary: str
+    Loan_amount: str
+    Interest_rate: str
+    Repayment_timeframe: str
+    Mode_of_repayment: str
+    What_happens_in_case_of_late_or_missed_payments: str
 
 class PartnershipAgreementDocumentResponse(BaseModel):
-    summary: str
-    responsibilities: str
-    restrictions: str
-    dispute_resolution: str
+    Summary: str
+    Responsibilities_of_parties: str
+    Restrictions_on_partners: str
+    How_disputes_will_be_resolved: str
 
 class PromptResponse(BaseModel):
     prompt: str
