@@ -7,6 +7,8 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ## Introduction
@@ -21,6 +23,23 @@ The chatbot interface allows users to interact with the system using natural lan
 - Uses natural language processing to understand user queries and provide relevant information.
 - Provides a summary of the document content in an easily understandable format.
 - Allows for questions on document content.
+
+## Installation
+
+To install the chatbot system, please follow these steps:
+
+1. Clone the repository to your local machine.
+2. CD into hackproject/code/api/app directory.
+3. Run ./setup.sh.
+
+## Usage
+
+To use the chatbot system, follow these steps:
+
+1. Open a terminal window and navigate to the project directory.
+2. Run the command `uvicorn hackproject.code.api.app.main:app` to start the chatbot server.
+3. Upload a document or type in a query or command to interact with the system.
+4. The system will respond with a summary of the document or answer to the user's query.
 
 ## Credits and Acknowledgements
 - The embedding model used in the project is the open souce "all-mpnet-base-v2" model

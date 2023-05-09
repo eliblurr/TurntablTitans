@@ -121,6 +121,7 @@ async def stt_(
         language: str = 'en'):
     try:
         text = stt(audio, language)
+        print(text)
         text_schema = WebText(body=text, native_language=native_language)
         prompt = WebPrompt(prompt=text_schema, chat_id=chat_id)
         response = await web_prompt(prompt)
