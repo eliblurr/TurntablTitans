@@ -1,15 +1,15 @@
 .card-theme{
-  background-color: var(--tertiaryColor);
-  color: var(--textOnPrimary);
+  background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
   
 }
 
 .card-body-theme{
-  background-color: var(--secondaryColor); 
+  background-color: var(--tertiaryColor); 
   align-items: center;
   display: flex; 
   flex-direction: row; 
-  color: var(--textOnSecondary);
+  color: var(--textOnPrimary);
   cursor: pointer;
 }
 
@@ -38,7 +38,7 @@
 .submit-btn {
   cursor: pointer;
   font-size: 18pt;
-  background-color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   color: var(--textOnPrimary);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  
   box-sizing: border-box;

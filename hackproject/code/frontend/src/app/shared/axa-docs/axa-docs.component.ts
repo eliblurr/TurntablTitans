@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { SidebarService } from '../services/sidebar/sidebar.service';
 
 @Component({
   selector: 'axa-docs',
@@ -6,8 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./axa-docs.component.css']
 })
 export class AXADocsComponent {
-  constructor(
-  ) {
+  constructor(public sidebarService: SidebarService){
   }
 
   ngOnInit(): void {

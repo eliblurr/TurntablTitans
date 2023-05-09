@@ -1,6 +1,8 @@
 .card-theme{
-  background-color: var(--tertiaryColor);
-  color: var(--textOnPrimary);
+  background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
+  max-height: 157px;
+  overflow-y: auto;
 }
 
 .card-body-theme{

@@ -147,3 +147,7 @@
   .title { width: 130px; font-size: 19px; }
   .menu { width: 12%;}
 }
+
+.active {
+  background-color: var(--tertiaryColor);
+}
