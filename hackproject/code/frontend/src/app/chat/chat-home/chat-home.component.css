@@ -343,3 +343,10 @@
   /*color: var(--textOnPrimary);*/
   transition: background-color 0.3s ease-in-out;
 }
+
+.speaker {
+  width: 2rem;
+  height: 2rem;
+  color: var(--iconColor);
+  font-size: 2rem;
+}
