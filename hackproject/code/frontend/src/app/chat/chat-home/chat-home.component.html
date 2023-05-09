@@ -44,6 +44,7 @@
               send
             </mat-icon>
           </div>
+          <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
         </form>
       </div>
     </section>

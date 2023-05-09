@@ -9,10 +9,10 @@ services:
     restart: always
     expose: 
       - 80
-  
+    ports: 
+      - 80:80
     env_file:
       - .docker.env
-
     networks:
       - finos-axa-hackathon-network
 
@@ -22,8 +22,12 @@ services:
       dockerfile: dockerfile.ui
     image: finos-axa-hackathon-ui
     restart: always
-    expose: 
-      - 4200
+    env_file:
+      - .docker.env
+    environment:
+      - NODE_ENV="production"
+    ports:
+      - 3000:80
     networks:
       - finos-axa-hackathon-network
 

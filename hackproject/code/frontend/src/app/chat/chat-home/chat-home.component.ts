@@ -12,6 +12,11 @@ export interface Message {
   message: string;
 }
 
+export interface Recording {
+  text: string,
+  chat_id: string
+}
+
 @Component({
   selector: 'app-chat-home',
   templateUrl: './chat-home.component.html',
@@ -20,10 +25,11 @@ export interface Message {
 export class ChatHomeComponent {
   currentTheme: any = localStorage.getItem('theme');
 
-  selectedCategory: number = 0;
   fileName = '';
-  showButton = false;
   loading = false
+  showButton = false;
+  receivedData = ''
+  selectedCategory: number = 0;
   chatForm: FormGroup = this.formBuilder.group({
     body: this.formBuilder.control('', Validators.required),
   })
@@ -64,5 +70,11 @@ export class ChatHomeComponent {
 
   textToSpeech(text: string) {
     this.sharedService.textToSpeech(text, "en")
+  }
+
+  receiveDataFromRecorder(data: string): void {
+    data = JSON.stringify(data);
+    const json_data = JSON.parse(data)
+    this.chatForm.setValue({body: json_data.text})
   }
 }

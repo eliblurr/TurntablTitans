@@ -69,34 +69,6 @@
   height: 100%;
 }
 
-.menu {
-  width: 5%;
-}
-
-.brand-name-language-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 95%;
-  height: 100%;
-}
-
-.dropdown {
-  width: 50%;
-}
-
-@media (max-width: 450px) {
-  .language-selector { width: 130px;}
-  .brand-name-language-container {width: 86%;}
-  .title { width: 130px; font-size: 19px; }
-  .menu { width: 12%;}
-}
-
-#topnav {
-  width: 100vw;
-  height: 100%;
-}
-
 .wrapper {
   width: 100%;
   display: flex;

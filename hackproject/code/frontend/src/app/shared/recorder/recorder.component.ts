@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { AudioRecorderService } from '../services/recorder/recorder.service'
 import {SynthesisService} from "../services/text-speech-synth/synthesis.service"
 import { DomSanitizer } from "@angular/platform-browser";
@@ -10,6 +10,7 @@ import { SharedService } from '../services/shared/shared.service';
   styleUrls: ['./recorder.component.css']
 })
 export class RecorderComponent implements OnInit{
+  @Output() dataToParent: EventEmitter<string> = new EventEmitter<string>();
   isRecording = false;
   recordedTime: any;
   blobUrl: any;
@@ -37,7 +38,7 @@ export class RecorderComponent implements OnInit{
     });
   }
 
-  ngOnInit(){    
+  ngOnInit(){
     if(localStorage.getItem("BuilderTheme") === null){
       localStorage.setItem('BuilderTheme','Default');
     }
@@ -75,11 +76,12 @@ export class RecorderComponent implements OnInit{
 
   submitAudio(){
     const chatId = this.sharedService.chatId;
+
     console.log(this.blob)
     console.log(this.teste)
     this.synthesisService.fetch_text(this.blob, "audio.wav", chatId).subscribe(
-      (res:string)=>{
-        console.log(res)
+      (res)=>{
+        this.dataToParent.emit(res)
       }
     )
   }

@@ -86,6 +86,8 @@ class Document(Enum):
 class Prompts(Enum):
     GREETING = ['hi', 'hello', 'hey', 'howdy', 'yo',
                 'sup', 'hiya', 'heya',
+                'hi!', 'hello!', 'hey!', 'howdy!', 'yo!',
+                'sup!', 'hiya!', 'heya!', "what's up!",
                 'greetings', "what's up", 'good morning', 'good afternoon',
                 'good evening', 'howdy', 'salutations','pleased to meet you', 'how are you',
                 "what's new", "what's happening",
@@ -93,23 +95,27 @@ class Prompts(Enum):
                 'whats up', 'whats new', 'whats happening', 'hows it going', 'hows life'
             ]
     GREETING_RESPONSE = [
-                         "Hey, Great day! I am here to help you!",
-                         "Hello, it's my pleasure meeting you!",
-                         "Hi, Let's chat!",
-                         "Hi there! How can I assist you today?",
-                         "Hello! How can I help you?",
-                         "Good to see you! How can I be of service?",
-                         "Welcome! How can I help you today?",
-                         "Hey there! What can I help you with?",
-                         "Hi, how can I make your day better?",
-                         "Greetings! What brings you here today?",
-                         "Hello! What can I do for you?",
-                         "Salutations! What can I assist you with?",
-                         "Hey! How can I be of help today?"
+                         "Hey, Great day! I am here to help you! To begin, upload a document.",
+                         "Hello, it's my pleasure meeting you! To begin, upload a document.",
+                         "Hi, Let's chat! To begin, upload a document.",
+                         "Hi there! How can I assist you today? To begin, upload a document.",
+                         "Hello! How can I help you?  To begin, upload a document.",
+                         "Good to see you! How can I be of service?  To begin, upload a document.",
+                         "Welcome! How can I help you today? To begin, upload a document.",
+                         "Hey there! What can I help you with? To begin, upload a document.",
+                         "Hi, how can I make your day better? To begin, upload a document.",
+                         "Greetings! What brings you here today? To begin, upload a document.",
+                         "Hello! What can I do for you? To begin, upload a document.",
+                         "Salutations! What can I assist you with? To begin, upload a document.",
+                         "Hey! How can I be of help today? To begin, upload a document."
                      ]
     APPRECIATION = ['thanks', 'thank you', 'appreciate it',
          'grateful', 'cheers', 'nice one', 'alright', 'cool'
-                    'bye', 'exit', 'quit', 'ok', 'okay']
+                    'bye', 'exit', 'quit', 'ok', 'okay',
+                    'thanks!', 'thank you!', 'appreciate it!',
+                    'grateful!', 'cheers!', 'nice one!', 'alright!', 'cool!',
+                     'bye!', 'exit!', 'quit!', 'ok!', 'okay!'
+                    ]
     APPRECIATION_RESPONSE = [
         'You\'re welcome!', 'No problem, happy to help.', 'Anytime, feel free to reach out if you need anything else.',
         'It was my pleasure.', 'Not a problem at all, glad I could assist you.', 'You\'re most welcome!',
@@ -119,55 +125,55 @@ class Prompts(Enum):
     NO_DOCUMENT_PROVIDED_REPLY = "I need a document first before I can answer questions"
     SUMMARY = "Can you give me a summary of the document using easy to understand words or non-legal terms"
     INSURANCE = {
-        "included_in_cover" : "Describe what is included in the cover",
-        "excluded_from_cover" : "Describe what is excluded from the cover",
-        "emergency_information" :"Who should I contact in case of emergency?"
+        "What_is_included_in_cover" : "Describe what is included in the cover",
+        "What_is_excluded_from_cover" : "Describe what is excluded from the cover",
+        "Who_to_contact_in_case_of_emergency" :"Who should I contact in case of emergency?"
     }
     LAND = {
-        "description" : "Describe the property briefly",
-        "terms_of_use" : "Describe the terms of use",
-        "warranties_and_guarantees" : "Describe the warranties and guarantees"
+        "Description_of_property" : "Describe the property briefly",
+        "Terms_of_use" : "Describe the terms of use",
+        "Warranties_and_guarantees" : "Describe the warranties and guarantees"
     }
     SERVICE_CONTRACT = {
-        "payment_and_services" : "How and what exactly is the vendor being paid for its services?",
-        "obligations" : "What are my obligations?",
-        "liability" : "Who will be responsible for mistakes?"
+        "Terms_of_payment_and_services" : "How and what exactly is the vendor being paid for its services?",
+        "Obligations" : "What are my obligations?",
+        "Liabilities" : "Who will be responsible for mistakes?"
     }
     EMPLOYMENT_CONTRACT = {
-        "start_date" : "What is the start date?",
-        "benefits_and_packages" : "Describe the benefits and packages?",
-        "schedule" : "Is there a defined schedule?",
-        "response_deadline" :"Am I expected to give my answer before a certain date?"
+        "Start_date" : "What is the start date?",
+        "Benefits_and_packages" : "Describe the benefits and packages?",
+        "Schedule" : "Is there a defined schedule?",
+        "Response_deadline" :"Am I expected to give my answer before a certain date?"
     }
     CONFIDENTIALITY_AGREEMENT = {
-        "confidential_info" : "What constitutes confidential information?",
-        "timeframe" : "Within what timeframe does this agreement hold?",
-        "breach" : "What constitutes a breach?",
-        "obligations" : "Describe my obligations?",
-        "steps_upon_violation" : "What steps will be taken if I violate?"
+        "What_constitutes_confidential_information" : "What constitutes confidential information?",
+        "Timeframe_within_which_the_agreement_holds" : "Within what timeframe does this agreement hold?",
+        "What_constitutes_a_breach" : "What constitutes a breach?",
+        "Obligations" : "Describe my obligations?",
+        "What_steps_will_be_taken_if_I_violate" : "What steps will be taken if I violate?"
     }
     SALES_CONTRACT = {
-        "coverage" : "What goods and services are covered?",
-        "payment_plan" : "Is there a payment plan in place?",
-        "details_of_delivery" : "Describe the details of delivery?"
+        "What_goods_and_services_are_covered" : "What goods and services are covered?",
+        "Is_there_a_payment_plan" : "Is there a payment plan in place?",
+        "Details_of_delivery" : "Describe the details of delivery?"
     }
     INDEPENDENT_CONTRACTOR_AGREEMENT = {
-        "schedule" : "Will I be required to work a set schedule?",
-        "payment_terms" : "Describe the payment terms?",
-        "details_of_termination" : "What is the minimum notice which will be provided in case of an,"
+        "Will_I_be_required_to_work_a_set_schedule" : "Will I be required to work a set schedule?",
+        "Payment_terms" : "Describe the payment terms?",
+        "Details_of_termination" : "What is the minimum notice which will be provided in case of an,"
                                                      "early contract termination?"
     }
     LOAN_AGREEMENT = {
-        "loan_amount" : "What is the loan amount?",
-        "interest_rate" : "What is the interest rate?",
-        "timeframe" : "What is the timeframe of the agreement?",
-        "method_of_repayment" : "What is the method of repayment?",
-        "late_payment_info" :"What happens in case there are late or missed payments?"
+        "Loan_amount" : "What is the loan amount?",
+        "Interest_rate" : "What is the interest rate?",
+        "Repayment_timeframe" : "What is the timeframe of the agreement?",
+        "Mode_of_repayment" : "What is the method of repayment?",
+        "What_happens_in_case_of_late_or_missed_payments" :"What happens in case there are late or missed payments?"
     }
     PARTNERSHIP_AGREEMENT = {
-        "responsibilities" : "Describe the responsibilities of the partners?",
-        "restrictions" : "What are the restriction on partners",
-        "dispute_resolution" : "How will disputes be resolved?"
+        "Responsibilities_of_parties" : "Describe the responsibilities of the partners?",
+        "Restrictions_on_partners" : "What are the restriction on partners",
+        "How_disputes_will_be_resolved" : "How will disputes be resolved?"
     }
 
     @classmethod

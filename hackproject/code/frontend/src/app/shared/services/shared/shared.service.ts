@@ -15,7 +15,7 @@ export class SharedService {
   sessionMessages = new BehaviorSubject<Chat[]>([])
   $chats = this.sessionMessages.asObservable();
   messages: Message[] = []
-  fileResponse?: FileResponse[] = []
+  fileResponse: FileResponse[] = []
   chatMap: Map<string, Message[]> = new Map<string, Message[]>();
   fileResponseMap: Map<string, FileResponse[]> = new Map<string, FileResponse[]>();
   file!: File

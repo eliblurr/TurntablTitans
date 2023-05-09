@@ -100,8 +100,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     const messages = this.sharedService.getMessages(chatId)
     const fileResponse = this.sharedService.getFileResponse(chatId)
     if (messages == undefined) return
+    if (fileResponse == undefined) return
+    this.sharedService.fileResponse = []
+    console.log(this.sharedService.fileResponse)
     this.sharedService.fileResponse = fileResponse
     this.sharedService.messages = messages
+    console.log(this.sharedService.fileResponse)
   }
 
   getChatLists(): Chat[] {
@@ -116,7 +120,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   // speechToText(){
   //   // this.sharedService.speechToText()
   // }
-
 
   initializeChatList() {
     if (this.sharedService.getChatsListFromLocalStorage().length !== 0) {
