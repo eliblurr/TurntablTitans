@@ -15,14 +15,15 @@ export class SharedService {
   sessionMessages = new BehaviorSubject<Chat[]>([])
   $chats = this.sessionMessages.asObservable();
   messages: Message[] = []
-  fileResponse: FileResponse[] = []
   chatMap: Map<string, Message[]> = new Map<string, Message[]>();
+  fileResponse: FileResponse[] = []
   fileResponseMap: Map<string, FileResponse[]> = new Map<string, FileResponse[]>();
   file!: File
 
   constructor(private synthesisService: SynthesisService) {
     this.synthesisService = synthesisService
   }
+
 
   startNewChat() {
     this.clearMessages()
@@ -34,20 +35,20 @@ export class SharedService {
 
   addFileUploadResponse(res: any) {
     this.loading = false
+    const responses: FileResponse[] = []
     Object.keys(res).forEach((key) => {
       const value = res[key];
-      const newMessage = this.createMessage('client', value);
+      const newMessage = this.createMessage( 'client', value);
       this.addMessage(this.chatId, newMessage)
-      this.formatFileUploadResponse(key, value)
+      this.formatFileUploadResponse(key, value, responses)
     })
-    this.fileResponseMap.set(this.chatId, this.fileResponse!)
+    this.fileResponseMap.set(this.chatId, responses)
     localStorage.setItem('fileResponseData', JSON.stringify([...this.fileResponseMap]));
   }
 
-  formatFileUploadResponse(key: string, value: string) {
+  formatFileUploadResponse(key: string, value: string, responses: FileResponse[]) {
     let transformedKey = key.replace(/_/g, ' ')
-    const response: FileResponse = {title: transformedKey, message:value}
-    this.fileResponse!.push(response)
+    responses.push({title: transformedKey, message:value})
   }
 
   clearMessages() {

@@ -84,6 +84,8 @@ export class RecorderComponent implements OnInit{
         this.dataToParent.emit(res)
       }
     )
+
+    this.clearRecordedData()
   }
 
 

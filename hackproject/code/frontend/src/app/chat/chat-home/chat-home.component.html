@@ -18,7 +18,7 @@
             <p [class]="message.type">
               {{ message.message }}
             </p>
-            <mat-icon *ngIf="message.type == 'client'" (click)="textToSpeech(message.message)">record_voice_over</mat-icon>
+            <mat-icon *ngIf="message.type == 'client'" (click)="textToSpeech(message.message)">volume_up</mat-icon>
           </li>
           <li
             *ngIf="sharedService.loading"
@@ -44,6 +44,10 @@
               send
             </mat-icon>
           </div>
+
+          <div><button class="icon-btn btn-align"  (click)="sendMessage()">
+            <mat-icon>send</mat-icon>
+          </button></div>
           <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
         </form>
       </div>
