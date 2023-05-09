@@ -18,7 +18,7 @@
 How might we design a solution that presents information from complex documents in a simplified, easy-to-understand format?
  
 ### Concept
-A Natural Language Processing chatbot that allows users to submit complex documents, receive a short summary of the document, and ask questions.
+A Natural Language Processing chatbot that allows users to submit complex documents, receive a summary of the document in simplified language, and ask questions.
  
 ### Approach
 
@@ -26,10 +26,12 @@ A Natural Language Processing chatbot that allows users to submit complex docume
 
 ## Assumptions
  
-1. *it's assumed that people with disabilities who want to understand a document have access to it in a digital format*
+1. *It's assumed that people with disabilities who want to understand a document have access to it in a digital format*
 
 2. *It's assumed that people with disabilities who use the solution have some level of familiarity with digital technology and are able to use a web or messaging application to upload documents*
  
+&nbsp;
+
 ## Persona
 
 | Actor                                                               | Role                                   | Goals                                                                                             | Details |
@@ -38,6 +40,8 @@ A Natural Language Processing chatbot that allows users to submit complex docume
 | <img src="./img/Laura.png" width="50" height="40"> Laura            | Customer Service Representative at Axa | Ensure customers get all the help they need                                                       |  |
 | <img src="./img/Alex.png" width="40" height="40"> Mark                  | Person with Disability                 | Has difficulty understanding complex language and would like a solution that helps him understand |  |
 | <img src="./img/ComprehendNow.png" width="40" height="40"> ComprehendNow | Web and Mobile messaging app           | Breakdown complex language in documents so that it's easily understandable.                       | |
+
+&nbsp;
  
 ## Story
 
@@ -45,10 +49,12 @@ A Natural Language Processing chatbot that allows users to submit complex docume
 
 <img src="./img/Alex.png" width="50" height="40"> Mark received the notification from his insurance company AXA informing him that new covers have been added to his policy. He is excited to know more about the new covers, but he is also concerned that he might not be able to understand the information properly due to his cognitive disability.
 
-<img src="./img/Alex.png" width="50" height="40">  Mark decides to contact the insurance company and request for the new policy documents to be explained to him in a simple and clear manner. The customer service representative, <img src="./img/Laura.png" width="50" height="40">  Laura understands <img src="./img/Alex.png" width="50" height="40">  Mark's needs and sends him the link to <img src="./img/ComprehendNow.png" width="50" height="40">  ComprehendNow so that he can find what he needs in the policy document in simplified language and with clear explanations of the new covers.
+<img src="./img/Alex.png" width="50" height="40">  Mark decides to contact the insurance company and request for the new policy documents to be explained to him in a simple and clear manner. The customer service representative, <img src="./img/Laura.png" width="50" height="40">  Laura, understands <img src="./img/Alex.png" width="50" height="40">  Mark's needs and sends him the link to <img src="./img/ComprehendNow.png" width="50" height="40">  ComprehendNow so that he can find what he needs in the policy document in simplified language and with clear explanations of the new covers.
 
 <img src="./img/Alex.png" width="50" height="40">  Mark is relieved to find that he can easily understand the information and can access it at any time he wants, even from his favorite messaging app. He is also pleased that he can easily ask questions on the policy document if he has any questions or needs clarification.
  
+&nbsp;
+
 ## Demo Web App Workflow
  
 ### Step 1
@@ -57,7 +63,7 @@ A Natural Language Processing chatbot that allows users to submit complex docume
  
 ### Step 2
 
-<img src="./img/Alex.png" width="40" height="40"> Mark chooses the language that he wants to interact in and an accessibility profile(Generated with  Atomic Accessibility Design Tool from Discover <img src="./img/Discover.png" width="40" height="40"> Mark opens ComprehendNow.) that fits his needs.
+<img src="./img/Alex.png" width="40" height="40"> Mark chooses the language that he wants to interact in and an accessibility profile(Generated with  Atomic Accessibility Design Tool from Discover <img src="./img/Discover.png" width="40" height="40">) that fits his needs.
 
 ### Step 3
 
@@ -70,6 +76,8 @@ A Natural Language Processing chatbot that allows users to submit complex docume
 ### Step 5
 
 <img src="./img/Alex.png" width="40" height="40"> Mark asks questions on the areas that he would like more information on and he is answered.
+
+&nbsp;
 
 ## Demo Messaging App Workflow
  
@@ -93,6 +101,7 @@ A Natural Language Processing chatbot that allows users to submit complex docume
 
 <img src="./img/Alex.png" width="40" height="40"> Mark asks questions on the areas that he would like more information on and he is answered.
 
+&nbsp;
 
 ## Sequence Diagram
  

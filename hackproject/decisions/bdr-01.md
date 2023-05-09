@@ -5,7 +5,7 @@
 * Date: 2023-05-05
 
 ## Context and Problem Statement
-Our goal is to create a solution that simplifies interacting with, and understanding complex documents. The solution should allow users to submit documents, receive a short summary, and be able to ask questions on the document. These questions will be replied to using simple and easy to understand words, making sure the true meaning and intent of the original document is not lost.
+Our goal is to create a solution that simplifies interacting with, and understanding complex documents. The solution should make sure the true meaning and intent of the original document is not lost.
 
 ## Decision Drivers <!-- optional -->
 
@@ -25,8 +25,8 @@ Chosen option: "A Natural Language Processing chatbot that allows users to submi
 
 ### Positive Consequences:
 
-- Easy-to-understand explanations of complex documents leading to increased compliance to requirements that may be included in documents.
 - Increased accessibility to information for people with disabilities, leading to greater inclusion and equity.
+- Easy-to-understand explanations of complex documents leading to increased compliance to requirements that may be included in documents.
 
 ### Negative Consequences:
 
@@ -58,7 +58,7 @@ Pros:
 
 Cons:
 - Can be resource intensive to develop and maintain.
-- May not be able to provide accurate answers to all questions, depending on the level of complexity and nuance involved.
+- May not be able to provide answers to all questions, depending on the level of complexity and nuance involved.
 
 &nbsp;
 
@@ -80,19 +80,18 @@ Cons:
 * An intuitive and easy to use user interface, with clear instructions and guidance on how to upload and interact with documents. 
 * Document processing with advanced Natural Language Processing(NLP) models.
 * Question answering that allows users to ask questions about the document using natural language queries.
-* Accessibility features such as audio playback, screen reader compatibility.
-* Protected user data in compliance with relevant regulations and standards.
+* Accessibility features such as speech-to-text and text-to-speech.
 
 ## Considerations
 
 * Quality and accuracy of the Natural Language Processing models
 * Availability, licensing, and or cost of the models
-* Technical requirements for using the models.
+* Technical requirements to use the models.
 
 ## Design Decisions
 
-* Made use of an open source embedding model (all-mpnet-base-v2
+* Use of an open source embedding model (all-mpnet-base-v2
 ) and the GPT-3 language model, both trained on extensive datasets for our use case to ensure quality and accuracy
-* The use of the open source embedding model (all-mpnet-base-v2
+* Use of the open source embedding model (all-mpnet-base-v2
 ), from our tests and analysis, will reduce operational costs by 91%
-* Due to hardware limitations, made use of a paid large language model, accounting for 8% of total operational costs
+* Due to hardware limitations, use of a paid large language model, accounting for 8% of total operational costs

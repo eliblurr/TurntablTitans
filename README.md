@@ -51,7 +51,7 @@ Mark is relieved to find that he can easily understand the information and can a
 
 ## Team Information
 
-Our team members came together because we bring a diverse set of skills to the table, such as natural language processing, machine learning, software engineering, user experience design and user testing.  This allowed us to build a solution that satisfies the problem domain.
+Our team members came together because we bring a diverse set of skills to the table, in areas such as natural language processing, machine learning, software engineering, user experience design and user acceptance testing. This allowed us to build a solution that solves the problem domain.
 
 | Name                                 | Organization |
 |--------------------------------------|--------------|
