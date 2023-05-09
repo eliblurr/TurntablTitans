@@ -21,7 +21,7 @@
           </ul>
         </div>
         <mat-select class="language-selector" placeholder="Select language" [(ngModel)]=selectedOption
-                    (selectionChange)="onSelectionChange($event)" style="background-color: white; height: 70%">
+                    (ngModelChange)="onSelectionChange($event)" style="background-color: white; height: 70%">
           <mat-option *ngFor=" let language of languages"
                       [value]="language">
             {{language|titlecase}}

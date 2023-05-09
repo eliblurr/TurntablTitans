@@ -5,9 +5,9 @@
       <div class="chat-box p-3 h-100 messages">
         <ul>
           <li *ngFor="let message of sharedService.messages" class="message">
-            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img
-              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
-              alt=""/></div>
+<!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->
+<!--              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"-->
+<!--              alt=""/></div>-->
             <div *ngIf="message.type == 'client'" id="bot" [class]="message.type" style="background-color: transparent"><img
               src="assets/images/bot.png" style="height: 50px; width: 50px"
               alt=""/></div>
@@ -21,6 +21,10 @@
             class="message"
             style="width: 100%; display: block"
           >
+            <img
+              src="assets/images/bot.png" style=" background-color: transparent; height: 50px; width: 50px"
+              alt=""/>
+
             <img src="assets/images/loading-dots.gif" style="width: 200px">
 <!--            <p [class]="'client'"><img src="assets/images/loading-dots.gif"></p>-->
           </li>

@@ -33,8 +33,9 @@
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  display: inline-block;
-  max-width: 80%;
+  /*display: inline-block;*/
+  /*background-color: red;*/
+  max-width: 90%;
 }
 
 .user {
