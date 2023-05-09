@@ -8,14 +8,18 @@
       </span>
     </button>
   </div>
-  <div *ngIf="sharedService.chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center"><h2>No Sessions</h2></div>
-  <ul *ngIf="sharedService.chats.length !== 0"class="chat-list" >
-    <li *ngFor="let chat of sharedService.chats">
+  <div *ngIf="chats.length == 0" style="height: 20%; display: flex; align-items: center; justify-content: center">
+    <h2>No Sessions</h2>
+  </div>
+  <ul *ngIf="chats.length !== 0" class="chat-list">
+    <li *ngFor="let chat of chats; let i = index" (click)="getChatData(chat.chatId, i)"
+        [class.active]="i === selectedChatIndex" #firstChat>
       <div class="chat-info">
         <h4>
           <mat-icon class="chat-icon">chat_bubble_outline</mat-icon>
           {{chat.chatName}}</h4>
       </div>
+    </li>
   </ul>
 
 <app-accessibility-section></app-accessibility-section>
