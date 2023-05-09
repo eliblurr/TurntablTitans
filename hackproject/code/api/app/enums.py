@@ -86,6 +86,8 @@ class Document(Enum):
 class Prompts(Enum):
     GREETING = ['hi', 'hello', 'hey', 'howdy', 'yo',
                 'sup', 'hiya', 'heya',
+                'hi!', 'hello!', 'hey!', 'howdy!', 'yo!',
+                'sup!', 'hiya!', 'heya!', "what's up!",
                 'greetings', "what's up", 'good morning', 'good afternoon',
                 'good evening', 'howdy', 'salutations','pleased to meet you', 'how are you',
                 "what's new", "what's happening",
@@ -93,23 +95,27 @@ class Prompts(Enum):
                 'whats up', 'whats new', 'whats happening', 'hows it going', 'hows life'
             ]
     GREETING_RESPONSE = [
-                         "Hey, Great day! I am here to help you!",
-                         "Hello, it's my pleasure meeting you!",
-                         "Hi, Let's chat!",
-                         "Hi there! How can I assist you today?",
-                         "Hello! How can I help you?",
-                         "Good to see you! How can I be of service?",
-                         "Welcome! How can I help you today?",
-                         "Hey there! What can I help you with?",
-                         "Hi, how can I make your day better?",
-                         "Greetings! What brings you here today?",
-                         "Hello! What can I do for you?",
-                         "Salutations! What can I assist you with?",
-                         "Hey! How can I be of help today?"
+                         "Hey, Great day! I am here to help you! To begin, upload a document.",
+                         "Hello, it's my pleasure meeting you! To begin, upload a document.",
+                         "Hi, Let's chat! To begin, upload a document.",
+                         "Hi there! How can I assist you today? To begin, upload a document.",
+                         "Hello! How can I help you?  To begin, upload a document.",
+                         "Good to see you! How can I be of service?  To begin, upload a document.",
+                         "Welcome! How can I help you today? To begin, upload a document.",
+                         "Hey there! What can I help you with? To begin, upload a document.",
+                         "Hi, how can I make your day better? To begin, upload a document.",
+                         "Greetings! What brings you here today? To begin, upload a document.",
+                         "Hello! What can I do for you? To begin, upload a document.",
+                         "Salutations! What can I assist you with? To begin, upload a document.",
+                         "Hey! How can I be of help today? To begin, upload a document."
                      ]
     APPRECIATION = ['thanks', 'thank you', 'appreciate it',
          'grateful', 'cheers', 'nice one', 'alright', 'cool'
-                    'bye', 'exit', 'quit', 'ok', 'okay']
+                    'bye', 'exit', 'quit', 'ok', 'okay',
+                    'thanks!', 'thank you!', 'appreciate it!',
+                    'grateful!', 'cheers!', 'nice one!', 'alright!', 'cool!',
+                     'bye!', 'exit!', 'quit!', 'ok!', 'okay!'
+                    ]
     APPRECIATION_RESPONSE = [
         'You\'re welcome!', 'No problem, happy to help.', 'Anytime, feel free to reach out if you need anything else.',
         'It was my pleasure.', 'Not a problem at all, glad I could assist you.', 'You\'re most welcome!',
