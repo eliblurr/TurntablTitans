@@ -40,6 +40,7 @@ from hackproject.code.api.app.services.tts_service.tts import tts as parrot
 from hackproject.code.api.app.services.stt_service.stt import stt
 from hackproject.code.api.app.services.axa.axa_service import get_questions, compute, products
 from hackproject.code.api.app.schemas.axa_service.axa_schemas import Question, QuestionDetail, SubmissionResponse, State
+from hackproject.code.api.app.schemas.axa_service.axa_schemas import Product as AXAProduct
 
 # laod env's
 load_dotenv()
@@ -135,7 +136,7 @@ async def tts(message_id:str, payload:TTS):
     path = parrot(payload.text, payload.language, message_id)
     return FileResponse(path, background=BackgroundTask(remove_file, path))
 
-@router.get("/axa/products", response_model=list[Product])
+@router.get("/axa/products", response_model=list[AXAProduct])
 async def get_products():
     return await products()
 
