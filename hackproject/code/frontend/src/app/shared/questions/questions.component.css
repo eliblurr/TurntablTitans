@@ -5,7 +5,7 @@
 }
 
 .card-body-theme{
-  background-color: var(--tertiaryColor); 
+  background-color: var(--secondaryColor); 
   display: flex; 
   flex-direction: row; 
   color: var(--textOnSecondary);
@@ -17,5 +17,6 @@
 }
 
 .disable {
-  opacity: 10%;
+  background-color: var(--tertiaryColor); 
+  opacity: 50%;
 }
