@@ -28,10 +28,10 @@ base_payload={
 
 
 async def products():
-    return Product(
+    return [Product(
         id="162306",
         name="motor"
-    )
+    )]
 
 async def get_questions(product_id:str, language:str, question_id:str=None, base=base_payload):
     HEADERS["accept-language"]=language
