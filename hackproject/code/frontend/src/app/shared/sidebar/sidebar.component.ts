@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   disabilities: string[] = [
-    "Color Blindness", "Dyslexia", "Autism"
+    "Default","Color Blindness", "Dyslexia", "Autism"
   ];
 
   selectedDisability: any = localStorage.getItem("BuilderTheme");

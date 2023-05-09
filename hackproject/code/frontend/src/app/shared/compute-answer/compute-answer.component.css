@@ -1,0 +1,18 @@
+.card-theme{
+  background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
+  max-height: 157px;
+  overflow-y: auto;
+}
+
+.card-body-theme{
+  background-color: var(--secondaryColor); 
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+  color: var(--textOnSecondary);
+}
+
+.card-body-theme:hover {
+  filter: brightness(140%);
+}

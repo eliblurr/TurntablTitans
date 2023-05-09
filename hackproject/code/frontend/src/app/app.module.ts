@@ -13,6 +13,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 
+import { AudioRecorderService } from './shared/services/recorder/recorder.service'
+
 
 @NgModule({
   declarations: [
@@ -29,9 +31,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+
   ],
-  providers: [],
+  providers: [AudioRecorderService],
   entryComponents:[FileUploadComponent],
   bootstrap: [AppComponent]
 })
