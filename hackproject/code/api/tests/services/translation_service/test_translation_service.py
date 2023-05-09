@@ -11,10 +11,10 @@ class TestTranslationService:
     @pytest.fixture()
     def test_schema(self):
         return InsuranceDocumentResponse(
-            summary="summary_value",
-            included_in_cover = "included_in_cover_value",
-            excluded_from_cover = "excluded_from_cover_value",
-            emergency_information = "emergency_information_value")
+            Summary="summary_value",
+            What_is_included_in_cover = "included_in_cover_value",
+            What_is_excluded_from_cover = "excluded_from_cover_value",
+            Who_to_contact_in_case_of_emergency = "emergency_information_value")
 
     def test_schema_is_translated(self, mocker, test_schema):
         mock_translator = Mock()
@@ -27,10 +27,10 @@ class TestTranslationService:
                           call("excluded_from_cover_value", dest=Language.GERMAN.value),
                           call("emergency_information_value", dest=Language.GERMAN.value)]
         mock_translate_func.assert_has_calls(expected_calls, any_order=True)
-        assert test_schema.summary == mock_translator.text
-        assert test_schema.included_in_cover == mock_translator.text
-        assert test_schema.excluded_from_cover == mock_translator.text
-        assert test_schema.emergency_information == mock_translator.text
+        assert test_schema.Summary == mock_translator.text
+        assert test_schema.What_is_included_in_cover == mock_translator.text
+        assert test_schema.What_is_excluded_from_cover == mock_translator.text
+        assert test_schema.Who_to_contact_in_case_of_emergency == mock_translator.text
 
     def test_text_is_translated(self, mocker):
         test_text = "test text"
