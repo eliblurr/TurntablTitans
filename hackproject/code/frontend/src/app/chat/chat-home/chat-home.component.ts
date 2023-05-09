@@ -62,4 +62,8 @@ export class ChatHomeComponent {
   updateButtonVisibility() {
     this.showButton = this.chatForm.get('body')?.value.trim().length > 0;
   }
+
+  textToSpeech(text: string) {
+    this.sharedService.textToSpeech(text, "en")
+  }
 }

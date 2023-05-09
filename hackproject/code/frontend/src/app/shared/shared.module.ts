@@ -15,6 +15,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from "@angular/material/select";
+
 import {RecorderComponent} from './recorder/recorder.component'
 import { AccordionComponent } from './accordion/accordion.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
@@ -32,9 +34,9 @@ import { AccessibilitySectionComponent } from './accessibility-section/accessibi
   ],
     imports: [
         CommonModule,
-        SharedRoutingModule, NgSelectModule, FormsModule, ReactiveFormsModule, MatSidenavModule, 
+        SharedRoutingModule, NgSelectModule, FormsModule, ReactiveFormsModule, MatSidenavModule,
         MatListModule, MatExpansionModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCheckboxModule,
-        MatOptionModule
+        MatOptionModule, MatSelectModule
     ],
   exports:[MainLayoutComponent, NgSelectModule, FormsModule, ReactiveFormsModule]
 })

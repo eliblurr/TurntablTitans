@@ -35,8 +35,16 @@ export class TopNavbarComponent {
     )
   }
 
-  onSelectionChange(event: any) {
-    this.selectedOption = event
-    this.sharedService.nativeLanguage = event
+  // onSelectionChange(event: any) {
+  //   console.log(event.nativeLanguage)
+  //   this.selectedOption = event.nativeLanguage
+  //   this.sharedService.nativeLanguage = event.nativeLanguage
+  // }
+
+
+  onSelectionChange(newValue: string): void {
+    this.selectedOption = newValue;
+    this.sharedService.nativeLanguage = newValue
+    console.log('Selected value:', newValue);
   }
 }

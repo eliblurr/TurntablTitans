@@ -5,34 +5,30 @@
   <form [formGroup]="uploadFileForm">
     <div class="flex">
       <div class="form-group mb-2 mt-2">
-        <label for="file_path">File</label>
+        <label for="file">File</label>
         <input
-          id="file_path"
+          id="file"
           type="file"
           class="form-control"
           accept=".pdf, .docx"
           placeholder="upload file"
-          formControlName="file_path"
           (change)="onFileInputChange($event)"
           required
         />
       </div>
       <div class="form-group mb-2 mt-2">
-
-
         <label for="type">Category</label>
-        <mat-select id="type" class="form-select" formControlName="type"  required>
-
+        <mat-select id="type" class="form-select" placeholder="Document category" formControlName="type" required>
           <mat-option [value]="null" disabled>Select category</mat-option>
-          <mat-option *ngFor="let category of categories"  [value]="category">{{category}}</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">{{category | titlecase}}</mat-option>
         </mat-select>
       </div>
       <div class="form-group mb-2 mt-2">
         <label for="doc_language"> Language</label>
-        <mat-select id="doc_language" class="form-select"
+        <mat-select id="doc_language" class="form-select" placeholder="Document language"
                     formControlName="doc_language" required>
           <mat-option [value]="null" disabled>Select language</mat-option>
-          <mat-option *ngFor="let language of languages" [value]="language" >{{language}}</mat-option>
+          <mat-option *ngFor="let language of languages" [value]="language">{{language | titlecase}}</mat-option>
         </mat-select>
       </div>
     </div>
@@ -41,6 +37,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button type="submit" class="btn btn-outline-primary s-lg-2" [disabled]="!this.uploadFileForm.valid" (click)="uploadFile()">Upload</button>
+  <button type="submit" class="btn btn-outline-primary s-lg-2" [disabled]="!this.uploadFileForm.valid"
+          (click)="uploadFile()">Upload
+  </button>
   <button type="submit" class="btn btn-outline-danger m-lg-2" (click)="cancel()">Cancel</button>
 </mat-dialog-actions>
