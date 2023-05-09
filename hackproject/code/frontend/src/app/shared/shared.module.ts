@@ -22,11 +22,13 @@ import { ComputeAnswerComponent } from './compute-answer/compute-answer.componen
 import { QuestionsComponent } from './questions/questions.component';
 import { AXADocsComponent } from './axa-docs/axa-docs.component';
 import { AXAInputComponent } from './axa-input/axa-input.component';
+import { AxaLayoutComponent } from './axa-layout/axa-layout.component';
+import { AccessibilitySectionComponent } from './accessibility-section/accessibility-section.component';
 
 @NgModule({
   declarations: [
     TopNavbarComponent,MainLayoutComponent, SidebarComponent, RecorderComponent, AccordionComponent, ProgressBarComponent,
-    ComputeAnswerComponent, QuestionsComponent, AXADocsComponent, AXAInputComponent
+    ComputeAnswerComponent, QuestionsComponent, AXADocsComponent, AXAInputComponent, AxaLayoutComponent, AccessibilitySectionComponent
   ],
     imports: [
         CommonModule,
