@@ -4,12 +4,15 @@
   </div>
   <ul class="chat-list" >
     <li >
-      <div class="chat-info">
-          <div class="card card-body card-body-theme elevate">
+      <div *ngFor="let productName of product" class="chat-info">
+          <div (click)="getQuestions(productName.id)" class="card card-body card-body-theme elevate">
             <div>
               <mat-icon>picture_as_pdf</mat-icon>
             </div>
-            <h4 class="card-text" style="margin-left: 20px;">Document One</h4>
+            <h4 class="card-text" style="margin-left: 20px;">
+              {{productName.name}}
+            </h4>
+              
           </div>
       </div>
   </ul>
