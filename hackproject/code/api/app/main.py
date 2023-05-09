@@ -111,7 +111,7 @@ async def file(type: str = Form(...),
         os.remove(file_path)
         return response
     except Exception:
-        return {"message": "There was an error uploading the file"}
+        return {"message": "Oops, an error occurred. Let's try that again."}
 
 @router.post("/stt")
 async def stt_(
@@ -182,7 +182,7 @@ def handle_message(message: types.Message):
             processed_prompt: ProcessedPrompt = prompt_service.process_prompt(message)
             chat_service.reply_prompt(processed_prompt)
         except:
-            bot.reply_to(message, "Oops, an error occurred please try again later.")
+            bot.reply_to(message, "Oops, an error occurred. Let's try that again.")
             traceback.print_exc()
         finally:
             return {'ok': True}
