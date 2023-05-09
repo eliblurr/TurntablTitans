@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Chat, Message} from "../../models/chat";
 import {SynthesisService} from "../../services/text-speech-synth/synthesis.service"
 import {BehaviorSubject} from "rxjs";
-
+import {FileResponse} from "../../models/file-upload";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,9 @@ export class SharedService {
   sessionMessages = new BehaviorSubject<Chat[]>([])
   $chats = this.sessionMessages.asObservable();
   messages: Message[] = []
+  fileResponse?: FileResponse[] = []
   chatMap: Map<string, Message[]> = new Map<string, Message[]>();
+  fileResponseMap: Map<string, FileResponse[]> = new Map<string, FileResponse[]>();
   file!: File
 
   constructor(private synthesisService: SynthesisService) {
@@ -36,7 +38,16 @@ export class SharedService {
       const value = res[key];
       const newMessage = this.createMessage('client', value);
       this.addMessage(this.chatId, newMessage)
+      this.formatFileUploadResponse(key, value)
     })
+    this.fileResponseMap.set(this.chatId, this.fileResponse!)
+    localStorage.setItem('fileResponseData', JSON.stringify([...this.fileResponseMap]));
+  }
+
+  formatFileUploadResponse(key: string, value: string) {
+    let transformedKey = key.replace(/_/g, ' ')
+    const response: FileResponse = {title: transformedKey, message:value}
+    this.fileResponse!.push(response)
   }
 
   clearMessages() {
@@ -63,7 +74,7 @@ export class SharedService {
   addToChatsList(chatId: string, chatName: string) {
     const newChat = {chatId: chatId, chatName: chatName}
     if (this.getChatsListFromLocalStorage().length !== 0) {
-      this.sessionMessages.next( this.getChatsListFromLocalStorage())
+      this.sessionMessages.next(this.getChatsListFromLocalStorage())
     }
     this.sessionMessages.next([...this.sessionMessages.value, newChat])
     this.$chats.subscribe((res) => {
@@ -83,6 +94,15 @@ export class SharedService {
       this.chatMap = new Map<string, Message[]>(JSON.parse(storedData));
     }
     return this.chatMap.get(chatId);
+  }
+
+  // Retrieve the file response for a specific chat ID
+  getFileResponse(chatId: string): FileResponse[] | undefined {
+    const storedData = localStorage.getItem('fileResponseData');
+    if (storedData) {
+      this.fileResponseMap = new Map<string, FileResponse[]>(JSON.parse(storedData));
+    }
+    return this.fileResponseMap.get(chatId);
   }
 
   // Retrieve chat data from local storage (if available)

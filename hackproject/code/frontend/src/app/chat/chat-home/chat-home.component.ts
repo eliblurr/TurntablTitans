@@ -28,7 +28,6 @@ export class ChatHomeComponent {
     body: this.formBuilder.control('', Validators.required),
   })
 
-
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -48,11 +47,11 @@ export class ChatHomeComponent {
     const newMessage = this.sharedService.createMessage('user', chatMessage);
     this.sharedService.addMessage(chatId, newMessage)
     this.sharedService.loading = true
-    console.log('Request', request)
     this.chatService.sendMessage(request).subscribe((res) => {
       this.sharedService.addMessage(chatId, {type: 'client', message: res.response})
       this.sharedService.loading = false
     })
+
   }
 
   openUploadFileDialog() {

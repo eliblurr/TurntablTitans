@@ -3,6 +3,10 @@
   <div id="chat" class="h-100">
     <section class="section h-100 content">
       <div class="chat-box p-3 h-100 messages">
+        <div *ngIf="sharedService.messages.length > 1">
+        <accordion *ngFor="let message of sharedService.fileResponse" [fileResponse]="message" ></accordion>
+        </div>
+
         <ul>
           <li *ngFor="let message of sharedService.messages" class="message">
 <!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->

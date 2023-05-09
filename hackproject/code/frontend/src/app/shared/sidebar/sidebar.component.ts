@@ -98,7 +98,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.selectedChatIndex = index;
     this.sharedService.chatId = chatId
     const messages = this.sharedService.getMessages(chatId)
+    const fileResponse = this.sharedService.getFileResponse(chatId)
     if (messages == undefined) return
+    this.sharedService.fileResponse = fileResponse
     this.sharedService.messages = messages
   }
 
