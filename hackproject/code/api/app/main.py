@@ -122,11 +122,7 @@ async def stt_(
         language: str = 'en'):
     try:
         text = stt(audio, language)
-        print(text)
-        text_schema = WebText(body=text, native_language=native_language)
-        prompt = WebPrompt(prompt=text_schema, chat_id=chat_id)
-        response = await web_prompt(prompt)
-        return response
+        return {"text": text, "chat_id": chat_id}
     except Exception as e:
         code = 400 if isinstance(e, e.__class__) else 500
         raise HTTPException(status_code=code, detail=str(e))
