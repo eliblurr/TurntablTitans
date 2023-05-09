@@ -13,7 +13,8 @@ import {tap} from "rxjs";
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent {
-  selectedFile: File | undefined;
+  selectedFile!: File;
+
   constructor(
     private formBuilder: FormBuilder,
     public sharedService: SharedService,
@@ -26,11 +27,10 @@ export class FileUploadComponent {
     this.getFileTypes()
     this.getLanguages()
   }
-  filepath = 'C:\\Users\\kwame.sarfo\\PycharmProjects\\finos-hackathon\\TurntablTitans\\hackproject\\code\\api\\app\\services\\model_service\\data\\motor.pdf';
+
   uploadFileForm: FormGroup = this.formBuilder.group({
     type: this.formBuilder.control('', Validators.required),
     doc_language: this.formBuilder.control('', Validators.required),
-    file_path: this.formBuilder.control(this.filepath, Validators.required),
     native_language: this.formBuilder.control(this.sharedService.nativeLanguage, Validators.required)
   })
 
@@ -43,16 +43,20 @@ export class FileUploadComponent {
 
   uploadFile() {
     const chatId = this.sharedService.chatId
-    console.log(chatId)
     if (!chatId) return
-    const request: FileUploadRequest = {prompt: this.uploadFileForm.value, chat_id: chatId}
+    const formData = new FormData();
+    formData.append("type", this.uploadFileForm.value["type"]);
+    formData.append("doc_language", this.uploadFileForm.value["doc_language"]);
+    formData.append("native_language", this.uploadFileForm.value["native_language"]);
+    formData.append("chat_id", chatId);
+    formData.append('file', this.sharedService.file, this.sharedService.file.name);
+    const request = formData
     this.sharedService.startNewChat()
     this.dialog.close()
     this.fileService.uploadDocument(request)
       .subscribe((res) => {
         this.sharedService.addFileUploadResponse(res)
-        console.log(res)})
-    console.log(this.uploadFileForm.value)
+      })
   }
 
   getFileTypes() {
@@ -71,8 +75,7 @@ export class FileUploadComponent {
     const files = event.target.files;
     if (files && files.length > 0) {
       this.selectedFile = files[0];
-      this.sharedService.newFileName = this.selectedFile!.name;
-      console.log('File Name', this.sharedService.newFileName);
+      this.sharedService.file = this.selectedFile;
     }
   }
 }

@@ -271,7 +271,7 @@
   outline: none;
 }
 
-#divstyle {
+#divstyle, #bot {
   background-color: var(--textOnPrimary);
   padding: 0%;
   border: none;

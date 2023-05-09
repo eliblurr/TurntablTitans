@@ -60,7 +60,7 @@ Mark is relieved to find that he can easily understand the information and can a
 | Deliverable | Purpose |
 | --- | --- |
 | [Use Case Story](./hackproject/usecase.md) | Supporting material for judges. | 
-| [Visual Collaboration Board URL]() | Supporting development material for team. | 
+| [Visual Collaboration Board URL](https://app.mural.co/t/turntabltitans6057/m/turntabltitans6057/1683468948643/5f30d3fe5a4326ceae53c12e414204e3c3f6ef00?sender=u88b5004d2f886360870e4376) | Supporting development material for team. | 
 | [Visual Collaboration Board Artifacts](./hackproject/media/board) | Supporting development material for team. | 
 | [Design Thinking Playback Brief](./presentations/playback-brief.ppt)| Supporting development material for team. | 
 | [Concept Playback - Pitch Video](./media/videos/pitch-video.mp4)|  Required for judging. | 
