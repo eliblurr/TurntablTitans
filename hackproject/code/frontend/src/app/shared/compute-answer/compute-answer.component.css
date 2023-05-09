@@ -1,6 +1,6 @@
 .card-theme{
-  background-color: var(--tertiaryColor);
-  color: var(--textOnPrimary);
+  background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
 }
 
 .card-body-theme{

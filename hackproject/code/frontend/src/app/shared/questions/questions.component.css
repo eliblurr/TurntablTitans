@@ -1,11 +1,11 @@
 .card-theme{
-  background-color: var(--tertiaryColor);
-  color: var(--textOnPrimary);
+  background-color: var(--secondaryColor);
+  color: var(--textOnSecondary);
   
 }
 
 .card-body-theme{
-  background-color: var(--secondaryColor); 
+  background-color: var(--tertiaryColor); 
   display: flex; 
   flex-direction: row; 
   color: var(--textOnSecondary);
