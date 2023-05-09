@@ -31,7 +31,8 @@ import { AudioRecorderService } from './shared/services/recorder/recorder.servic
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+
   ],
   providers: [AudioRecorderService],
   entryComponents:[FileUploadComponent],
