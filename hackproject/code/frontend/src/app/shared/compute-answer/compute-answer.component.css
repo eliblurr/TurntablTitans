@@ -11,6 +11,8 @@
   flex-direction: row; 
   justify-content: space-between;
   color: var(--textOnSecondary);
+  max-height: 160px;
+  overflow-y: auto;
 }
 
 .card-body-theme:hover {

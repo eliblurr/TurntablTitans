@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {FileResponse} from "../models/file-upload";
 
 @Component({
   selector: 'accordion',
@@ -6,6 +7,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./accordion.component.css']
 })
 export class AccordionComponent {
+  @Input() fileResponse!: FileResponse
+
   constructor(
   ) {
   }

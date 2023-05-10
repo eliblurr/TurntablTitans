@@ -1,16 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  ConfidentialityAgreementDocumentResponse,
-  EmploymentContractDocumentResponse, FileTypes,
-  FileUploadRequest,
-  IndependentContractorAgreementResponse,
-  InsuranceDocumentResponse,
-  LandDocumentResponse, Language,
-  LoanAgreementDocumentResponse,
-  PartnershipAgreementDocumentResponse,
-  SalesContractDocumentResponse,
-  ServiceContractDocumentResponse
-} from "../../models/file-upload";
+import {FileTypes, Language} from "../../models/file-upload";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";

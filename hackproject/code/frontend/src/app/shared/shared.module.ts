@@ -38,6 +38,6 @@ import { AccessibilitySectionComponent } from './accessibility-section/accessibi
         MatListModule, MatExpansionModule, MatIconModule, MatButtonModule, MatTooltipModule, MatCheckboxModule,
         MatOptionModule, MatSelectModule
     ],
-  exports:[MainLayoutComponent, NgSelectModule, FormsModule, ReactiveFormsModule]
+    exports: [MainLayoutComponent, NgSelectModule, FormsModule, ReactiveFormsModule, AccordionComponent, RecorderComponent]
 })
 export class SharedModule { }
