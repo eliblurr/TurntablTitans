@@ -61,9 +61,7 @@
             <img
               src="assets/images/bot.png" style=" background-color: transparent; height: 50px; width: 50px"
               alt=""/>
-
             <img src="assets/images/loading-dots.gif" style="width: 100px">
-            <!--            <p [class]="'client'"><img src="assets/images/loading-dots.gif"></p>-->
           </li>
         </ul>
       </div>
@@ -71,11 +69,6 @@
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
           <input type="text" class="form-control" formControlName="body" id="user-chat-input"
                  placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
-          <!--          <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">-->
-          <!--            <mat-icon class="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">-->
-          <!--              send-->
-          <!--            </mat-icon>-->
-          <!--          </div>-->
 
           <button *ngIf="showSendButton" class="icon-btn btn-align" (click)="sendMessage()" disabled="!chatForm.valid">
             <mat-icon>send</mat-icon>

@@ -8,7 +8,7 @@
     <div id="accordionDetail" class="accordion-collapse" [ngClass]="{'collapse':title != fileResponse.title}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         {{fileResponse.message}}
-        <div><mat-icon class="speaker" (click)="textToSpeech(fileResponse.message)">volume_up</mat-icon></div>
+        <div style="float: right; margin-bottom: 2px"><mat-icon  class="speaker" (click)="textToSpeech(fileResponse.message)">volume_up</mat-icon></div>
       </div>
     </div>
   </div>
