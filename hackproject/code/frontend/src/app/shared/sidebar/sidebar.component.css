@@ -129,7 +129,7 @@ input:checked + .slider:before {
   justify-content: space-around;
   align-items: center;
   padding-top: 3px;
-  height: 67px;
+  height: 68px;
   margin-bottom: -3px;
 }
 
