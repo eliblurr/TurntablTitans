@@ -1,13 +1,16 @@
-<div class="card card-theme">
+<div class="card card-theme" *ngIf="currentQuestion">
   <h2 class="card-header card-title">Answer the following questions</h2>
 
   <div class="card-body" >
     <h2 class="question-text">{{currentQuestion.question}}</h2>
     <div class="mb-3">
-      <textarea class="form-control" placeholder="enter your answer here" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea [(ngModel)]="inputAreaValue" class="form-control" placeholder="enter your answer here" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="list-group possible-answers" style="margin-bottom: 10px;">
+      <button type="button" (click)="updateInput(answer['answer'])"  *ngFor="let answer of currentQuestion['possible_answers'];" class="list-group-item list-group-item-action button-theming">{{answer['answer']}}</button>
     </div>
     <div class="d-grid gap-2">
-      <button (click) = "sendResponse()" class="btn btn-primary submit-btn" type="button">Submit</button>
+      <button  class="btn btn-primary submit-btn" type="button" (click)="submit()">Submit</button> 
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ base_payload={
         "lines": [
             {
                 "state": [],
-                "line_ref": "string"
+                "line_ref": "root"
             }
         ]
     }
@@ -33,8 +33,10 @@ async def products():
         name="motor"
     )]
 
-async def get_questions(product_id:str, language:str, question_id:str=None, base=base_payload):
+async def get_questions(product_id:str, language:str, question_id:str=None):
     HEADERS["accept-language"]=language
+    base=base_payload.copy()
+    
     if question_id!=None:
         base.update({
             "productId": product_id,
@@ -44,10 +46,8 @@ async def get_questions(product_id:str, language:str, question_id:str=None, base
             "onlyNext": False
         })
         res = requests.post(SPECIFICATION_URL, headers=HEADERS, json=base)
-
         if res.status_code!=200:
             raise HTTPException(status_code=res.status_code, detail=res.json())
-
         return QuestionDetail(
             id=res.json().get("id", ""),
             order=res.json().get("order", 0),
@@ -64,6 +64,10 @@ async def get_questions(product_id:str, language:str, question_id:str=None, base
     res = requests.post(COMPUTATION_URL, headers=HEADERS, json=base)
     if res.status_code!=200:
         raise HTTPException(status_code=res.status_code, detail=res.json())
+    try:
+        print(res.json()["questions"])
+    except:
+        pass
     return [
         Question(
             id=question.get("id", None), 
@@ -74,7 +78,8 @@ async def get_questions(product_id:str, language:str, question_id:str=None, base
         if "metadata" in question.keys() and len(question.get("metadata", [])) >= 1
     ]
 
-async def compute(product_id:str, language:str, payload: list[State]=[], base=base_payload):
+async def compute(product_id:str, language:str, payload: list[State]=[]):
+    base=base_payload.copy()
     HEADERS["accept-language"]=language
     base.update({"productId": product_id})
     base["claim"]["lines"][0]["state"]=[state.dict() for state in payload]

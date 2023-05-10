@@ -138,36 +138,20 @@ async def tts(message_id:str, payload:TTS):
 
 @router.get("/axa/products", response_model=list[AXAProduct])
 async def get_products():
-    try:
-        return await products()
-    except:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
+    return await products()
 
 @router.get("/axa/{product}/questions", response_model=list[Question])
 async def questions(product:str, language: str = 'en'):
-    try:
-        return await get_questions(product, language)
-    except:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
+    return await get_questions(product, language)
 
 @router.get("/axa/{product}/questions/{question_id}", response_model=QuestionDetail)
 async def get_question_by_id(product:str, question_id:str, language: str = 'en'):
-    try:
-        return await get_questions(product, language, question_id)
-    except:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
+    return await get_questions(product, language, question_id)
 
 @router.post("/axa/{product}/compute", response_model=SubmissionResponse)
 async def submit(product:str, payload:list[State], language: str = 'en'):
-    try:
-        return await compute(product, language, payload)
-    except:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
-
+    return await compute(product, language, payload)
+    
 @router.get("/chat/web")
 async def web_prompt():
     chat_id = str(uuid.uuid4())

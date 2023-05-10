@@ -34,7 +34,11 @@ export class AxaServiceService {
     return this.http.get<any>(this.axaQuestionInputURL, {headers: this.headers})
   }
 
-  computeAnswer(request: ComputerAnswer): Observable<any> {
+  getQuestionById(id: string): Observable<any> {
+    return this.http.get<any>(this.axaQuestionsURL+`/${id}`, {headers: this.headers})
+  }
+
+  computeAnswer(request: ComputerAnswer[]): Observable<any> {
     return this.http.post<any>(this.axaComputeURL, request, {headers: this.headers})
   }
 }
