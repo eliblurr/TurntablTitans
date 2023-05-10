@@ -11,7 +11,7 @@
 .sidebar {
   height: 100%;
   color: var(--textOnSecondary);
-  box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding-left: 15px;
   padding-top: 10px;
   width: 250px;
@@ -45,7 +45,7 @@
   padding: 5%;
   padding-left: 10px;
   font-size: 15px;
-  padding-bottom: 10px;  
+  padding-bottom: 10px;
   padding-top: 5px;
   color: var(--textOnSecondary);
   display: flex;
@@ -59,7 +59,7 @@
   height: 22px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -192,7 +192,7 @@ input:checked + .slider:before {
   appearance: none;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  
 }
 
 .icon-btn {

@@ -2,23 +2,56 @@
 <app-main-layout>
   <div id="chat" class="h-100">
     <section class="section h-100 content">
+      <div *ngIf="sharedService.messages.length == 0" class="landing-parent">
+        <div class="landing-content-wrapper">
+          <h1 class="landing-title">ComprehendNow</h1>
+          <div class="process-parent">
+            <div class="landing">
+              <div class="step">
+                <img id="img1" src="assets/images/file-upload.png" alt="file upload icon">
+                <p class="step-text">1. Upload Document</p>
+              </div>
+              <img id="nexts" src="assets/images/next.png" width="100" height="100" alt="next process icon">
+              <div class="step">
+                <img id="img2" src="assets/images/analysis.png" width="320" height="200" alt="file analysis icon">
+                <p class="step-text">2. Document Analysis</p>
+              </div>
+              <img id="nexts" src="assets/images/next-invert.png" width="100" height="100" alt="next process icon">
+              <div class="step">
+                <img id="img3" src="assets/images/qna.png" width="200" height="195" alt="question and answer icon">
+                <p class="step-text">3. Question and Answers</p>
+              </div>
+            </div>
+          </div>
+          <div class="btn-holder">
+            <button class="new-chat-btn btn-align" (click)="openUploadFileDialog()">
+              <mat-icon style="margin-right: 0"> add_comment</mat-icon>
+                Upload document
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="chat-box p-3 h-100 messages">
         <div *ngIf="sharedService.messages.length > 1">
-        <accordion *ngFor="let message of sharedService.fileResponse; let indexOfelement=index;" [fileResponse]="message" [index]="genId()"></accordion>
+          <accordion (click)="openSelectedAccordion(message.title)" *ngFor="let message of sharedService.getFileResponse(sharedService.chatId)"
+                     [fileResponse]="message"
+                     [title]="selectedTitle"></accordion>
         </div>
 
         <ul class="list-item">
           <li *ngFor="let message of sharedService.messages" class="message">
-<!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->
-<!--              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"-->
-<!--              alt=""/></div>-->
-            <div *ngIf="message.type == 'client'" id="bot" [class]="message.type" style="background-color: transparent"><img
-              src="assets/images/bot.png" style="height: 50px; width: 50px"
-              alt=""/></div>
+            <!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->
+            <!--              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"-->
+            <!--              alt=""/></div>-->
+            <div *ngIf="message.type == 'client'" id="bot" [class]="message.type" style="background-color: transparent">
+              <img
+                src="assets/images/bot.png" style="height: 50px; width: 50px"
+                alt=""/></div>
             <p [class]="message.type">
               {{ message.message }}
             </p>
-            <mat-icon class="speaker" *ngIf="message.type=='client'" (click)="textToSpeech(message.message)">record_voice_over</mat-icon>
+            <mat-icon class="speaker" *ngIf="message.type=='client'" (click)="textToSpeech(message.message)">volume_up
+            </mat-icon>
           </li>
           <li
             *ngIf="sharedService.loading"
@@ -28,27 +61,20 @@
             <img
               src="assets/images/bot.png" style=" background-color: transparent; height: 50px; width: 50px"
               alt=""/>
-
-            <img src="assets/images/loading-dots.gif" style="width: 200px">
-<!--            <p [class]="'client'"><img src="assets/images/loading-dots.gif"></p>-->
+            <img src="assets/images/loading-dots.gif" style="width: 100px">
           </li>
         </ul>
       </div>
-
-      <div class="message-input send-message">
+      <div *ngIf="sharedService.messages.length != 0" class="message-input send-message">
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
-          <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
           <input type="text" class="form-control" formControlName="body" id="user-chat-input"
-                 placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
-          <!-- <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">
-            <mat-icon class="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
-              send
-            </mat-icon>
-          </div> -->
+                 placeholder="Type your message here ..." style="width: 90%">
 
-          <div><button [disabled]="!chatForm.valid" class="icon-btn btn-align disabled" [class.disabled]="!chatForm.valid" (click)="sendMessage()">
+          <button *ngIf="showSendButton" class="icon-btn btn-align" (click)="sendMessage()"  >
             <mat-icon>send</mat-icon>
-          </button></div>
+          </button>
+          <recorder (dataToParent)="receiveDataFromRecorder($event)" (hideSendButton)="toggleSendButton($event)"
+                    style="margin-right: 5px"></recorder>
         </form>
       </div>
     </section>

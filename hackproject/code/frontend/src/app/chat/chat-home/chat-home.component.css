@@ -2,6 +2,195 @@
   display: none;
 }
 
+.landing-parent {
+  width: 100%;
+  height: 100%;
+  background-color: var(--tertiaryColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-title {
+  color: var(--textOnPrimary);
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.process-parent {
+  width: 100%;
+  /*height: 100%;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing {
+  width: 100%;
+  height: 50%;
+  /*background-color: red;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-text {
+  color: var(--textOnPrimary);
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.btn-align {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.new-chat-btn {
+  background-color: var(--tertiaryColor);
+  color: var(--textOnPrimary);
+  border: none;
+  width: 30%;
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  appearance: none;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.landing-content-wrapper {
+  margin-top: -70px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+#img1 {
+  width: 200px;
+  height: 190px;
+}
+
+#img2 {
+  width: 320px;
+  height: 200px;
+}
+
+#img3 {
+  width: 200px;
+  height: 195px;
+}
+
+@media screen and (max-width: 1366px) {
+  .landing-content-wrapper {
+    /* background-color: red; */
+    width: 80%;
+  }
+
+  .landing-title {
+    color: var(--textOnPrimary);
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  #img1 {
+    width: 150px;
+    height: 145px;
+    margin-top: 42px;
+  }
+
+  #img2 {
+    width: 270px;
+    height: 165px;
+  }
+
+  #img3 {
+    width: 150px;
+    height: 145px;
+    margin-top: 35px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .landing-content-wrapper {
+    /* background-color: red; */
+    width: 80%;
+  }
+
+  .landing-title {
+    color: var(--textOnPrimary);
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  #img1 {
+    width: 150px;
+    height: 145px;
+    margin-top: 42px;
+    display: none;
+  }
+
+  #img2 {
+    width: 270px;
+    height: 165px;
+  }
+
+  #img3 {
+    width: 150px;
+    height: 145px;
+    margin-top: 35px;
+    display: none;
+  }
+
+  #nexts {
+    display: none;
+  }
+
+  .step-text {
+    display: none;
+  }
+
+  .btn-holder {
+    width: 70%;
+  }
+
+  .new-chat-btn {
+    width: 100%;
+  }
+
+  .btn-align {
+    width: 100%;
+  }
+}
+
+
+.btn-holder {
+  display: flex;
+  width: 50%;
+  align-self: center;
+  justify-content: center;
+  margin-top: 70px;
+}
+
 #user-chat-submit-button {
   color: var(--tertiaryColor);
   font-size: 19px;
@@ -33,7 +222,7 @@
 
 .client {
   border: 0.5px solid #333;
-  background-color: var(--primaryColor);
+  background: var(--primaryColor);
   color: var(--textOnPrimary);
   padding: 10px;
   border-radius: 5px;
@@ -189,7 +378,7 @@
 #chat .content .messages ul li p {
   display: inline-block;
   padding: 10px 15px;
-  border-radius: 10px;
+  border-radius: 20px;
   max-width: 45%;
   line-height: 130%;
 }
@@ -348,15 +537,7 @@
   width: 2rem;
   height: 2rem;
   color: var(--iconColor);
-  font-size: 2rem;
 }
-
-.btn-align {
-  align-items: center;
-  display: flex;
-  justify-content: space-around;
-}
-
 
 .icon-btn {
   background-color: var(--primaryColor);
@@ -369,9 +550,11 @@
   appearance: none;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.disabled {
-  opacity: 30%;
+.btn-align {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
 }

@@ -27,7 +27,7 @@ export class FileUploadComponent {
     this.getFileTypes()
     this.getLanguages()
   }
-  
+
   uploadFileForm: FormGroup = this.formBuilder.group({
     type: this.formBuilder.control('', Validators.required),
     doc_language: this.formBuilder.control('', Validators.required),
@@ -51,6 +51,7 @@ export class FileUploadComponent {
     formData.append("chat_id", chatId);
     formData.append('file', this.sharedService.file, this.sharedService.file.name);
     const request = formData
+    console.log(request)
     this.sharedService.startNewChat()
     this.dialog.close()
     this.fileService.uploadDocument(request)

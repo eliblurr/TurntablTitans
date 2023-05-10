@@ -12,24 +12,3 @@
   border-radius: 0px;
   border: .5px solid var(--textOnSecondary);
 }
-
-
-.icon-btn {
-  background-color: var(--primaryColor);
-  color: var(--textOnPrimary);
-  border: none;
-  padding: 8px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  appearance: none;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  box-sizing: border-box;
-}
-
-.btn-align {
-  align-items: center;
-  display: flex;
-  justify-content: space-around;
-}

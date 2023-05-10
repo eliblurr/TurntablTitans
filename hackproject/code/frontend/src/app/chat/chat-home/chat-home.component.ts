@@ -12,11 +12,6 @@ export interface Message {
   message: string;
 }
 
-export interface Recording {
-  text: string,
-  chat_id: string
-}
-
 @Component({
   selector: 'app-chat-home',
   templateUrl: './chat-home.component.html',
@@ -27,12 +22,15 @@ export class ChatHomeComponent {
 
   fileName = '';
   loading = false
-  showButton = false;
   receivedData = ''
+  showButton = false;
+  showSendButton = true;
   selectedCategory: number = 0;
   chatForm: FormGroup = this.formBuilder.group({
     body: this.formBuilder.control('', Validators.required),
   })
+
+  selectedTitle = "";
 
   constructor(
     private http: HttpClient,
@@ -43,29 +41,31 @@ export class ChatHomeComponent {
   }
 
   sendMessage() {
-    this.loading = true;
-    // this.scrollToBottom();
-    const chatId = this.sharedService.chatId
-    const chatMessage = this.chatForm.get('body')?.value
-    const chatPrompt: ChatPrompt = {body: chatMessage, native_language: this.sharedService.nativeLanguage}
-    const request: ChatRequest = {prompt: chatPrompt, chat_id: chatId}
-    this.chatForm.reset()
-    const newMessage = this.sharedService.createMessage('user', chatMessage);
-    this.sharedService.addMessage(chatId, newMessage)
-    this.sharedService.loading = true
-    this.chatService.sendMessage(request).subscribe((res) => {
-      this.sharedService.addMessage(chatId, {type: 'client', message: res.response})
-      this.sharedService.loading = false
-    })
-
+    if (this.chatForm.controls['body'].value.length > 0){
+      this.loading = true;
+      // this.scrollToBottom();
+      const chatId = this.sharedService.chatId
+      console.log(chatId)
+      const chatMessage = this.chatForm.get('body')?.value
+      const chatPrompt: ChatPrompt = {body: chatMessage, native_language: this.sharedService.nativeLanguage}
+      const request: ChatRequest = {prompt: chatPrompt, chat_id: chatId}
+      this.chatForm.reset()
+      const newMessage = this.sharedService.createMessage('user', chatMessage);
+      this.sharedService.addMessage(chatId, newMessage)
+      this.sharedService.loading = true
+      this.chatService.sendMessage(request).subscribe((res) => {
+        this.sharedService.addMessage(chatId, {type: 'client', message: res.response})
+        this.sharedService.loading = false
+      })
+    }
   }
 
   openUploadFileDialog() {
+    this.chatService.getChatId().subscribe((res) => {
+      localStorage.setItem('chat_id', res.chat_id)
+      this.sharedService.chatId = res.chat_id
+    })
     this.dialog.open(FileUploadComponent, {width: '450px'});
-  }
-
-  updateButtonVisibility() {
-    this.showButton = this.chatForm.get('body')?.value.trim().length > 0;
   }
 
   textToSpeech(text: string) {
@@ -77,15 +77,12 @@ export class ChatHomeComponent {
     const json_data = JSON.parse(data)
     this.chatForm.setValue({body: json_data.text})
   }
-  
-  genId(){
-    const characters ='abcdefghijklmnopqrstuvwxyz';
-    let result = ' ';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < 8; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return "result";
+
+  toggleSendButton(visible:boolean){
+    this.showSendButton = !visible
   }
 
+  openSelectedAccordion(title: string){
+    this.selectedTitle = title;
+  }
 }

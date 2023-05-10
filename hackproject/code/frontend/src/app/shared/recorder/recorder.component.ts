@@ -11,6 +11,8 @@ import { SharedService } from '../services/shared/shared.service';
 })
 export class RecorderComponent implements OnInit{
   @Output() dataToParent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() hideSendButton: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   isRecording = false;
   recordedTime: any;
   blobUrl: any;
@@ -45,6 +47,7 @@ export class RecorderComponent implements OnInit{
   }
 
   startRecording() {
+    this.hideSendButton.emit(true)
     if (!this.isRecording) {
       this.isRecording = true;
       this.audioRecordingService.startRecording();
@@ -66,6 +69,7 @@ export class RecorderComponent implements OnInit{
   }
 
   clearRecordedData() {
+    this.hideSendButton.emit(false)
     this.blobUrl = null;
     this.recordedTime=null;
   }
@@ -75,8 +79,8 @@ export class RecorderComponent implements OnInit{
   }
 
   submitAudio(){
+    this.hideSendButton.emit(true)
     const chatId = this.sharedService.chatId;
-
     console.log(this.blob)
     console.log(this.teste)
     this.synthesisService.fetch_text(this.blob, "audio.wav", chatId).subscribe(

@@ -7,7 +7,7 @@
 ## Context and Problem Statement
 Our goal is to create a solution that simplifies interacting with, and understanding complex documents. The solution should make sure the true meaning and intent of the original document is not lost.
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * A user with disability, who wants to consume documents.
 * A company, that wants to increase compliance with relevant requirements.
@@ -96,7 +96,8 @@ Cons:
 ## Design Decisions
 
 * Use of an open source embedding model (all-mpnet-base-v2
-) and the GPT-3 language model, both trained on extensive datasets for our use case to ensure quality and accuracy
+) and the GPT-3 language model, both trained on extensive datasets for our use case to ensure quality and accuracy.
 * Use of the open source embedding model (all-mpnet-base-v2
-), from our tests and analysis, will reduce operational costs by 91%
-* Due to hardware limitations, use of a paid large language model, accounting for 8% of total operational costs
+), from our tests and analysis, will reduce operational costs by 91%.
+* Due to hardware limitations, use of a paid large language model, accounting for 8% of total operational costs.
+* Speech-to-Text and Text-to-Speech will be achieved using open source models from Silero.
