@@ -9,6 +9,7 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Next Steps](#next-steps)
 - [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ## Introduction
@@ -41,6 +42,15 @@ To use the chatbot system, follow these steps:
 3. Upload a document or type in a query or command to interact with the system.
 4. The system will respond with a summary of the document or answer to the user's query.
 
+## Next Steps
+
+- Adding more languages: currently, for text-to-speech we can only support 5 languages (English, French, Russian, Dutch, Spanish), while only English is supported for speech-to-text. Adding support for more languages could increase its usefulness and appeal to a wider audience.
+
+- Improving accuracy, reliability and cost savings: It may be worth investing in further development to improve the accuracy and reliability of the text-to-speech and speech-to-text functions. It will also be good to look into an open source Large Language Model, so we can reduce operational costs to zero.
+
+- Enhancing accessibility: Enhancing accessibility, such as support for Braille displays or integration with assistive technology.
+
 ## Credits and Acknowledgements
 - The embedding model used in the project is the open souce "all-mpnet-base-v2" model
 - The Large Language model used in the project is the "text-davinci-003" model from OpenAI.
+- Speech-to-Text and Text-to-Speech was achieved using models from Silero.
