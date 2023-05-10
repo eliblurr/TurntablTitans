@@ -14,7 +14,7 @@ export class TopNavbarComponent {
   constructor(
     private sidebarService: SidebarService,
     private fileService: FileUploadService,
-    private sharedService: SharedService
+    public sharedService: SharedService
   ) {
   }
 

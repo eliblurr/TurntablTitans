@@ -9,12 +9,14 @@ import {SharedService} from "../services/shared/shared.service";
 })
 export class AccordionComponent {
   @Input() fileResponse!: FileResponse
+  @Input() title!: string
 
   constructor(
-    private sharedService: SharedService
+    private sharedService: SharedService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   textToSpeech(text: string) {
     this.sharedService.textToSpeech(text, "en")

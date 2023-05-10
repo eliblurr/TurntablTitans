@@ -1,14 +1,14 @@
 <div class="accordion" id="accordionExample" >
   <div class="accordion-item item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed header" style="border-radius: 0;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <button class="accordion-button collapsed header" style="border-radius: 0;" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDetail" aria-expanded="false" aria-controls="accordionDetail">
         {{fileResponse.title}}
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div id="accordionDetail" class="accordion-collapse" [ngClass]="{'collapse':title != fileResponse.title}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         {{fileResponse.message}}
-        <div style="float: right"><mat-icon class="speaker" (click)="textToSpeech(fileResponse.message)">volume_up</mat-icon></div>
+        <div><mat-icon class="speaker" (click)="textToSpeech(fileResponse.message)">volume_up</mat-icon></div>
       </div>
     </div>
   </div>

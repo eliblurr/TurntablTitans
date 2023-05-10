@@ -30,6 +30,8 @@ export class ChatHomeComponent {
     body: this.formBuilder.control('', Validators.required),
   })
 
+  selectedTitle = "";
+
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -57,6 +59,10 @@ export class ChatHomeComponent {
   }
 
   openUploadFileDialog() {
+    this.chatService.getChatId().subscribe((res) => {
+      localStorage.setItem('chat_id', res.chat_id)
+      this.sharedService.chatId = res.chat_id
+    })
     this.dialog.open(FileUploadComponent, {width: '450px'});
   }
 
@@ -76,5 +82,9 @@ export class ChatHomeComponent {
 
   toggleSendButton(visible:boolean){
     this.showSendButton = !visible
+  }
+
+  openSelectedAccordion(title: string){
+    this.selectedTitle = title;
   }
 }

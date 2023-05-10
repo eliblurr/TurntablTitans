@@ -45,7 +45,7 @@
   padding: 5%;
   padding-left: 10px;
   font-size: 15px;
-  padding-bottom: 10px;  
+  padding-bottom: 10px;
   padding-top: 5px;
   color: var(--textOnSecondary);
   display: flex;
@@ -59,7 +59,7 @@
   height: 22px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
