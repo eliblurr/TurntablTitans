@@ -31,8 +31,12 @@ To install the chatbot system, please follow these steps:
 
 1. Clone the repository to your local machine.
 2. CD into hackproject/code/api/app directory.
-3. Run ./setup.sh.
-
+3. Run chmod +x ./setup.sh && ./setup.sh.
+4. Run api service with -> uvicorn main:app --port <API-PORT>
+5. CD into hackproject/code/frontend/ directory.
+6. Run chmod +x ./setup_environment.sh && ./setup_environment.sh -c <API-URL>.
+7. Run frontend with -> npm start
+  
 ## Usage
 
 To use the chatbot system, follow these steps:
