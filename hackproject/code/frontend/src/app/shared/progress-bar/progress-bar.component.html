@@ -2,11 +2,11 @@
 <div class="card">
   <div class="card-body progress-container">
     <span>
-      <h4 class="card-title">Progress Bar: 50%</h4>
+      <h4 class="card-title">Progress Bar: {{progress || "0"}}%</h4>
     </span>
     
     <div class="progress outer-bar" role="progressbar" aria-label="Default striped example" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar progress-bar-striped inner-bar" style="width: 50%"></div>
+      <div class="progress-bar progress-bar-striped inner-bar" style="width: 0%" [style.width]="progress+'%'"></div>
     </div>
   </div>
 </div>

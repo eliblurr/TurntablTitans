@@ -2,7 +2,7 @@
   height: 300%;
   background-color: var(--secondaryColor);
   color: var(--textOnSecondary);
-  max-height: 240px;
+  /* min-height: 200px; */
   overflow-y: auto;
 }
 
@@ -26,4 +26,9 @@
 .disable {
   background-color: var(--tertiaryColor); 
   opacity: 50%;
+}
+
+.body-container{
+    min-height: 200px;
+    max-height: 200px;
 }

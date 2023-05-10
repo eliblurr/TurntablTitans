@@ -49,3 +49,17 @@
   background-color: var(--tertiaryColor);
   color: var(--textOnSecondary);
 }
+
+.possible-answers {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.button-theming{
+  background-color: var(--tertiaryColor);
+  color: var(--textOnSecondary);
+}
+
+.button-theming:hover {
+  background-color: var(--primaryColor);
+}

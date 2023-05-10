@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import { ComputerAnswer } from '../models/chat';
+import {Component, Input, Output, OnChanges, SimpleChanges, EventEmitter} from '@angular/core';
 import { AxaServiceService } from '../services/axa/axa-service.service';
 
 @Component({
@@ -7,27 +6,37 @@ import { AxaServiceService } from '../services/axa/axa-service.service';
   templateUrl: './axa-input.component.html',
   styleUrls: ['./axa-input.component.css']
 })
-export class AXAInputComponent {
-  currentQuestion:any
-  questionPayload: ComputerAnswer = {  id: "string", value: "string", order: 0}
+export class AXAInputComponent implements OnChanges {
+  @Input() currentQuestionId:any
+  @Output() answerEmitter = new EventEmitter<any>(); 
+  currentQuestion: any
+  inputAreaValue: any
 
   constructor(private axaService:AxaServiceService) {
   }
 
-  ngOnInit(): void {
-    this.getCurrentQuestion()
+  ngOnChanges(changes: SimpleChanges): void {
+    this.currentQuestion=null
+    this.getQuestionById(changes['currentQuestionId'].currentValue);
   }
 
-  sendResponse(){
-    this.axaService.computeAnswer(this.questionPayload).subscribe(data => console.log(data))
-    location.reload()
+  submit(){    
+    this.answerEmitter.emit({"answer":this.inputAreaValue, "id":this.currentQuestion['id']})
+    this.inputAreaValue = null
+    this.currentQuestion = null
   }
 
-  getCurrentQuestion(){
-    this.axaService.getProductsQuestion().subscribe(
-      data=>{this.currentQuestion=data;
-      console.log(data)
-    }
-      )
+  updateInput(answer:string){
+    this.inputAreaValue = null
+    this.inputAreaValue = answer
+  }
+
+  getQuestionById(id:string){
+    this.axaService.getQuestionById(id).subscribe(
+      data=>{
+        this.currentQuestion=data;
+        console.log(data)
+      }
+    )
   }
 }

@@ -1,25 +1,38 @@
-import {Component} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { AxaServiceService } from '../services/axa/axa-service.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css']
 })
-export class QuestionsComponent {
-  question:any
-  constructor(private axaService:AxaServiceService) {}
+export class QuestionsComponent implements OnChanges {
+  @Input() questions!:any 
+  @Input() currentQuestion!:any 
+  @Output() idEmitter = new EventEmitter<any>();    
 
-  ngOnInit(): void {
-    this.getAXAQuestions();
+  constructor(private route: ActivatedRoute){}
+
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.questions = changes["questions"].currentValue; 
+    this.scrollToElement(this.questions['id'])
   }
 
-  getAXAQuestions(){
-    this.axaService.getQuestions().subscribe(data =>
-      {this.question=data});}
-      
-  parseQuestionID(id:any){
-    localStorage.setItem("currentQuestionID",id)
-    location.reload()
+  passQuestionID(id:any){
+    this.idEmitter.emit(id);  
   }
+
+  scrollToElement(id:string) {
+  console.log(`scrolling to ${id}`);
+  let el = document.getElementById(id);
+  if (el !=null){
+    el.scrollIntoView()
+  }
+  // el.scrollIntoView();
+}
+
 }

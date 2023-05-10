@@ -3,10 +3,10 @@
     <div class="main-chat-page d-flex h-100">
        <axa-docs></axa-docs>
        <div class="cards">
-          <progress-bar></progress-bar>
-          <compute-answer></compute-answer>
-          <axa-input></axa-input> 
-          <questions></questions>  
+          <progress-bar [progress]="progress"></progress-bar>
+          <compute-answer [coverage]="coverage"></compute-answer>
+          <axa-input *ngIf="currentQuestionId" [currentQuestionId]="currentQuestionId" (answerEmitter)="getAnswerFromChild($event)"></axa-input> 
+          <questions *ngIf="questions && questions.length" [questions]="questions" [currentQuestion]="currentQuestionId" (idEmitter)="getQuestionIdFromChild($event)"></questions>  
       </div>
     </div>
     </div>

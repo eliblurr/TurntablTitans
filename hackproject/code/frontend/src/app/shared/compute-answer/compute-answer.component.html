@@ -1,8 +1,12 @@
 <div class="card card-theme">
   <h2 class="card-header card-title">Compute Answer</h2>
-  <div class="card-body card-body-theme" >
-    <h4 style="margin-right: 20px;">Status: In Progress</h4>
+  <div class="card-body card-body-theme" *ngFor="let state of coverage;">
+    <h4 style="margin-right: 20px;">Status: {{state['status']}}</h4>
     <p class="card-text">.</p>
   </div>
 </div>
+
+<!-- <div class="list-group possible-answers scrollspy-example">
+      <button type="button" (click)="updateInput(answer['answer'])"  *ngFor="let answer of currentQuestion['possible_answers'];" class="list-group-item list-group-item-action">{{answer['answer']}}</button>
+    </div> -->
 

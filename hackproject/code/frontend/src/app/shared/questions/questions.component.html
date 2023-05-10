@@ -1,22 +1,13 @@
-<div class="card card-theme">
+<div class="card card-theme flex-column" style="height:max-content;">
   <h2 class="card-header card-title">AXA Questions</h2>
-  <!-- iterable component down here -->
-  <div class="body-content">
-  <div *ngFor="let currentQuestion of question; let i = index" >
-    <div *ngIf="i == 0" (click)="parseQuestionID(currentQuestion.id)" class="card-body card-body-theme " >
-      <div>
-        <mat-icon>question_answer</mat-icon>
+  <div class="body-content" style="height: 500px;">
+    <div *ngFor="let question of questions; let i = index" >
+      <div [id]="question.id" (click)="passQuestionID(question.id)" class="card-body card-body-theme disable" [class.disable]="question.id!=currentQuestion">
+        <div>
+          <mat-icon>question_answer</mat-icon>
+        </div>
+        <p class="card-text" style="margin-left: 20px;">
+          {{question.question}}</p>
       </div>
-      <p class="card-text" style="margin-left: 20px;">
-        {{currentQuestion.question}}</p>
-    </div>
-    <!-- to make question inactive add "disable" to class -->
-    <div *ngIf="i != 0"  (click)="parseQuestionID(currentQuestion.id)" class="card-body card-body-theme disable" > 
-      <div>
-        <mat-icon > question_answer</mat-icon>
-      </div>
-      <p class="card-text" style="margin-left: 20px;">{{currentQuestion.question}}</p>
-    </div>
   </div>
-</div>
 </div>
