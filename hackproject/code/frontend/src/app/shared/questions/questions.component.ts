@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { AxaServiceService } from '../services/axa/axa-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '../services/shared/shared.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class QuestionsComponent implements OnChanges {
   @Input() currentQuestion!:any 
   @Output() idEmitter = new EventEmitter<any>();    
 
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute, public sharedService: SharedService){}
 
   ngOnInit(): void {}
 
@@ -34,5 +35,10 @@ export class QuestionsComponent implements OnChanges {
   }
   // el.scrollIntoView();
 }
+
+  textToSpeech(text:string){
+    this.sharedService.textToSpeech(text, "en")
+  }
+
 
 }

@@ -1,5 +1,6 @@
 import {Component, Input, Output, OnChanges, SimpleChanges, EventEmitter} from '@angular/core';
 import { AxaServiceService } from '../services/axa/axa-service.service';
+import { SharedService } from '../services/shared/shared.service';
 
 @Component({
   selector: 'axa-input',
@@ -12,7 +13,8 @@ export class AXAInputComponent implements OnChanges {
   currentQuestion: any
   inputAreaValue: any
 
-  constructor(private axaService:AxaServiceService) {
+  constructor(private axaService:AxaServiceService, 
+   public sharedService: SharedService,) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,4 +41,9 @@ export class AXAInputComponent implements OnChanges {
       }
     )
   }
+
+  textToSpeech(text:string){
+    this.sharedService.textToSpeech(text, "en")
+  }
+
 }

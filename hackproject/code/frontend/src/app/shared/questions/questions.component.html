@@ -2,12 +2,27 @@
   <h2 class="card-header card-title">AXA Questions</h2>
   <div class="body-content" style="height: 500px;">
     <div *ngFor="let question of questions; let i = index" >
-      <div [id]="question.id" (click)="passQuestionID(question.id)" class="card-body card-body-theme disable" [class.disable]="question.id!=currentQuestion">
-        <div>
-          <mat-icon>question_answer</mat-icon>
+      <div [id]="question.id" (click)="passQuestionID(question.id)" class="card-body card-body-theme question-align disable" [class.disable]="question.id!=currentQuestion">
+        <div class="btn-align">
+          <div>
+            <mat-icon>question_answer</mat-icon>
+          </div>
+          <p class="card-text" style="margin-left: 20px;">
+            {{question.question}}
+          </p>
         </div>
-        <p class="card-text" style="margin-left: 20px;">
-          {{question.question}}</p>
+        <button class="icon-btn btn-align" (click)="textToSpeech(question.question)">
+          <mat-icon>volume_up</mat-icon>
+        </button>
       </div>
   </div>
 </div>
+
+<!-- <div class="list-group possible-answers" >
+      <div class="list-group button-theming" style="flex-direction: row; display: flex;" *ngFor="let answer of currentQuestion['possible_answers'];">
+        <button type="button" (click)="updateInput(answer['answer'])" class="list-group-item list-group-item-action button-theming">{{answer['answer']}}</button>
+        <button class="icon-btn btn-align" (click)="textToSpeech(answer['answer'])">
+          <mat-icon>volume_up</mat-icon>
+        </button>
+      </div> 
+     </div> -->
