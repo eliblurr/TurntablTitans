@@ -7,7 +7,7 @@
 ## Context and Problem Statement
 Our goal is to create a solution that simplifies interacting with, and understanding complex documents. The solution should make sure the true meaning and intent of the original document is not lost.
 
-## Decision Drivers <!-- optional -->
+## Decision Drivers
 
 * A user with disability, who wants to consume documents.
 * A company, that wants to increase compliance with relevant requirements.

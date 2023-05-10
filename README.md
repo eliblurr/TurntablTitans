@@ -1,6 +1,8 @@
  
 # ComprehendNow
 
+ComprehendNow is a natural language processing solution that aims to help people with disabilities better understand complex documents. Leveraging machine learning algorithms and Natural Language Processing techniques, ComprehendNow provides an intuitive and user-friendly chatbot interface that can assist users in comprehending complex texts, such as insurance policies or legal documents. The solution offers a wide range of features, including text summarization, speech-to-text, text-to-speech, and question-answering. ComprehendNow aims to improve accessibility and promote inclusivity by empowering individuals with cognitive disabilities to confidently engage with information that might have once been inaccessible to them.
+
 ## Project Details
 
 | Event Attribute| Description    |
@@ -47,7 +49,6 @@ Mark is relieved to find that he can easily understand the information and can a
 ## Solution Decisions
 
 1. [ADR 01](./hackproject/decisions/adr-01.md)
-2. [BDR 01](./hackproject/decisions/adr-01.md)
 
 ## Team Information
 
