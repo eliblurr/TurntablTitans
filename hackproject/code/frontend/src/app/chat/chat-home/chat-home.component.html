@@ -2,8 +2,12 @@
 <app-main-layout>
   <div id="chat" class="h-100">
     <section class="section h-100 content">
-      <div class="chat-box h-100 messages">
-        <ul class="list-item">
+      <div class="chat-box p-3 h-100 messages">
+        <div *ngIf="sharedService.messages.length > 1">
+        <accordion *ngFor="let message of sharedService.fileResponse" [fileResponse]="message" ></accordion>
+        </div>
+
+        <ul>
           <li *ngFor="let message of sharedService.messages" class="message">
 <!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->
 <!--              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"-->
@@ -40,6 +44,11 @@
               send
             </mat-icon>
           </div>
+
+          <div><button class="icon-btn btn-align"  (click)="sendMessage()">
+            <mat-icon>send</mat-icon>
+          </button></div>
+          <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
         </form>
       </div>
     </section>

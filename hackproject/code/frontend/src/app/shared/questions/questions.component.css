@@ -1,4 +1,5 @@
 .card-theme{
+  height: 300%;
   background-color: var(--secondaryColor);
   color: var(--textOnSecondary);
   max-height: 240px;
@@ -11,6 +12,11 @@
   flex-direction: row; 
   color: var(--textOnSecondary);
   cursor: help;
+}
+
+.body-content{
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .card-body-theme:hover {

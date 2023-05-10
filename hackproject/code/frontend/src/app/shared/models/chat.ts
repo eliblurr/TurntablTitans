@@ -13,6 +13,12 @@ export interface ChatRequest {
   chat_id: string
 }
 
+export interface ComputerAnswer {
+  id: string,
+  value: string,
+  order: number
+}
+
 export interface ChatPrompt {
   body: string,
   native_language: string
