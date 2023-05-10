@@ -4,7 +4,7 @@
     <section class="section h-100 content">
       <div class="chat-box p-3 h-100 messages">
         <div *ngIf="sharedService.messages.length > 1">
-        <accordion *ngFor="let message of sharedService.fileResponse" [fileResponse]="message" ></accordion>
+        <accordion *ngFor="let message of sharedService.fileResponse; let indexOfelement=index;" [fileResponse]="message" [index]="genId()"></accordion>
         </div>
 
         <ul class="list-item">
@@ -37,18 +37,18 @@
 
       <div class="message-input send-message">
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
+          <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
           <input type="text" class="form-control" formControlName="body" id="user-chat-input"
                  placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
-          <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">
+          <!-- <div *ngIf="showButton" class="d-flex align-items-center pe-3" style=" ">
             <mat-icon class="user-chat-submit-button" (click)="sendMessage()" disabled="!chatForm.valid">
               send
             </mat-icon>
-          </div>
+          </div> -->
 
-          <div><button class="icon-btn btn-align"  (click)="sendMessage()">
+          <div><button [disabled]="!chatForm.valid" class="icon-btn btn-align disabled" [class.disabled]="!chatForm.valid" (click)="sendMessage()">
             <mat-icon>send</mat-icon>
           </button></div>
-          <recorder (dataToParent)="receiveDataFromRecorder($event)"></recorder>
         </form>
       </div>
     </section>
