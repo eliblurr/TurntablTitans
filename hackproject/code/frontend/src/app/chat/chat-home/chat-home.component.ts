@@ -12,11 +12,6 @@ export interface Message {
   message: string;
 }
 
-export interface Recording {
-  text: string,
-  chat_id: string
-}
-
 @Component({
   selector: 'app-chat-home',
   templateUrl: './chat-home.component.html',
@@ -27,8 +22,9 @@ export class ChatHomeComponent {
 
   fileName = '';
   loading = false
-  showButton = false;
   receivedData = ''
+  showButton = false;
+  showSendButton = true;
   selectedCategory: number = 0;
   chatForm: FormGroup = this.formBuilder.group({
     body: this.formBuilder.control('', Validators.required),
@@ -76,5 +72,9 @@ export class ChatHomeComponent {
     data = JSON.stringify(data);
     const json_data = JSON.parse(data)
     this.chatForm.setValue({body: json_data.text})
+  }
+
+  toggleSendButton(visible:boolean){
+    this.showSendButton = !visible
   }
 }
