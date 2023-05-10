@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  api:
+    build: 
+      context: ./api
+      dockerfile: dockerfile.api
+    image: finos-axa-hackathon-api
+    restart: always
+    expose: 
+      - 80
+    ports: 
+      - 80:80
+    env_file:
+      - .docker.env
+    networks:
+      - finos-axa-hackathon-network
+
+  ui:
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile.ui
+    image: finos-axa-hackathon-ui
+    restart: always
+    env_file:
+      - .docker.env
+    environment:
+      - NODE_ENV="production"
+    ports:
+      - 3000:80
+    networks:
+      - finos-axa-hackathon-network
+
+  app:
+    build: 
+      context: .
+      dockerfile: dockerfile.app
+    image: finos-axa-hackathon-full-app
+    restart: always
+    expose: 
+      - 8081
+    networks:
+      - finos-axa-hackathon-network
+    
+
+volumes:
+  static_data:
+  upload_data:
+    driver: local
+
+networks:
+  finos-axa-hackathon-network:
+    driver: bridge

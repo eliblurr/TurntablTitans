@@ -14,6 +14,7 @@ import {tap} from "rxjs";
 })
 export class FileUploadComponent {
   selectedFile!: File;
+
   constructor(
     private formBuilder: FormBuilder,
     public sharedService: SharedService,
@@ -26,7 +27,7 @@ export class FileUploadComponent {
     this.getFileTypes()
     this.getLanguages()
   }
-
+  
   uploadFileForm: FormGroup = this.formBuilder.group({
     type: this.formBuilder.control('', Validators.required),
     doc_language: this.formBuilder.control('', Validators.required),
@@ -42,7 +43,6 @@ export class FileUploadComponent {
 
   uploadFile() {
     const chatId = this.sharedService.chatId
-    console.log(chatId)
     if (!chatId) return
     const formData = new FormData();
     formData.append("type", this.uploadFileForm.value["type"]);
@@ -56,8 +56,7 @@ export class FileUploadComponent {
     this.fileService.uploadDocument(request)
       .subscribe((res) => {
         this.sharedService.addFileUploadResponse(res)
-        console.log(res)})
-    console.log(this.uploadFileForm.value)
+      })
   }
 
   getFileTypes() {

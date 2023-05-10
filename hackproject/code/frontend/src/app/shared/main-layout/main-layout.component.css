@@ -10,3 +10,14 @@
   width: 100%;
 }
 
+@media (max-width: 1199px){
+  #main {
+    /* padding: 20px; */
+    position: page;
+    z-index:0;
+  }
+}
+
+.main-chat-page{
+  overflow: hidden;
+}

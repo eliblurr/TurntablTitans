@@ -30,7 +30,7 @@ from hackproject.code.api.app.enums import Product
 from hackproject.code.api.app.schemas.model_service.model_service_schemas import PromptResponse
 from hackproject.code.api.app.schemas.tts_service.tts_schemas import TTS
 from hackproject.code.api.app.schemas.prompt_service.prompt_service_schema import WebPrompt, ProcessedPrompt, \
-    ChatInitialization, WebDocument
+    ChatInitialization, WebDocument, WebText
 from hackproject.code.api.app.services.chat_service.chat_service import ChatServiceImpl, ChatService
 from hackproject.code.api.app.services.model_service.model_service import ModelService, ModelServiceImpl
 from hackproject.code.api.app.services.prompt_service.prompt_service import PromptServiceImpl, PromptService
@@ -40,6 +40,7 @@ from hackproject.code.api.app.services.tts_service.tts import tts as parrot
 from hackproject.code.api.app.services.stt_service.stt import stt
 from hackproject.code.api.app.services.axa.axa_service import get_questions, compute, products
 from hackproject.code.api.app.schemas.axa_service.axa_schemas import Question, QuestionDetail, SubmissionResponse, State
+from hackproject.code.api.app.schemas.axa_service.axa_schemas import Product as AXAProduct
 
 # laod env's
 load_dotenv()
@@ -111,36 +112,61 @@ async def file(type: str = Form(...),
         os.remove(file_path)
         return response
     except Exception:
-        return {"message": "There was an error uploading the file"}
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.post("/stt")
-def stt_(audio: UploadFile, language: str = 'en'):
+async def stt_(
+        native_language: str = Form(...),
+       chat_id: str = Form(...),
+       audio: UploadFile = File(...),
+        language: str = 'en'):
     try:
-        return stt(audio, language)
+        text = stt(audio, language)
+        return {"text": text, "chat_id": chat_id}
     except Exception as e:
         code = 400 if isinstance(e, e.__class__) else 500
         raise HTTPException(status_code=code, detail=str(e))
 
 @router.post("/tts/{message_id}")
 async def tts(message_id:str, payload:TTS):
-    path = parrot(payload.text, payload.language, message_id)
-    return FileResponse(path, background=BackgroundTask(remove_file, path))
+    try:
+        path = parrot(payload.text, payload.language, message_id)
+        return FileResponse(path, background=BackgroundTask(remove_file, path))
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
-@router.get("/axa/products", response_model=list[Product])
+@router.get("/axa/products", response_model=list[AXAProduct])
 async def get_products():
-    return await products()
+    try:
+        return await products()
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.get("/axa/{product}/questions", response_model=list[Question])
 async def questions(product:str, language: str = 'en'):
-    return await get_questions(product, language)
+    try:
+        return await get_questions(product, language)
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.get("/axa/{product}/questions/{question_id}", response_model=QuestionDetail)
 async def get_question_by_id(product:str, question_id:str, language: str = 'en'):
-    return await get_questions(product, language, question_id)
+    try:
+        return await get_questions(product, language, question_id)
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.post("/axa/{product}/compute", response_model=SubmissionResponse)
 async def submit(product:str, payload:list[State], language: str = 'en'):
-    return await compute(product, language, payload)
+    try:
+        return await compute(product, language, payload)
+    except:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.get("/chat/web")
 async def web_prompt():
@@ -155,6 +181,7 @@ async def web_prompt(request: WebPrompt):
         return prompt_response
     except:
         traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
 
 @router.post("/chat/messaging/" + bot.token)
 async def mobile_prompt(request: Request):
@@ -173,7 +200,7 @@ def handle_message(message: types.Message):
             processed_prompt: ProcessedPrompt = prompt_service.process_prompt(message)
             chat_service.reply_prompt(processed_prompt)
         except:
-            bot.reply_to(message, "Oops, an error occurred please try again later.")
+            bot.reply_to(message, "Oops, an error occurred. Let's try that again.")
             traceback.print_exc()
         finally:
             return {'ok': True}

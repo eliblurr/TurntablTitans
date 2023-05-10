@@ -1,12 +1,12 @@
 .header {
-  background-color: var(--tertiaryColor); 
+  background-color: var(--primaryColor);
   color: var(--textOnPrimary);
-  height: 20px; 
+  height: 20px;
   border-radius: 0px;
 }
 
 .item {
-  background-color: var(--secondaryColor); 
+  background-color: var(--secondaryColor);
   color: var(--textOnSecondary);
   min-height: 20px;
   border-radius: 0px;

@@ -10,7 +10,7 @@
         <div style="display: flex; align-items: center;">
           <h1 class="title">ComprehendNow</h1>
         </div>
-        <div >
+        <div>
           <ul class="nav justify-content-center">
             <li [routerLinkActive]="'active'"  class="nav-item">
               <a class="nav-link title nav-link-text" routerLink="/chat/home">Home</a>
@@ -20,13 +20,14 @@
             </li>
           </ul>
         </div>
-          <ng-select class="language-selector" [items]="languages"
-           bindLabel="name"
-           bindValue="id"
-           placeholder="Select language"
-                     (ngModelChange)="onSelectionChange($event)"
-                     [(ngModel)]=selectedOption>
-          </ng-select>
+        <mat-select class="language-selector" placeholder="Select language" [(ngModel)]=selectedOption
+                    (ngModelChange)="onSelectionChange($event)" style="background-color: white; height: 70%">
+          <mat-option *ngFor=" let language of languages"
+                      [value]="language">
+            {{language|titlecase}}
+          </mat-option>
+        </mat-select>
       </div>
     </div>
+  </div>
 </div>

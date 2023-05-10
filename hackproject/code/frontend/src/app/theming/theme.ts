@@ -6,6 +6,7 @@ export const THEMES:any = {
       textOnTertiary: 'var(--dm-on-tertiary-300)',
       textOnPrimary: 'var(--on-primary)',
       textOnSecondary: 'var(--on-secondary)',
+      iconColor: 'var(--primary)',
       background: 'var(--background)',
     },
     BDyslexia: {
@@ -15,6 +16,7 @@ export const THEMES:any = {
       textOnTertiary: 'var(--dm-on-tertiary-300)',
       textOnPrimary: 'var(--on-primary)',
       textOnSecondary: 'var(--dm-on-background-secondary)',
+      iconColor: 'var(--on-primary)',
       background: 'black',
     },
     Default: {
@@ -24,6 +26,7 @@ export const THEMES:any = {
       tertiaryColor: 'rgba(18, 177, 245, 0.409)',
       textOnTertiary: 'hsl(0, 0%, 100%)',
       textOnSecondary: 'black',
+      iconColor: '#435f7a',
       background: '#E6EAEA',
     },
     BDefault: {
@@ -33,6 +36,7 @@ export const THEMES:any = {
       tertiaryColor: 'rgba(18, 177, 245, 0.409)',
       textOnTertiary: 'hsl(0, 0%, 100%)',
       textOnSecondary: 'white',
+      iconColor: 'var(--on-primary)',
       background: 'black',
     },
     'BColor Blindness': {
@@ -42,6 +46,7 @@ export const THEMES:any = {
       textOnSecondary: 'white',
       tertiaryColor: '#9E6F21',
       textOnTertiary: 'var(--cb-textOnTertiary)',
+      iconColor: 'var(--on-primary)',
       background: 'var(--primaryDarkBG)',
     },
     'Color Blindness': {
@@ -51,6 +56,7 @@ export const THEMES:any = {
       textOnSecondary: 'var(--cb-textOnSecondary)',
       tertiaryColor: '#EBB02D',
       textOnTertiary: 'var(--cb-textOnTertiary)',
+      iconColor: 'var(--primary)',
       background: '#E6EAEA',
     },
     BAutism: {
@@ -60,6 +66,7 @@ export const THEMES:any = {
       textOnSecondary: 'var(--at-secondary)',
       tertiaryColor: 'var(--at-tertiary)',
       textOnTertiary: 'var(--at-textOnTertiary)',
+      iconColor: 'var(--on-primary)',
       background: 'var(--primaryDarkBG)',
     },
     Autism: {
@@ -69,6 +76,7 @@ export const THEMES:any = {
       textOnSecondary: 'var(--at-textOnSecondary)',
       tertiaryColor: 'var(--at-tertiary)',
       textOnTertiary: 'var(--at-textOnTertiary)',
+      iconColor: 'var(--primary)',
       background: 'var(--background)',
     },
     

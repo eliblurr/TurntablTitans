@@ -1,6 +1,7 @@
 #!/bin/bash
 DIR=$(dirname "$(readlink -f "$0")")
 
+pip install --upgrade pip
 cat $DIR/requirements.txt | xargs -n 1 -L 1 pip install
 
 MODEL_DIR=$DIR/app/tmp/models
