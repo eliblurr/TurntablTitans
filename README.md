@@ -46,8 +46,8 @@ Mark is relieved to find that he can easily understand the information and can a
 
 ## Solution Decisions
 
-1. [ADR 01](./decisions/adr-01.md)
-2. [BDR 01](./hackproject/decisions/bdr-01.md)
+1. [ADR 01](./hackproject/decisions/adr-01.md)
+2. [BDR 01](./hackproject/decisions/adr-01.md)
 
 ## Team Information
 
