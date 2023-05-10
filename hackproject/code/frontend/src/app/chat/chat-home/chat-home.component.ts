@@ -77,4 +77,15 @@ export class ChatHomeComponent {
     const json_data = JSON.parse(data)
     this.chatForm.setValue({body: json_data.text})
   }
+  
+  genId(){
+    const characters ='abcdefghijklmnopqrstuvwxyz';
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < 8; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return "result";
+  }
+
 }
