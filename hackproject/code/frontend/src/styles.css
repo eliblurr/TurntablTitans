@@ -3,7 +3,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: var(--background); }
+body { margin: 0; font-family: Open Sans, "Helvetica Neue", sans-serif; background-color: var(--background); }
 
 :root {
   --primary: #611314;

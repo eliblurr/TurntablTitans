@@ -1,14 +1,20 @@
-<div class="accordion" id="accordionExample" >
+<div class="accordion" id="accordionExample">
   <div class="accordion-item item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed header" style="border-radius: 0;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <button class="accordion-button collapsed header" style="border-radius: 0;" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseTwo'" aria-expanded="false" aria-controls="collapseTwo">
         {{fileResponse.title}}
+        <!-- '#'+fileResponse.title -->
+         <!-- data-bs-target="#collapseTwo"  -->
+         <!-- data-bs-target="#{{fileResponse.title}}"  -->
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div [id]="'collapseTwo'" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         {{fileResponse.message}}
-        <recorder></recorder>
+        <hr>
+        <button class="icon-btn btn-align" (click)="textToSpeech(fileResponse.message)" >
+            <mat-icon>volume_up</mat-icon>
+          </button>
       </div>
     </div>
   </div>
