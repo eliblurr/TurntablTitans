@@ -1,7 +1,7 @@
 {
-  "/api/v1": {
+  "/api/v1":  {
     "target": "https://305c-102-22-11-130.ngrok-free.app",
-    "changeOrigin": true,
+    "changeOrigin" : true,
     "secure": false,
     "logLevel": "debug"
   }

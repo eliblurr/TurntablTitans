@@ -33,7 +33,7 @@
 
 .client {
   border: 0.5px solid #333;
-  background-color: var(--tertiaryColor);
+  background: var(--primaryColor);
   color: var(--textOnPrimary);
   padding: 10px;
   border-radius: 5px;
