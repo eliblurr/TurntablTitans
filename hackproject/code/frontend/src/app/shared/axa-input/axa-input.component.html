@@ -2,14 +2,12 @@
   <h2 class="card-header card-title">Answer the following questions</h2>
 
   <div class="card-body" >
-    <h2 class="question-text">Placeholder question goes here?</h2>
+    <h2 class="question-text">{{currentQuestion.question}}</h2>
     <div class="mb-3">
       <textarea class="form-control" placeholder="enter your answer here" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="d-grid gap-2">
-      <button class="btn btn-primary submit-btn" type="button">Submit</button>
+      <button (click) = "sendResponse()" class="btn btn-primary submit-btn" type="button">Submit</button>
     </div>
-    
   </div>
-
 </div>

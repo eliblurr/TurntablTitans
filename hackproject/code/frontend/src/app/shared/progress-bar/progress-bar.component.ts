@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { AxaServiceService } from '../services/axa/axa-service.service';
 
 @Component({
   selector: 'progress-bar',
@@ -6,11 +7,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./progress-bar.component.css']
 })
 export class ProgressBarComponent {
-  constructor(
-  ) {
-  }
+  constructor(private axaService: AxaServiceService) {}
 
   ngOnInit(): void {
+
+  }
+  getProgress(){
+      
   }
 
 }

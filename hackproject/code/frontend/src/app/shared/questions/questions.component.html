@@ -1,19 +1,22 @@
 <div class="card card-theme">
   <h2 class="card-header card-title">AXA Questions</h2>
   <!-- iterable component down here -->
-  
-  <div class="card-body card-body-theme" >
-    <div>
-      <mat-icon > question_answer</mat-icon>
+  <div class="body-content">
+  <div *ngFor="let currentQuestion of question; let i = index" >
+    <div *ngIf="i == 0" (click)="parseQuestionID(currentQuestion.id)" class="card-body card-body-theme " >
+      <div>
+        <mat-icon>question_answer</mat-icon>
+      </div>
+      <p class="card-text" style="margin-left: 20px;">
+        {{currentQuestion.question}}</p>
     </div>
-    <p class="card-text" style="margin-left: 20px;">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
-  </div>
-  <!-- to make question inactive add "disable" to class -->
-  <div class="card-body card-body-theme disable" > 
-    <div>
-      <mat-icon > question_answer</mat-icon>
+    <!-- to make question inactive add "disable" to class -->
+    <div *ngIf="i != 0"  (click)="parseQuestionID(currentQuestion.id)" class="card-body card-body-theme disable" > 
+      <div>
+        <mat-icon > question_answer</mat-icon>
+      </div>
+      <p class="card-text" style="margin-left: 20px;">{{currentQuestion.question}}</p>
     </div>
-    <p class="card-text" style="margin-left: 20px;">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
   </div>
-
+</div>
 </div>

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { AxaServiceService } from '../services/axa/axa-service.service';
 import { SidebarService } from '../services/sidebar/sidebar.service';
 
 @Component({
@@ -7,10 +8,25 @@ import { SidebarService } from '../services/sidebar/sidebar.service';
   styleUrls: ['./axa-docs.component.css']
 })
 export class AXADocsComponent {
-  constructor(public sidebarService: SidebarService){
+  product:any
+  constructor(public sidebarService: SidebarService, private axaService:AxaServiceService){
+  }
+
+  getAvailableProducts(){
+    this.axaService.getProducts().subscribe(data =>
+      {
+      console.log(data)
+      this.product=data});
+  
+  }
+  getQuestions(id:any){
+    console.log(id)
+    localStorage.setItem('currentProducyID', id)
+    location.reload()
   }
 
   ngOnInit(): void {
+    this.getAvailableProducts();
   }
 
 }
