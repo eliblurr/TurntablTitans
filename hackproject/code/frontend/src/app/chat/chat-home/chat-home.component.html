@@ -18,7 +18,7 @@
             <p [class]="message.type">
               {{ message.message }}
             </p>
-            <mat-icon *ngIf="message.type == 'client'" (click)="textToSpeech(message.message)">volume_up</mat-icon>
+            <mat-icon class="speaker" *ngIf="message.type=='client'" (click)="textToSpeech(message.message)">record_voice_over</mat-icon>
           </li>
           <li
             *ngIf="sharedService.loading"
