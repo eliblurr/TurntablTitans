@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { ComputerAnswer } from '../models/chat';
 import { AxaServiceService } from '../services/axa/axa-service.service';
 
 @Component({
@@ -8,11 +9,7 @@ import { AxaServiceService } from '../services/axa/axa-service.service';
 })
 export class AXAInputComponent {
   currentQuestion:any
-  event =  {
-    "id": "string",
-    "value": "string",
-    "order": 0
-  }
+  questionPayload: ComputerAnswer = {  id: "string", value: "string", order: 0}
 
   constructor(private axaService:AxaServiceService) {
   }
@@ -22,7 +19,8 @@ export class AXAInputComponent {
   }
 
   sendResponse(){
-    this.axaService.computeAnswer(this.event).subscribe(data => console.log(data))
+    this.axaService.computeAnswer(this.questionPayload).subscribe(data => console.log(data))
+    location.reload()
   }
 
   getCurrentQuestion(){

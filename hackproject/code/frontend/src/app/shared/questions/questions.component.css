@@ -1,4 +1,5 @@
 .card-theme{
+  height: 300%;
   background-color: var(--secondaryColor);
   color: var(--textOnSecondary);
 }
