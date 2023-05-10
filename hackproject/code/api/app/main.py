@@ -112,7 +112,7 @@ async def file(type: str = Form(...),
         os.remove(file_path)
         return response
     except Exception:
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.post("/stt")
 async def stt_(
@@ -134,7 +134,7 @@ async def tts(message_id:str, payload:TTS):
         return FileResponse(path, background=BackgroundTask(remove_file, path))
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.get("/axa/products", response_model=list[AXAProduct])
 async def get_products():
@@ -142,7 +142,7 @@ async def get_products():
         return await products()
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.get("/axa/{product}/questions", response_model=list[Question])
 async def questions(product:str, language: str = 'en'):
@@ -150,7 +150,7 @@ async def questions(product:str, language: str = 'en'):
         return await get_questions(product, language)
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.get("/axa/{product}/questions/{question_id}", response_model=QuestionDetail)
 async def get_question_by_id(product:str, question_id:str, language: str = 'en'):
@@ -158,7 +158,7 @@ async def get_question_by_id(product:str, question_id:str, language: str = 'en')
         return await get_questions(product, language, question_id)
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.post("/axa/{product}/compute", response_model=SubmissionResponse)
 async def submit(product:str, payload:list[State], language: str = 'en'):
@@ -166,7 +166,7 @@ async def submit(product:str, payload:list[State], language: str = 'en'):
         return await compute(product, language, payload)
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.get("/chat/web")
 async def web_prompt():
@@ -181,7 +181,7 @@ async def web_prompt(request: WebPrompt):
         return prompt_response
     except:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail="Oops, an error occurred. Let's try that again.")
+        raise HTTPException(status_code=500, detail="An error occurred, please try again.")
 
 @router.post("/chat/messaging/" + bot.token)
 async def mobile_prompt(request: Request):

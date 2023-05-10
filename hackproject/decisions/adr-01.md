@@ -23,10 +23,15 @@ Our goal is to create a solution that simplifies interacting with, and understan
 
 Chosen option: "A Natural Language Processing chatbot that allows users to submit complex documents, receive a short summary of the document and be able to ask questions", because it will let users have a better understanding of the documents they are interacting with, as well as provide a personalized experience.
 
+### Architectural Diagram
+
+![architectural-diagram](./img/architectural-diagram.png)
+
 ### Positive Consequences:
 
 - Increased accessibility to information for people with disabilities, leading to greater inclusion and equity.
 - Easy-to-understand explanations of complex documents leading to increased compliance to requirements that may be included in documents.
+- Ability to access solution through the web and also a messaging app.
 
 ### Negative Consequences:
 
