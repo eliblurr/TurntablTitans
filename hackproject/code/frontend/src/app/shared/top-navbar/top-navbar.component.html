@@ -1,13 +1,13 @@
 <div id="topnav" class="navbarheader fixed d-flex align-items-center w-100">
   <div class="row w-100">
-    <div class="col d-flex w-100">
+    <div class="col d-flex w-100" style="">
       <div class="menu">
         <button mat-icon-button (click)="controlSideBar()" matTooltip="Menu">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
       <div class="brand-name-language-container">
-        <div style="display: flex; align-items: center;">
+        <div *ngIf="sharedService.messages.length !== 0" class="d-none d-lg-block" style="display: flex; align-items: center;">
           <h1 class="title">ComprehendNow</h1>
         </div>
         <div>

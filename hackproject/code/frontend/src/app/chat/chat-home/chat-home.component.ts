@@ -12,11 +12,6 @@ export interface Message {
   message: string;
 }
 
-export interface Recording {
-  text: string,
-  chat_id: string
-}
-
 @Component({
   selector: 'app-chat-home',
   templateUrl: './chat-home.component.html',
@@ -27,12 +22,15 @@ export class ChatHomeComponent {
 
   fileName = '';
   loading = false
-  showButton = false;
   receivedData = ''
+  showButton = false;
+  showSendButton = true;
   selectedCategory: number = 0;
   chatForm: FormGroup = this.formBuilder.group({
     body: this.formBuilder.control('', Validators.required),
   })
+
+  selectedTitle = "";
 
   constructor(
     private http: HttpClient,
@@ -61,6 +59,10 @@ export class ChatHomeComponent {
   }
 
   openUploadFileDialog() {
+    this.chatService.getChatId().subscribe((res) => {
+      localStorage.setItem('chat_id', res.chat_id)
+      this.sharedService.chatId = res.chat_id
+    })
     this.dialog.open(FileUploadComponent, {width: '450px'});
   }
 
@@ -77,15 +79,12 @@ export class ChatHomeComponent {
     const json_data = JSON.parse(data)
     this.chatForm.setValue({body: json_data.text})
   }
-  
-  genId(){
-    const characters ='abcdefghijklmnopqrstuvwxyz';
-    let result = ' ';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < 8; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return "result";
+
+  toggleSendButton(visible:boolean){
+    this.showSendButton = !visible
   }
 
+  openSelectedAccordion(title: string){
+    this.selectedTitle = title;
+  }
 }

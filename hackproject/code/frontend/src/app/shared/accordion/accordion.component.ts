@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FileResponse} from "../models/file-upload";
-import { SharedService } from '../services/shared/shared.service';
+import {SharedService} from "../services/shared/shared.service";
 
 @Component({
   selector: 'accordion',
@@ -9,18 +9,17 @@ import { SharedService } from '../services/shared/shared.service';
 })
 export class AccordionComponent {
   @Input() fileResponse!: FileResponse
-  @Input() index!: any
+  @Input() title!: string
 
   constructor(
-    private sharedService:SharedService
-  ) {
+    private sharedService: SharedService,
+  ) {}
+
+  ngOnInit(): void {
   }
 
   textToSpeech(text: string) {
     this.sharedService.textToSpeech(text, "en")
-  }
-
-  ngOnInit(): void {
   }
 
 }
