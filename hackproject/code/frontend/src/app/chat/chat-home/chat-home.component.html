@@ -2,8 +2,8 @@
 <app-main-layout>
   <div id="chat" class="h-100">
     <section class="section h-100 content">
-      <div class="chat-box p-3 h-100 messages">
-        <ul>
+      <div class="chat-box h-100 messages">
+        <ul class="list-item">
           <li *ngFor="let message of sharedService.messages" class="message">
 <!--            <div *ngIf="message.type == 'user'" id="divstyle" [class]="message.type"><img-->
 <!--              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"-->
@@ -14,7 +14,7 @@
             <p [class]="message.type">
               {{ message.message }}
             </p>
-            <mat-icon *ngIf="message.type == 'client'" (click)="textToSpeech(message.message)">record_voice_over</mat-icon>
+            <mat-icon class="speaker" *ngIf="message.type=='client'" (click)="textToSpeech(message.message)">record_voice_over</mat-icon>
           </li>
           <li
             *ngIf="sharedService.loading"

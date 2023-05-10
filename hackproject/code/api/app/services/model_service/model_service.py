@@ -90,7 +90,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return InsuranceDocumentResponse(summary=summary, **answers)
+        return InsuranceDocumentResponse(Summary=summary, **answers)
 
     def __process_land_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -99,7 +99,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return LandDocumentResponse(summary=summary, **answers)
+        return LandDocumentResponse(Summary=summary, **answers)
 
     def __process_service_contract_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -108,7 +108,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return ServiceContractDocumentResponse(summary=summary, **answers)
+        return ServiceContractDocumentResponse(Summary=summary, **answers)
 
     def __process_employment_contract_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -117,7 +117,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return EmploymentContractDocumentResponse(summary=summary, **answers)
+        return EmploymentContractDocumentResponse(Summary=summary, **answers)
 
     def __process_confidentiality_agreement_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -126,7 +126,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return ConfidentialityAgreementDocumentResponse(summary=summary, **answers)
+        return ConfidentialityAgreementDocumentResponse(Summary=summary, **answers)
 
     def __process_sales_contract_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -135,7 +135,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return SalesContractDocumentResponse(summary=summary, **answers)
+        return SalesContractDocumentResponse(Summary=summary, **answers)
 
     def __process_independent_contractor_agreement_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -144,7 +144,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return IndependentContractorAgreementDocumentResponse(summary=summary, **answers)
+        return IndependentContractorAgreementDocumentResponse(Summary=summary, **answers)
 
     def __process_loan_agreement_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -153,7 +153,7 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return LoanAgreementDocumentResponse(summary=summary, **answers)
+        return LoanAgreementDocumentResponse(Summary=summary, **answers)
 
     def __process_partnership_agreement_document(self, index_information):
         summary = self.__generate_summary(index_information=index_information)
@@ -162,4 +162,4 @@ class ModelServiceImpl(ModelService):
         language = index_information.language
         answers = {k: index.query(self.__translation_service.translate_text(text=v, language=language)).response for k,v in
                    prompts.items()}
-        return PartnershipAgreementDocumentResponse(summary=summary, **answers)
+        return PartnershipAgreementDocumentResponse(Summary=summary, **answers)

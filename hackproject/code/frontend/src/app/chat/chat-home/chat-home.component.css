@@ -18,7 +18,12 @@
 
 .messages {
   height: 100%;
-  overflow: auto;
+  overflow: scroll;
+}
+
+.list-item {
+  margin-left: -50px;
+  margin-right: 15px;
 }
 
 .message {
@@ -28,14 +33,14 @@
 
 .client {
   border: 0.5px solid #333;
-  background: var(--primaryColor);
+  background-color: var(--tertiaryColor);
   color: var(--textOnPrimary);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
   /*display: inline-block;*/
   /*background-color: red;*/
-  max-width: 90%;
+  max-width: 60%;
 }
 
 .user {
@@ -73,7 +78,7 @@
 }
 
 .chat-box {
-  overflow: auto;
+  overflow: scroll;
 }
 
 #chat {
@@ -185,11 +190,11 @@
   display: inline-block;
   padding: 10px 15px;
   border-radius: 20px;
-  max-width: 205px;
+  max-width: 45%;
   line-height: 130%;
 }
 
-@media screen and (min-width: 735px) {
+@media screen and (max-width: 735px) {
   #chat .content .messages ul li p {
     max-width: 300px;
   }
@@ -337,4 +342,11 @@
   font-weight: bold;
   /*color: var(--textOnPrimary);*/
   transition: background-color 0.3s ease-in-out;
+}
+
+.speaker {
+  width: 2rem;
+  height: 2rem;
+  color: var(--iconColor);
+  font-size: 2rem;
 }
