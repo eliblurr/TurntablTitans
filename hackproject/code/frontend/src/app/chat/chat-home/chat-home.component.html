@@ -68,9 +68,9 @@
       <div *ngIf="sharedService.messages.length != 0" class="message-input send-message">
         <form [formGroup]="chatForm" class="d-flex justify-content-between">
           <input type="text" class="form-control" formControlName="body" id="user-chat-input"
-                 placeholder="Type your message here ..." style="width: 90%" (input)="updateButtonVisibility()">
+                 placeholder="Type your message here ..." style="width: 90%">
 
-          <button *ngIf="showSendButton" class="icon-btn btn-align" (click)="sendMessage()" disabled="!chatForm.valid">
+          <button *ngIf="showSendButton" class="icon-btn btn-align" (click)="sendMessage()"  >
             <mat-icon>send</mat-icon>
           </button>
           <recorder (dataToParent)="receiveDataFromRecorder($event)" (hideSendButton)="toggleSendButton($event)"
